@@ -3,7 +3,7 @@
 ### Author: Bc. David Koubek
 #### Supervisor: doc. PhDr. Jozef Baruník, Ph.D.
 #### Academic Year: 2019/2020
-31 July 2020
+#### Version: v1.0, 23 March 2020 (WIP)
 
 ### Introduction
 We analyse high frequency datasets on US and EU bond futures using a combination of factor and neural network models. We use the Dynamic Nelson Siegel factor models for preparing the datasets into a time series of factors, and then train various deep learning models for forecasting the factors. An essential part of this work is the extensive hyperparameter tuning of the deep learning models in order to arrive at a well performing model for the task at hand. A lot of attention is devoted to designing the hyperparameter tuning scheme and to regularisation techniques for fighting the overfitting of our complex models.
