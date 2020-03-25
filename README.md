@@ -10,10 +10,10 @@ We analyse high frequency datasets on US and EU bond futures using a combination
 
 ### Thesis structure
 #### Methodology
- - The factor models used are described in the [Methodology/Factor_models.ipynb](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Methodology/Factor_models.ipynb).
+ - The factor models used will be described in the [Methodology/Factor_models.ipynb](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Methodology/Factor_models.ipynb) - TBD, not written yet.
  
 #### Data Analysis
- - The basic analysis is summarised in a Jupyter notebook file in [Data Analysis/Data_analysis.ipynb](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Data_analysis.ipynb). In this file we perform and present the data preprocessing (loading, merging, cleaning), data visualisation, and summary statistics.
+ - The basic analysis will be summarised in a Jupyter notebook file in [Data Analysis/Data_analysis.ipynb](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Data_analysis.ipynb). In this file we perform and present the data preprocessing (loading, merging, cleaning), data visualisation, and summary statistics. - TBD, for now only noninteractive source code is accessible in [Data Analysis/Data_conversion.R](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Data_conversion.R) and [Data Analysis/Model_fit.R](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Model_fit.R).
 
 ### Hyperparameter Tuning
 Remember your ABCs.
