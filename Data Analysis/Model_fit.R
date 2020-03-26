@@ -257,7 +257,7 @@ len <- 1
 # for (i in 1:len) {
 	i <- 1 # number of the run
 	print(paste("Iteration", i, "/", len))
-	for (hyp_tune in 1:3) { # 1:5 or 1:(length(parameters)
+	for (hyp_tune in 1:5) { # 1:5 or 1:(length(parameters)
 		# hyp_tune <- 5 # in case u want to skip the for loop and manually select which one to train
 		print(paste("Hyperparameter tuning", hyp_tune, "/", length(parameters)))
 
