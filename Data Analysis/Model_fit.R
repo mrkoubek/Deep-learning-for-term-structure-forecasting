@@ -1,20 +1,24 @@
 # Master Thesis
 # Model fitting follows
-# v1.1 - basic NN models for our time series, without factor models
+# v1.2 - converting the environment/code for cuDNN LSTM GPU training (WIP)
 
 rm(list = ls())
 
 # Bind R to a Python environment that has TensorFlow with GPU support
 # Do this first before loading any further packages, otherwise the R session can be binded with a default CPU environment and you will have to restart R to rebind
-	# library(reticulate)
-	# use_condaenv("r-tensorflow-gpu") # Specify the name of a conda environment.
+reticulate::use_condaenv("r-tensorflow-gpu") # Specify the name of a conda environment.
+# reticulate::use_condaenv("r-tensorflow-gpu", required = TRUE)
+# play:
+# reticulate::repl_python()
+# import tensorflow as tf
 
 # Packages
 if (!require("pacman")) install.packages("pacman") # installs pacman package if not installed yet
-# tf_config()
-pacman::p_load(pacman, dplyr, tidyr, ggplot2, scales, Cairo, zoo, xtable, tibble) # load packages TBD e.g. these, edit when u determine which needed/used..
-p_load(forecast, reticulate, keras, tensorflow)
+pacman::p_load(pacman, dplyr, tidyr, ggplot2, scales, Cairo, zoo, xtable, tibble, forecast) # load packages TBD e.g. these, edit when u determine which needed/used..
+p_load(reticulate, tensorflow, keras)
+py_config()
 tf_config()
+devtools::session_info()
 
 # Workspace
 setwd("E:/Google_Drive/Diploma_Thesis/Code")
@@ -235,6 +239,8 @@ build_model_n <- function(nlayers = 1, units = rep(6, nlayers), dropout = 0, rec
 	
 	model <- keras_model_sequential()
 	for (i in 1:nlayers) { # hidden layers
+		# model %>% layer_cudnn_lstm(units = units[i], return_sequences = (i != nlayers), input_shape = c(num_steps, num_features))
+		# AttributeError: module 'tensorflow_core.keras.layers' has no attribute 'CuDNNLSTM'
 		model %>% layer_lstm(units = units[i], return_sequences = (i != nlayers), dropout = dropout, recurrent_dropout = recurrent_dropout, input_shape = c(num_steps, num_features))
 	}
 	model %>% layer_dense(units = 1) # output layer
@@ -257,7 +263,7 @@ len <- 1
 # for (i in 1:len) {
 	i <- 1 # number of the run
 	print(paste("Iteration", i, "/", len))
-	for (hyp_tune in 1:5) { # 1:5 or 1:(length(parameters)
+	for (hyp_tune in 1:1) { # 1:5 or 1:(length(parameters)
 		# hyp_tune <- 5 # in case u want to skip the for loop and manually select which one to train
 		print(paste("Hyperparameter tuning", hyp_tune, "/", length(parameters)))
 
@@ -331,16 +337,4 @@ plot(history)
 	# factor models
 	# evaluation
 	# extensive hyperpar tuning once the code is scalable
-
-#####################
-#### Keras setup ####
-#####################
-
-	### Set up the environment once: ###
-	# For CPU it easier as follows, for GPU follow variou online documentation. Still, it best to set up the environment in conda first for both versions.
-	# Install Rtools for building packages outside CRAN, Anaconda (it's a "Python manager") and then install Keras from R:
-		# install.packages("devtools")
-		# devtools::install_github("rstudio/keras") # install keras R package (not the actual "Keras" yet, just the "keras" R package that can later install "Keras" and "TensorFlow"!)
-		# library(keras) # load in the keras package
-		# install_keras() # installs default Keras library and TensorFlow backend
 
