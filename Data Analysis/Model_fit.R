@@ -14,11 +14,11 @@ reticulate::use_condaenv("r-tensorflow-gpu") # Specify the name of a conda envir
 
 # Packages
 if (!require("pacman")) install.packages("pacman") # installs pacman package if not installed yet
-pacman::p_load(pacman, dplyr, tidyr, ggplot2, scales, Cairo, zoo, xtable, tibble, forecast) # load packages TBD e.g. these, edit when u determine which needed/used..
+pacman::p_load(pacman, dplyr, tidyr, ggplot2, scales, Cairo, zoo, xtable, tibble, forecast, naturalsort) # load packages TBD e.g. these, edit when u determine which needed/used..
 p_load(reticulate, tensorflow, keras)
 py_config()
 tf_config()
-devtools::session_info()
+# devtools::session_info()
 
 # Workspace
 setwd("E:/Google_Drive/Diploma_Thesis/Code")
@@ -204,7 +204,7 @@ tensorboard(log_dir = "TensorBoard_logs/tmp", action = "stop") # stops the Tenso
 ##### TBD Tune #####
 # Define manually parameters here that will be used in the model
 ### MAE ###
-	n_epochs <- 50 # for now 50 takes 10min for smallest network, later obviously need to train longer to optimise until it starts overfitting
+	n_epochs <- 10 # for now 50 takes 10min for smallest network, later obviously need to train longer to optimise until it starts overfitting
 	batch <- 128
 
 	parameters_architecture <- list(nlayers = 1, units = c(8, 0, 0), dropout = 0.2, recurrent_dropout = 0.2) # 11s per epoch on a month of data
@@ -264,7 +264,7 @@ len <- 1
 	i <- 1 # number of the run
 	print(paste("Iteration", i, "/", len))
 	for (hyp_tune in 1:1) { # 1:5 or 1:(length(parameters)
-		# hyp_tune <- 5 # in case u want to skip the for loop and manually select which one to train
+		hyp_tune <- 1 # in case u want to skip the for loop and manually select which one to train
 		print(paste("Hyperparameter tuning", hyp_tune, "/", length(parameters)))
 
 		model <- do.call(what = build_model_n, args = parameters[[hyp_tune]])
@@ -319,10 +319,51 @@ plot(history)
 
 
 ### Evaluation ###
+	eval_add <- function(to_update_scores, data, labels) {
+		results <- model %>% evaluate(data, labels, verbose = 0)
+		for (i in 1:length(results)) {
+			to_update_scores[[i]] <- c(to_update_scores[[i]], results[[i]])
+		}
+		return(to_update_scores)
+	}
+
+	train_all_scores <- list(loss = NULL, metric = NULL)
+	val_all_scores <- list(loss = NULL, metric = NULL)
+	test_all_scores <- list(loss = NULL, metric = NULL)
+
+	model_names <- list.files(path = paste0("Models/checkpoints/"))
+	model_names <- naturalsort(model_names)
+	model_names
 
 
+	for (n in model_names) {
+		n <- model_names[1]
+		print(paste("Merging scores for model", n))
+		
+		load(file = paste0("Workspaces/tmp/Image_", n, "_trained.RData"))
+		model <- load_model_hdf5(paste0("Models/tmp/Model_", n, ".h5"))
+
+		train_all_scores <- eval_add(to_update_scores = train_all_scores, data = data_train, labels = labels_train)
+		val_all_scores <- eval_add(to_update_scores = val_all_scores, data = data_val, labels = labels_val)
+		test_all_scores <- eval_add(to_update_scores = test_all_scores, data = data_test, labels = labels_test)
+	}
+
+	train_all_scores <- as.data.frame(train_all_scores, row.names = c(paste0("train_model_", 1:(length(model_names)))), col.names = c(model$loss, model$metrics))
+	val_all_scores <- as.data.frame(val_all_scores, row.names = c(paste0("val_model_", 1:(length(model_names)))), col.names = c(model$loss, model$metrics))
+	test_all_scores <- as.data.frame(test_all_scores, row.names = c(paste0("test_model_", 1:(length(model_names)))), col.names = c(model$loss, model$metrics))
+
+	train_all_scores
+	val_all_scores
+	test_all_scores
 
 
+	(eval_train <- model %>% evaluate(data_train, labels_train, verbose = 0))
+	(eval_val <- model %>% evaluate(data_val, labels_val, verbose = 0))
+	(eval_test <- model %>% evaluate(data_test, labels_test, verbose = 0))
+
+	pred_train <- model %>% predict(data_train, batch_size = 128)
+	pred_val <- model %>% predict(data_val, batch_size = 128)
+	pred_test <- model %>% predict(data_test, batch_size = 128)
 
 
 
