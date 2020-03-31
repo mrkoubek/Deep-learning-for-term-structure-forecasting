@@ -3,7 +3,12 @@
 ### Author: Bc. David Koubek
 #### Supervisor: doc. PhDr. Jozef Baruník, Ph.D.
 #### Academic Year: 2019/2020
-#### Version: v1.0, 23 March 2020 (WIP)
+#### Version: v1.1, 31 March 2020 (WIP)
+
+### Foreword
+This is a work in progress.
+In v1.0 we focused on setting up the basic backbone in code for our neural network (NN) models and an excerpt of our datasets.
+In this v1.1 we will focus on adding the Nelson-Siegel model before the NN training takes place.
 
 ### Introduction
 We analyse high frequency datasets on US and EU bond futures using a combination of factor and neural network models. We use the Dynamic Nelson Siegel factor models for preparing the datasets into a time series of factors, and then train various deep learning models for forecasting the factors. An essential part of this work is the extensive hyperparameter tuning of the deep learning models in order to arrive at a well performing model for the task at hand. A lot of attention is devoted to designing the hyperparameter tuning scheme and to regularisation techniques for fighting the overfitting of our complex models.
@@ -13,7 +18,7 @@ We analyse high frequency datasets on US and EU bond futures using a combination
  - The factor models used will be described in the [Methodology/Factor_models.ipynb](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Methodology/Factor_models.ipynb) - TBD, not written yet.
  
 #### Data Analysis
- - The basic analysis will be summarised in a Jupyter notebook file in [Data Analysis/Data_analysis.ipynb](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Data_analysis.ipynb). In this file we perform and present the data preprocessing (loading, merging, cleaning), data visualisation, and summary statistics. - TBD, for now only noninteractive source code is accessible in [Data Analysis/Data_conversion.R](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Data_conversion.R) and [Data Analysis/Model_fit.R](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Model_fit.R).
+ - The basic analysis will be summarised in a Jupyter notebook file in [Data Analysis/Data_analysis.ipynb](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Data_analysis.ipynb). In this file we perform and present the data preprocessing (loading, merging, cleaning), data visualisation, and summary statistics. - TBD, for now only noninteractive source code is accessible in [Data Analysis/Data_conversion.R](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Data_conversion.R) and [Data Analysis/Model_fit.R](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Model_fit.R). The models' evaluation is done in [Data Analysis/Model_evaluation.R](https://github.com/mrkoubek/deep-learning-for-term-structure-forecasting/blob/master/Data%20Analysis/Model_evaluation.R).
 
 ### Hyperparameter Tuning
 Remember your ABCs.
