@@ -1,6 +1,6 @@
 # Master Thesis
 # Model evaluation follows
-# v1.1 - added automatic evaluation (compariton of models)
+# v1.1 - added automatic evaluation (comparison of models)
 
 rm(list = ls())
 
@@ -427,6 +427,47 @@ test_all_scores_ordered_by_RMSE
 # save.image(file = paste0("Results/", futurenames[future], "/Tables/Image_", futurenames[future], "_evaluated.RData"))
 load(file = paste0("Results/", futurenames[future], "/Tables/Image_", futurenames[future], "_evaluated.RData"))
 
+
+# Export for LaTeX
+print(xtable(train_all_scores, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", training set")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/train_all_scores.tex"), include.rownames = FALSE)
+print(xtable(val_all_scores, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", validation set")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/val_all_scores.tex"), include.rownames = FALSE)
+print(xtable(test_all_scores, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", test set")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/test_all_scores.tex"), include.rownames = FALSE)
+
+print(xtable(train_all_scores_ordered_by_MAE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", training set, ordered by MAE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/train_all_scores_ordered_by_MAE.tex"), include.rownames = FALSE)
+print(xtable(val_all_scores_ordered_by_MAE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", validation set, ordered by MAE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/val_all_scores_ordered_by_MAE.tex"), include.rownames = FALSE)
+print(xtable(test_all_scores_ordered_by_MAE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", test set, ordered by MAE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/test_all_scores_ordered_by_MAE.tex"), include.rownames = FALSE)
+
+print(xtable(train_all_scores_ordered_by_RMSE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", training set, ordered by RMSE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/train_all_scores_ordered_by_RMSE.tex"), include.rownames = FALSE)
+print(xtable(val_all_scores_ordered_by_RMSE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", validation set, ordered by RMSE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/val_all_scores_ordered_by_RMSE.tex"), include.rownames = FALSE)
+print(xtable(test_all_scores_ordered_by_RMSE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", test set, ordered by RMSE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/test_all_scores_ordered_by_RMSE.tex"), include.rownames = FALSE)
+
+# Pick best 4 models from validation set by MAE
+best_models_val <- c("RW", rownames(val_all_scores_ordered_by_MAE[-which(rownames(val_all_scores_ordered_by_MAE) %in% "RW"), ])[1:4])
+test_picked_scores <- test_all_scores[best_models_val, ]
+test_picked_scores
+
+test_picked_scores_ordered_by_MAE <- test_picked_scores[order(test_picked_scores$MAE), ]
+test_picked_scores_ordered_by_RMSE <- test_picked_scores[order(test_picked_scores$RMSE), ]
+
+test_picked_scores_ordered_by_MAE
+test_picked_scores_ordered_by_RMSE
+
+# Export for LaTeX
+print(xtable(test_picked_scores, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", test set, best models")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/test_picked_scores.tex"), include.rownames = FALSE)
+print(xtable(test_picked_scores_ordered_by_MAE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", test set, best models, ordered by MAE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/test_picked_scores_ordered_by_MAE.tex"), include.rownames = FALSE)
+print(xtable(test_picked_scores_ordered_by_RMSE, align = c(rep("l", 2), rep("r", 8)), caption = paste0(futurenames[future], ", test set, best models, ordered by RMSE")),
+	type = "latex", file = paste0("Results/", futurenames[future], "/Tables/test_picked_scores_ordered_by_RMSE.tex"), include.rownames = FALSE)
 
 
 
