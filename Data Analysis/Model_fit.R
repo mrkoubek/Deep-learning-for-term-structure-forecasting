@@ -132,7 +132,9 @@ summary(dataFutures_train)
 #### TBD Factor models ######
 #############################
 
-# Not programmed yet, shall run the data through the factor models (DNS) before training the NNsn.
+# Not programmed yet, shall run the data through the factor models (DNS) before training the NNs.
+# In a separate script probably, Model_factor.R
+# Run script.
 
 
 
@@ -323,7 +325,5 @@ plot(history)
 #####################
 
 # TBD:
-	# factor models
-	# evaluation
 	# extensive hyperpar tuning once the code is scalable
 
