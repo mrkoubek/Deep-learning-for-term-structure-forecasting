@@ -42,7 +42,13 @@ str(FedYieldCurve) # 8 maturities in columnt, 372 months in rows as observations
 head(FedYieldCurve)
 maturity.Fed <- c(3/12, 0.5, 1,2,3,5,7,10)
 
-(NSParameters <- Nelson.Siegel( rate=first(FedYieldCurve,'10 month'),	maturity=maturity.Fed))
+# first() from xts package can have number of periods in character string, n = 'n period.type', where period.type can be: secs, seconds, mins, minutes, hours, days, weeks, months, quarters, and years
+# Nelson.Siegel(rate, maturity) explained:
+# - rate is a matrix with i.r.
+# - maturity is a vector of maturities of rate (in months??)
+(NSParameters <- Nelson.Siegel(rate=first(FedYieldCurve,'10 month'), maturity=maturity.Fed))
+# NSrates(Coeff, maturity) explained:
+# - 
 (y <- NSrates(NSParameters[5,], maturity.Fed))
 
 # Plot
