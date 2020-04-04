@@ -24,13 +24,7 @@ print("Workspace rdy set go!")
 p_load(YieldCurve)
 
 # https://www.rdocumentation.org/packages/YieldCurve/versions/4.1/topics/Nelson.Siegel
-Nelson.Siegel( rate, maturity )
-
-# Work with: dataFutures_train, maybe window the data first, or after? delve and test..
-
-
-
-
+# Nelson.Siegel(rate, maturity)
 
 
 ###############################################
@@ -48,7 +42,7 @@ maturity.Fed <- c(3/12, 0.5, 1,2,3,5,7,10)
 # - maturity is a vector of maturities of rate (in months??)
 (NSParameters <- Nelson.Siegel(rate=first(FedYieldCurve,'10 month'), maturity=maturity.Fed))
 # NSrates(Coeff, maturity) explained:
-# - 
+# - https://www.rdocumentation.org/packages/YieldCurve/versions/4.1/topics/NSrates
 (y <- NSrates(NSParameters[5,], maturity.Fed))
 
 # Plot
@@ -61,9 +55,34 @@ grid()
 
 
 
+
 #####################
 ####### Notes #######
 #####################
+
+
+# Work with: dataFutures_train, probably window the data after the NS, as is the case currently in Model_fit.R
+
+# We need to change our prices data into a different shape, with columns representing maturities.
+# What are our maturities? Do we load up the 2, 5, 10, 30Y maturity prices as columns?
+# For this we need to go back to Data_conversion.R and load up more datasets.
+# Do we then add maturity interpolations?
+
+
+#############
+# Procedure:#
+#############
+# rows observations, say aggregate from tick to 5min data, save each workspace or together if small enough
+# gradually load workspaces and merge columns maturities 2, 5, 10, 30Y, delete unused variables
+# cut data for say 1 month or 1Y of data depending on size, so it is manageable for tests
+# try Nelson.Siegel()
+# rewrite Nelson.Siegel() and literature into my own code DNS fitting
+# redo NNs input structure so the output from DNS can be fit and predicted by NNs
+# try NNs onto the multivariable time series of DNS coefficeints
+# transform back the coefficients into prices predicted
+# evaluate
+
+
 
 # TBD:
 	# go thru the Nelson.Siegel function source code
