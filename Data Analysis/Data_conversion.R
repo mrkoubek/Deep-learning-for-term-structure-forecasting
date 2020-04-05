@@ -20,6 +20,21 @@ print("Workspace rdy set go!")
 ### 01 - Load up data ###
 #########################
 
+# New, finish:
+# Preparation of variables
+pathConversion <- file.path("E:/Diploma_Thesis/Data/Conversion_Data")
+foldernames <- list.dirs(path = pathConversion, recursive = FALSE) # foldernames ~ paths
+futurenames <- list.dirs(path = pathConversion, full.names = FALSE, recursive = FALSE) # only names of our futures w/o path
+dim <- length(foldernames) # number of futures
+
+# Empty variables
+filenames <- vector(mode = "list", length = dim) # create an empty list that has a dimension of the number of futures, the values are added later
+# names(filenames) <- futurenames # name the filenames lists, prob useless
+filePaths <- vector(mode = "list", length = dim) # TBD optimise to one variable instead of 3 foldernames, filenames, filePaths put in one list or sth
+bindedFile <- vector(mode = "list", length = dim) # TBD
+dataForex <- array(list(NULL), dim = dim, dimnames = list(futurenames)) # an array in which we'll save all our data
+# End new
+
 dim <- 1 # how many datasets are we using
 futurenames <- "US"
 dataFutures <- array(list(NULL), dim = dim, dimnames = list(futurenames)) # an array in which we'll save all our data
@@ -115,6 +130,37 @@ summary(data_small)
 # Save the workspace
 # The following takes 0min to save and is 6MB
 save.image(file = "Workspaces/Data_03_trimmed-small_US.RData")
+
+
+
+#############################
+### 04 - Merge maturities ###
+#############################
+
+str(data_small)
+head(data_small)
+tail(data_small)
+
+for (i in maturities) {
+	# Bind maturities together
+	progress <- paste0(i, "/", length(maturities)) # fraction to see progress
+	print(paste(progress, "Binding", futurenames[i], "...")) # print run
+
+TBD
+
+
+
+
+	if (i == dim) {
+		print(paste("Done binding and saving all", progress))
+	}
+}
+
+
+
+# Save the workspace
+# The following takes ?min to save and is ?MB
+save.image(file = "Workspaces/Data_conversion_04_trimmed-small_US_2-30Ymaturities.RData")
 
 
 
