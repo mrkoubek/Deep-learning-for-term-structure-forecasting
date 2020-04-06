@@ -137,6 +137,21 @@ save.image(file = "Workspaces/Data_03_trimmed-small_US.RData")
 ### 04 - Merge maturities ###
 #############################
 
+
+#############
+# Procedure:#
+#############
+# rows observations, say aggregate from tick to 5min data, save each workspace or together if small enough
+# gradually load workspaces and merge columns maturities 2, 5, 10, 30Y, delete unused variables
+# cut data for say 1 month or 1Y of data depending on size, so it is manageable for tests
+# try Nelson.Siegel()
+# rewrite Nelson.Siegel() and literature into my own code DNS fitting
+# redo NNs input structure so the output from DNS can be fit and predicted by NNs
+# try NNs onto the multivariable time series of DNS coefficeints
+# transform back the coefficients into prices predicted
+# evaluate
+
+
 str(data_small)
 head(data_small)
 tail(data_small)
