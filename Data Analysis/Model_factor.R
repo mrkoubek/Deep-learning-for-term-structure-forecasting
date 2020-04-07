@@ -37,6 +37,7 @@ head(FedYieldCurve)
 maturity.Fed <- c(3/12, 0.5, 1,2,3,5,7,10)
 
 # first() from xts package can have number of periods in character string, n = 'n period.type', where period.type can be: secs, seconds, mins, minutes, hours, days, weeks, months, quarters, and years
+# the first() is not necessary there, it is just to calculate the NS parameters for the first few observations to run faster.
 # Nelson.Siegel(rate, maturity) explained:
 # - rate is a matrix with i.r.
 # - maturity is a vector of maturities of rate (in months??)
