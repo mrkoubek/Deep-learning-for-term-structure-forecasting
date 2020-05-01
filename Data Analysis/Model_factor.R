@@ -32,7 +32,7 @@ p_load(YieldCurve)
 ###############################################
 
 data(FedYieldCurve) # Fed data set
-str(FedYieldCurve) # 8 maturities in columnt, 372 months in rows as observations
+str(FedYieldCurve) # 8 maturities in columns, 372 months in rows as observations
 head(FedYieldCurve)
 maturity.Fed <- c(3/12, 0.5, 1,2,3,5,7,10)
 
@@ -40,20 +40,84 @@ maturity.Fed <- c(3/12, 0.5, 1,2,3,5,7,10)
 # the first() is not necessary there, it is just to calculate the NS parameters for the first few observations to run faster.
 # Nelson.Siegel(rate, maturity) explained:
 # - rate is a matrix with i.r.
-# - maturity is a vector of maturities of rate (in months??)
+# - maturity is a vector of maturities of rate (in months) - TBD why does the documentation say in months and the example has it in years?
 (NSParameters <- Nelson.Siegel(rate=first(FedYieldCurve,'10 month'), maturity=maturity.Fed))
 # NSrates(Coeff, maturity) explained:
 # - https://www.rdocumentation.org/packages/YieldCurve/versions/4.1/topics/NSrates
 (y <- NSrates(NSParameters[5,], maturity.Fed))
 
 # Plot
-plot(maturity.Fed,FedYieldCurve[5,],main="Fitting Nelson-Siegel yield curve",
-  xlab=c("Pillars in months"), type="o")
+plot(maturity.Fed,FedYieldCurve[5,],main="Fitting Nelson-Siegel yield curve", xlab=c("Pillars in months"), type="o")
 lines(maturity.Fed,y, col=2)
 legend("topleft",legend=c("observed yield curve","fitted yield curve"),
 col=c(1,2),lty=1)
 grid()
 
+
+
+####### NOT MY CODE, FUNCTIONS FROM PACKAGE YieldCurve ########
+# Testing one by one for understanding
+Nelson.Siegel <- function (rate, maturity) 
+{
+    rate <- try.xts(rate, error = as.matrix)
+    if (ncol(rate) == 1) 
+        rate <- matrix(as.vector(rate), 1, nrow(rate))
+    pillars.number <- length(maturity)
+    lambdaValues <- seq(maturity[1], maturity[pillars.number], 
+        by = 0.5)
+    FinalResults <- matrix(0, nrow(rate), 4)
+    colnames(FinalResults) <- c("beta_0", "beta_1", "beta_2", 
+        "lambda")
+    j <- 1
+    while (j <= nrow(rate)) {
+        InterResults <- matrix(0, length(lambdaValues), 5)
+        colnames(InterResults) <- c("beta0", "beta1", "beta2", 
+            "lambda", "SSR")
+        for (i in 1:length(lambdaValues)) {
+            lambdaTemp <- optimize(.factorBeta2, interval = c(0.001, 
+                1), maturity = lambdaValues[i], maximum = TRUE)$maximum
+            InterEstimation <- .NS.estimator(as.numeric(rate[j, 
+                ]), maturity, lambdaTemp)
+            BetaCoef <- InterEstimation$Par
+            if (BetaCoef[1] > 0 & BetaCoef[1] < 20) {
+                SSR <- sum(InterEstimation$Res^2)
+                InterResults[i, ] <- c(BetaCoef, lambdaTemp, 
+                  SSR)
+            }
+            else {
+                InterResults[i, ] <- c(BetaCoef, lambdaValues[i], 
+                  1e+05)
+            }
+        }
+        BestRow <- which.min(InterResults[, 5])
+        FinalResults[j, ] <- InterResults[BestRow, 1:4]
+        j <- j + 1
+    }
+    reclass(FinalResults, rate)
+}
+
+NSrates <- function (Coeff, maturity) 
+{
+    Curve <- xts(matrix(0, nrow(Coeff), length(maturity)), order.by = time(Coeff))
+    colnames(Curve) <- make.names(maturity)
+    Coeff <- as.matrix(Coeff)
+    for (i in 1:nrow(Curve)) {
+        Curve[i, ] <- as.numeric(Coeff[i, 1]) * rep(1, length(maturity)) + # beta_0 * 1 (~ vector of length equal to number of maturities)
+            as.numeric(Coeff[i, 2]) * as.numeric(.factorBeta1(Coeff[i, 4], maturity)) + # beta_1 * the NS model's fraction after beta_1
+            as.numeric(Coeff[i, 3]) * as.numeric(.factorBeta2(Coeff[i, 4], maturity)) # beta_2 * the NS model's fraction after beta_2
+    }
+    return(Curve)
+}
+
+.factorBeta1 <- function (lambda, maturity) # maturity is a vector of length = number of maturities, while lambda is a single number for the particular observation
+{
+    as.numeric((1 - exp(-lambda * maturity))/(lambda * maturity))
+}
+
+.factorBeta2 <- function (lambda, maturity) 
+{
+    as.numeric((1 - exp(-lambda * maturity))/(lambda * maturity) - exp(-lambda * maturity))
+}
 
 
 
