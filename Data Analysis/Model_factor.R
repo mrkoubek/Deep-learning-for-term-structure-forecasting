@@ -34,23 +34,22 @@ p_load(YieldCurve)
 data(FedYieldCurve) # Fed data set
 str(FedYieldCurve) # 8 maturities in columns, 372 months in rows as observations
 head(FedYieldCurve)
-maturity.Fed <- c(3/12, 0.5, 1,2,3,5,7,10)
+maturity.Fed <- c(3/12, 1/2, 1, 2, 3, 5, 7, 10)
 
 # first() from xts package can have number of periods in character string, n = 'n period.type', where period.type can be: secs, seconds, mins, minutes, hours, days, weeks, months, quarters, and years
 # the first() is not necessary there, it is just to calculate the NS parameters for the first few observations to run faster.
 # Nelson.Siegel(rate, maturity) explained:
 # - rate is a matrix with i.r.
 # - maturity is a vector of maturities of rate (in months) - TBD why does the documentation say in months and the example has it in years?
-(NSParameters <- Nelson.Siegel(rate=first(FedYieldCurve,'10 month'), maturity=maturity.Fed))
+(NSParameters <- Nelson.Siegel(rate = first(FedYieldCurve, '10 month'), maturity = maturity.Fed))
 # NSrates(Coeff, maturity) explained:
 # - https://www.rdocumentation.org/packages/YieldCurve/versions/4.1/topics/NSrates
-(y <- NSrates(NSParameters[5,], maturity.Fed))
+(y <- NSrates(Coeff = NSParameters[5,], maturity = maturity.Fed))
 
 # Plot
-plot(maturity.Fed,FedYieldCurve[5,],main="Fitting Nelson-Siegel yield curve", xlab=c("Pillars in months"), type="o")
-lines(maturity.Fed,y, col=2)
-legend("topleft",legend=c("observed yield curve","fitted yield curve"),
-col=c(1,2),lty=1)
+plot(maturity.Fed, first(FedYieldCurve, '10 month')[5,], main = "Fitting Nelson-Siegel yield curve", xlab = c("Pillars in months"), type = "o") # original observed data
+lines(maturity.Fed, y, col = 2, type = "o") # add NS fitted rates
+legend("topleft", legend = c("observed yield curve", "fitted yield curve"),u1)
 grid()
 
 
@@ -96,12 +95,13 @@ Nelson.Siegel <- function (rate, maturity)
     reclass(FinalResults, rate)
 }
 
-NSrates <- function (Coeff, maturity) 
+NSrates <- function (Coeff, maturity)  # takes in the NS parameters (betas), plugs into the NS equation to calculate the yields
 {
     Curve <- xts(matrix(0, nrow(Coeff), length(maturity)), order.by = time(Coeff))
     colnames(Curve) <- make.names(maturity)
     Coeff <- as.matrix(Coeff)
     for (i in 1:nrow(Curve)) {
+        # The main NS model equation, y_t(tau) = beta_0 + beta_1 * (exp fraction..) + beta_2 * (exp fractions..)
         Curve[i, ] <- as.numeric(Coeff[i, 1]) * rep(1, length(maturity)) + # beta_0 * 1 (~ vector of length equal to number of maturities)
             as.numeric(Coeff[i, 2]) * as.numeric(.factorBeta1(Coeff[i, 4], maturity)) + # beta_1 * the NS model's fraction after beta_1
             as.numeric(Coeff[i, 3]) * as.numeric(.factorBeta2(Coeff[i, 4], maturity)) # beta_2 * the NS model's fraction after beta_2
@@ -109,14 +109,30 @@ NSrates <- function (Coeff, maturity)
     return(Curve)
 }
 
+# test one by one:
+crv <- xts(matrix(0, 1, 8), order.by = time(NSParameters[5, ]))
+make.names(maturity.Fed)
+nrow(crv)
+crv[1, ]
+ceff <- NSParameters[5, ]
+ceff[1, 1] # beta_0
+rep(1, length(maturity.Fed))
+ceff[1, 2] # beta_1
+ceff[1, 3] # beta_2
+ceff[1, 4] # lambda
+
+.factorBeta1(ceff[1, 4], maturity.Fed) # NS model's fraction after beta_1
+.factorBeta2(ceff[1, 4], maturity.Fed) # NS model's fraction after beta_2
+
+
 .factorBeta1 <- function (lambda, maturity) # maturity is a vector of length = number of maturities, while lambda is a single number for the particular observation
 {
-    as.numeric((1 - exp(-lambda * maturity))/(lambda * maturity))
+    as.numeric((1 - exp(-lambda * maturity))/(lambda * maturity)) # factor loading (fraction) of beta_1
 }
 
 .factorBeta2 <- function (lambda, maturity) 
 {
-    as.numeric((1 - exp(-lambda * maturity))/(lambda * maturity) - exp(-lambda * maturity))
+    as.numeric((1 - exp(-lambda * maturity))/(lambda * maturity) - exp(-lambda * maturity)) # factor loading (fraction) of beta_2
 }
 
 
