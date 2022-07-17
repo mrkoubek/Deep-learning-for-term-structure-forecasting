@@ -22,8 +22,8 @@ tf_config()
 
 # Workspace
 setwd("E:/Google_Drive/Diploma_Thesis/Code")
-# load(file = "Workspaces/Data_03_trimmed-small_US.RData") # 0min
-load(file = "Workspaces/Data_04_split-small_US_tick_05-2019.RData") # 0min
+load(file = "Workspaces/Data_03_trimmed-small_US.RData") # 0min
+# load(file = "Workspaces/Data_04_split-small_US_tick_05-2019.RData") # 0min
 print("Workspace rdy set go!")
 
 
@@ -47,15 +47,68 @@ dataFutures_train <- dataFutures_tmp[1:split_train]
 dataFutures_val <- dataFutures_tmp[(split_train + 1):split_val]
 dataFutures_test <- dataFutures_tmp[(split_val + 1):end]
 
-# Differencing the data - optional, but better results
-dataFutures_train_orig <- dataFutures_train # backup of original data for the end "undiff"
+# backup of original data, for "undifferencing" at the end
+dataFutures_train_orig <- dataFutures_train 
 dataFutures_val_orig <- dataFutures_val
 dataFutures_test_orig <- dataFutures_test
 
+# Difference the data
 dataFutures_train <- diff(dataFutures_train)
 dataFutures_val <- diff(dataFutures_val)
 dataFutures_test <- diff(dataFutures_test)
 summary(dataFutures_train)
+
+
+#############################
+### Data Exploration - WIP ##
+#############################
+
+# IES revive tinker
+
+# Print unique values in our dataset, how many of them and the first few
+
+# getOption("digigts") # global number of rounding digits, default is 7
+# options("digits" = 16)
+
+# There is only 118 unique price values in our small_US dataset of a month
+str(unique(dataFutures_train_orig), digits = 16) # original prices data
+plot(unique(dataFutures_train_orig))
+# plot(dataFutures_train_orig) # can be contrasted to the price graph, altho it takes a while to plot
+
+# There is only 12 unique differenced values in our small_US dataset of a month
+str(unique(dataFutures_train), digits = 16) # differenced data
+plot(unique(dataFutures_train))
+
+summary(dataFutures_train != 0)
+
+timpy <- dataFutures_train[dataFutures_train != 0]
+str(timpy)
+summary(timpy)
+
+hist(timpy)
+
+min(timpy)
+max(timpy)
+hist(timpy, breaks = 20000, xlim = c(min(timpy), max(timpy)))
+
+p_load(HistogramTools)
+
+myhist <- HistogramTools:::.BuildHistogram(timpy) # doesn't work
+plot(myhist)
+
+plot(timpy)
+summary(timpy == 0.03125)
+summary(timpy == -0.03125)
+summary(!(timpy == -0.03125 | timpy == 0.03125))
+timpyy <- timpy[!(timpy == -0.03125 | timpy == 0.03125)]
+summary(timpyy)
+str(timpyy)
+plot(timpyy)
+
+timpyyy <- timpyy[!(timpyy == -0.0625 | timpyy == 0.0625)]
+summary(timpyyy)
+str(timpyyy)
+plot(timpyyy)
 
 
 #############################
@@ -110,22 +163,24 @@ summary(dataFutures_train)
 	plots_height <- plots_width / GoldenRatio
 
 # A day
-	# ggsave(dataset_graph, filename = paste0("Graphs/dataset_", futurenames[future], "_aday.pdf"), device = cairo_pdf,
+	# ggsave(dataset_graph, filename = paste0("Graphs/Model_fit/dataset_", futurenames[future], "_aday.pdf"), device = cairo_pdf,
 	# 	width = plots_width, height = plots_height, units = "in")
-	# ggsave(split_graph, filename = paste0("Graphs/differenced_", futurenames[future], "_aday.pdf"), device = cairo_pdf,
+	# ggsave(split_graph, filename = paste0("Graphs/Model_fit/differenced_", futurenames[future], "_aday.pdf"), device = cairo_pdf,
 	# 	width = plots_width, height = plots_height, units = "in")
 
 # A month
-	ggsave(dataset_graph, filename = paste0("Graphs/dataset_", futurenames[future], "_amonth.pdf"), device = cairo_pdf,
+	ggsave(dataset_graph, filename = paste0("Graphs/Model_fit/dataset_", futurenames[future], "_amonth.pdf"), device = cairo_pdf,
 		width = plots_width, height = plots_height, units = "in")
-	ggsave(split_graph, filename = paste0("Graphs/differenced_", futurenames[future], "_amonth.pdf"), device = cairo_pdf,
+	ggsave(split_graph, filename = paste0("Graphs/Model_fit/differenced_", futurenames[future], "_amonth.pdf"), device = cairo_pdf,
 		width = plots_width, height = plots_height, units = "in")
-
 
 # Save workspace
 # save.image(file = paste0("Workspaces/Data_04_split-small_", futurenames[future], "_tick_05-2019.RData")) # 1min 21MB
 
 
+#######################################################################################
+########### Workspaces/Data_04_split-small_US_tick_05-2019.RData ######################
+#######################################################################################
 
 
 #############################
@@ -134,7 +189,16 @@ summary(dataFutures_train)
 
 # Not programmed yet, shall run the data through the factor models (DNS) before training the NNs.
 # In a separate script probably, Model_factor.R
-# Run script.
+# Run script. TBD read up and organise code/files..
+# source("./dl-git-repo/deep-learning-for-term-structure-forecasting/Data Analysis/Model_factor-test.R")
+
+# TBD move this info - To run more scripts:
+# p_load(tidyverse) # to pipe (%>%) and map across each file
+
+# List files and source each
+# list.files("./dl-git-repo/deep-learning-for-term-structure-forecasting/Data Analysis", full.names = TRUE)# %>% map(source)
+
+
 
 
 
@@ -171,17 +235,19 @@ labels_train[1:5]
 
 
 # Keras LSTMs expect the input array to be shaped as (no. samples, no. time steps, no. features), yet we have just the two axes, need to add an axis "no.features" at the end that will just say that we have 1 feature (we have just one column/price to feed)
-# dim(data_train)
-# dim(data_val)
-# dim(data_test)
+dim(data_train) # two dimensions (no. samples, no. time steps)
+class(data_train) # matrix
+dim(data_val)
+dim(data_test)
 # K <- backend() # don't need this approach anymore, from Keras 2.1.2 can use k_expand_dims and k_eval
 # data_train <- K$eval(K$expand_dims(data_train, axis = 2L)) # 2L because of this https://github.com/rstudio/tensorflow/issues/190
 data_train <- k_eval(k_expand_dims(data_train, axis = -1)) # -1 for the last axis to expand at
 data_val <- k_eval(k_expand_dims(data_val, axis = -1))
 data_test <- k_eval(k_expand_dims(data_test, axis = -1))
-dim(data_train)
+dim(data_train) # three dimensions (no. samples, no. time steps, no. features)
 str(data_train)
-class(data_train)
+class(data_train) # array
+data_train[1:5, 1:4, ]
 
 
 # LSTM input shape: (samples, time steps, features)
