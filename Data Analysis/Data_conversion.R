@@ -1,6 +1,6 @@
 # Master Thesis
 # Data conversion follows
-# v1.1 - merging maturities
+# v1.2 - trimming the data
 
 rm(list = ls())
 
@@ -480,32 +480,98 @@ rm(data_summary, data_str, data_head)
 # TBD CONT
 load(file = "Workspaces/Data_01_loaded_cleaned_TUFVTYUS.RData") # we load all the maturities
 
-# Take an excerpt from the data to easily work on/visualise, e.g. only the day 20th May 2019 or the month May 2019:
-data_small_aday <- subset(data, Date >= as.POSIXlt("2019-05-20", tz = "GMT") & Date < as.POSIXlt("2019-05-21", tz = "GMT"))
-data_small_amonth <- subset(data, Date >= as.POSIXlt("2019-05-01", tz = "GMT") & Date < as.POSIXlt("2019-06-01", tz = "GMT"))
+colnames(data$TU)
 
-data_small <- data_small_aday
-data_small <- data_small_amonth
+# Take an excerpt from the data to easily work on/visualise, e.g. only the day 20th May 2019 or the month May 2019:
+data_TU_small_aday <- subset(data$TU, Time >= as.POSIXct("2019-05-20", tz = "GMT") & Time < as.POSIXct("2019-05-21", tz = "GMT"))
+data_TU_small_amonth <- subset(data$TU, Time >= as.POSIXct("2019-05-01", tz = "GMT") & Time < as.POSIXct("2019-06-01", tz = "GMT"))
+
+data_small <- data_TU_small_aday
+data_small <- data_TU_small_amonth
 str(data_small)
 head(data_small)
 tail(data_small)
 
-rm(data, data_US, dim)
+rm(data, data_TU_small_aday, data_TU_small_amonth)
 
 # Exploratory analysis
-plot.ts(x = data_small$Date, y = data_small$Close, type = "l")
+plot.ts(x = data_small$Time, y = data_small$Close, type = "l")
 summary(data_small)
 
 # Polish graph TBD
 
 # Save the workspace
 # The following takes 0min to save and is 6MB
-save.image(file = "Workspaces/Data_03_trimmed-small_US.RData")
+# save.image(file = "Workspaces/Data_03_trimmed-small_US.RData")
+# save.image(file = "Workspaces/Data_03_trimmed-small_aday_TU.RData")
+# save.image(file = "Workspaces/Data_03_trimmed-small_amonth_TU.RData")
 
 
 #############################
 ### 04 - Aggregate data #####
 #############################
+
+# First aggregating the small trimmed data of one day/month, then scale up
+load(file = "Workspaces/Data_03_trimmed-small_amonth_TU.RData") # we load all the maturities
+
+ls()
+str(data_small)
+
+data_small$Hour <- cut(data_small$Time, breaks = "1 hour")
+str(data_small)
+head(data_small)
+tail(data_small)
+summary(data_small$Hour == "2019-05-20 08:00:00")
+
+# then use ddply (from plyr package), splitting the data frame by that cut variable
+p_load(plyr)
+data_small_hourly <- ddply(data_small, .(Hour), summarize, price_close = tail(Close, n = 1))
+str(data_small_hourly)
+head(data_small_hourly)
+tail(data_small_hourly)
+
+# MISSING DATA - weird that nothing in the 16th hour, TBD need to solve that, missing data
+head(data_small_hourly)
+str(data_small)
+data_small[10452, ] # hour 15:59:58
+data_small[10453, ] # hour 17:00:00, skips trading from 16-17h??? TBD, can be seen even in the one day tick graph in chapter 03
+
+
+# WIP
+dim <- 1
+par(mfrow = c(dim, 1))
+plot(data_small$Time, data_small$Close, type = "l", main = paste("TU", "2019-05-20"), xlab = "Time", ylab = "Price")
+plot(data_small_hourly$Hour, data_small_hourly$price_close, type = "l", main = paste("TU", "2019-05-20"), xlab = "Time", ylab = "Price")
+
+
+# Save the workspace
+# The following takes 0min to save and is 6MB
+# save.image(file = "Workspaces/Data_04_aggregated-small_amonth_TU.RData")
+
+
+
+# TBD plot all maturities
+# Plotting the data again
+dim <- 4
+par(mfrow = c(dim, 1))
+for (i in 1:dim) {
+	plot(data_small[[i]]$Time, data_small[[i]]$Close, type = "l", main = paste(futurenames[i], "H1 2017"), xlab = "Time", ylab = "Price")
+}
+
+
+
+
+
+
+
+
+#############################
+######### END RESULT ########
+#############################
+
+# TBD CONT
+# First aggregating the small trimmed data of one day/month, then scale up
+load(file = "Workspaces/Data_04_aggregated-small_amonth_TU.RData") # we load all the maturities
 
 
 
