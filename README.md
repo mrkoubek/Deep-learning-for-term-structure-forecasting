@@ -2,13 +2,13 @@
 ## Deep Learning for Term Structure Forecasting
 ### Author: Bc. David Koubek
 #### Supervisor: doc. PhDr. Jozef Baruník, Ph.D.
-#### Academic Year: 2019/2020
-#### Version: v1.1, 31 March 2020 (WIP)
+#### Academic Year: 2023/2024
+#### Version: v1.2, December 2023 (WIP)
 
 ### Foreword
-This is a work in progress.
 In v1.0 we focused on setting up the basic backbone in code for our neural network (NN) models and an excerpt of our datasets.
-In this v1.1 we will focus on adding the Nelson-Siegel model before the NN training takes place.
+In v1.1 we focused on adding the Nelson-Siegel model before the NN training takes place.
+In v1.2 we focus on polishing up some preprocessing issues with the data, treating missing observations.
 
 ### Introduction
 We analyse high frequency datasets on US and EU bond futures using a combination of factor and neural network models. We use the Dynamic Nelson Siegel factor models for preparing the datasets into a time series of factors, and then train various deep learning models for forecasting the factors. An essential part of this work is the extensive hyperparameter tuning of the deep learning models in order to arrive at a well performing model for the task at hand. A lot of attention is devoted to designing the hyperparameter tuning scheme and to regularisation techniques for fighting the overfitting of our complex models.
