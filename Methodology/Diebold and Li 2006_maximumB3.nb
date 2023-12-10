@@ -1,0 +1,3198 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    138898,       3189]
+NotebookOptionsPosition[    135408,       3076]
+NotebookOutlinePosition[    135756,       3091]
+CellTagsIndexPosition[    135713,       3088]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"e", "^", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}], " ", 
+     RowBox[{"(", 
+      RowBox[{"16.4204", "-", 
+       RowBox[{"16.4204", " ", 
+        RowBox[{"e", "^", 
+         RowBox[{"(", 
+          RowBox[{"0.0609", " ", "t"}], ")"}]}]}], "+", "t", "+", 
+       RowBox[{"0.0609", " ", 
+        RowBox[{"t", "^", "2"}]}]}], ")"}]}], ")"}], "/", 
+   RowBox[{"t", "^", "2"}]}], "==", "0"}]], "Input",
+ CellChangeTimes->{{3.8236811434727077`*^9, 3.8236812022503667`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{
+    SuperscriptBox["e", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]], " ", 
+    RowBox[{"(", 
+     RowBox[{"16.4204`", "\[VeryThinSpace]", "-", 
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["e", 
+        RowBox[{"0.0609`", " ", "t"}]]}], "+", "t", "+", 
+      RowBox[{"0.0609`", " ", 
+       SuperscriptBox["t", "2"]}]}], ")"}]}], 
+   SuperscriptBox["t", "2"]], "\[Equal]", "0"}]], "Output",
+ CellChangeTimes->{{3.8236811453683615`*^9, 3.8236811620189543`*^9}, 
+   3.823681202539935*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], " ", 
+      RowBox[{"(", 
+       RowBox[{"16.4204`", "\[VeryThinSpace]", "-", 
+        RowBox[{"16.4204`", " ", 
+         SuperscriptBox["e", 
+          RowBox[{"0.0609`", " ", "t"}]]}], "+", "t", "+", 
+        RowBox[{"0.0609`", " ", 
+         SuperscriptBox["t", "2"]}]}], ")"}]}], 
+     SuperscriptBox["t", "2"]], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "inex"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients or the system obtained by direct rationalization of inexact \
+numbers present in the system. Since many of the methods used by Solve \
+require exact input, providing Solve with an exact version of the system may \
+help. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::inex\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.8236812100704436`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], " ", 
+      RowBox[{"(", 
+       RowBox[{"16.4204`", "\[VeryThinSpace]", "-", 
+        RowBox[{"16.4204`", " ", 
+         SuperscriptBox["e", 
+          RowBox[{"0.0609`", " ", "t"}]]}], "+", "t", "+", 
+        RowBox[{"0.0609`", " ", 
+         SuperscriptBox["t", "2"]}]}], ")"}]}], 
+     SuperscriptBox["t", "2"]], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.8236812100714397`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FullSimplify", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"16.4204", "-", 
+       RowBox[{"16.4204", " ", 
+        RowBox[{"E", "^", 
+         RowBox[{"(", 
+          RowBox[{"0.0609", " ", "t"}], ")"}]}]}], "+", "t", "+", 
+       RowBox[{"0.0609", " ", 
+        RowBox[{"t", "^", "2"}]}]}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"E", "^", 
+        RowBox[{"(", 
+         RowBox[{"0.0609", " ", "t"}], ")"}]}], " ", 
+       RowBox[{"t", "^", "2"}]}], ")"}]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"t", ">", "0"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.823681290206605*^9, 3.8236812902076035`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"1.`", " ", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"0.0609`", " ", "t"}]]}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "0.06089985627633918`"}], "-", 
+      RowBox[{"0.0037088012472290565`", " ", "t"}]}], ")"}], " ", "t"}]}], 
+  "\[Equal]", "1.`"}]], "Output",
+ CellChangeTimes->{3.823681291740222*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"1.`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{"0.0609`", " ", "t"}]]}], "+", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "0.06089985627633918`"}], "-", 
+        RowBox[{"0.0037088012472290565`", " ", "t"}]}], ")"}], " ", "t"}]}], 
+    "\[Equal]", "1.`"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "inex"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients or the system obtained by direct rationalization of inexact \
+numbers present in the system. Since many of the methods used by Solve \
+require exact input, providing Solve with an exact version of the system may \
+help. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::inex\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823681302834015*^9}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"1.`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{"0.0609`", " ", "t"}]]}], "+", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "0.06089985627633918`"}], "-", 
+        RowBox[{"0.0037088012472290565`", " ", "t"}]}], ")"}], " ", "t"}]}], 
+    "\[Equal]", "1.`"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.823681302834015*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expand", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"16.4204", "-", 
+      RowBox[{"16.4204", " ", 
+       RowBox[{"E", "^", 
+        RowBox[{"(", 
+         RowBox[{"0.0609", " ", "t"}], ")"}]}]}], "+", "t", "+", 
+      RowBox[{"0.0609", " ", 
+       RowBox[{"t", "^", "2"}]}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"E", "^", 
+       RowBox[{"(", 
+        RowBox[{"0.0609", " ", "t"}], ")"}]}], " ", 
+      RowBox[{"t", "^", "2"}]}], ")"}]}], "\[Equal]", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.823681359380707*^9, 3.8236813593817053`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"0.0609`", " ", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+   FractionBox["16.4204`", 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    RowBox[{"16.4204`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", 
+  "0"}]], "Output",
+ CellChangeTimes->{3.8236813601557856`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "inex"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients or the system obtained by direct rationalization of inexact \
+numbers present in the system. Since many of the methods used by Solve \
+require exact input, providing Solve with an exact version of the system may \
+help. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::inex\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823681361681034*^9}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.8236813616816826`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["E", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "x"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["x", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["E", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "x"}]]}], 
+      SuperscriptBox["x", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["E", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "x"}]], "x"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "x", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.823681374320148*^9, 3.8236813996417613`*^9}, {
+  3.8236815996018095`*^9, 3.8236816080901403`*^9}},
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "inex"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients or the system obtained by direct rationalization of inexact \
+numbers present in the system. Since many of the methods used by Solve \
+require exact input, providing Solve with an exact version of the system may \
+help. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::inex\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823681402693633*^9, 3.823681609588038*^9}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "x"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["x", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "x"}]]}], 
+      SuperscriptBox["x", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "x"}]], "x"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "x", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.823681402694631*^9, 3.8236816095900335`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"[", 
+     RowBox[{"1", "-", 
+      RowBox[{"e", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "0.0609"}], "*", "t"}], ")"}]}]}], "]"}], "/", 
+    RowBox[{"[", 
+     RowBox[{"0.0609", "*", "t"}], "]"}]}], "-", 
+   RowBox[{"e", "^", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "0.0609"}], "*", "t"}], ")"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8236814920545406`*^9, 3.8236814973846874`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Maximize", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"E", "^", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}]}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"0.0609", " ", "t"}], ")"}]}], "-", 
+    RowBox[{"E", "^", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}]}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.823681566851592*^9, 3.823681567272815*^9}, 
+   3.8236816243571124`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.2984256075256392`", ",", 
+   RowBox[{"{", 
+    RowBox[{"t", "\[Rule]", "29.4463404007125`"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.8236815684302187`*^9, 3.823681625587142*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+find maximum of (1-E^(-0.0609 t))/(0.0609 t)-E^(-0.0609 t)\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.8236816615146065`*^9, 3.823681663965903*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+be962cf0-73a7-4b8e-a933-8c019fa8c4af\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.8236816706812325`*^9}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "find maximum of (1-E^(-0.0609 t))/(0.0609 t)-E^(-0.0609 t)", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}, 
+    PodStates -> {"GlobalMaxima__Step-by-step solution"}}, 
+   Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Input interpretation", "scanner" -> "Identity", "id" -> 
+     "Input", "position" -> "100", "error" -> "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Maximize[(1 - E^(-0.0609 t))/(0.0609 t) - E^(-0.0609 t), {t}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FormBox[
+              TagBox[
+               GridBox[{{
+                  PaneBox[
+                   StyleBox[
+                    TagBox[
+                    GridBox[{{
+                    StyleBox[
+                    "\"maximize\"", {
+                    LineIndent -> 0, LineSpacing -> {0.9, 0, 1.5}}], 
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{
+                    RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+                    RowBox[{"0.0609`", " ", "t"}]], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{
+                    RowBox[{"-", "0.0609`"}], " ", "t"}]]}], HoldForm]}}, 
+                    GridBoxBackground -> {"Columns" -> {
+                    GrayLevel[0.949], None}, "Rows" -> {{None}}}, 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                    ColumnsEqual -> False, RowsEqual -> False, 
+                    GridBoxDividers -> {"Columns" -> {
+                    GrayLevel[0.84], 
+                    GrayLevel[0.84], 
+                    GrayLevel[0.84]}, "Rows" -> {{
+                    GrayLevel[0.84]}}, 
+                    "RowsIndexed" -> {
+                    1 -> GrayLevel[0.84], -1 -> GrayLevel[0.84]}}, 
+                    GridBoxSpacings -> {
+                    "Columns" -> {2, 2, 2}, "Rows" -> {{1}}}, 
+                    GridBoxAlignment -> {
+                    "Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, 
+                    AllowScriptLevelChange -> False, BaselinePosition -> 1], 
+                    $CellContext`TagBoxWrapper["Separator" -> " | "]], 
+                    LineSpacing -> {1, 0, 1.5}, LineIndent -> 0], 
+                   BaselinePosition -> Center]}}, 
+                GridBoxItemSize -> {
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                ColumnsEqual -> False, RowsEqual -> False, 
+                GridBoxSpacings -> {"Columns" -> {{
+                    AbsoluteThickness[-1]}}, "Rows" -> {{0}}}, 
+                AllowScriptLevelChange -> False], 
+               $CellContext`TagBoxWrapper["Separator" -> " | "]], 
+              TraditionalForm], 
+             PolynomialForm[#, TraditionalOrder -> False]& ], 
+            TraditionalForm]], "Output", {
+          Background -> None, 
+           GraphicsBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics"}, 
+             DefaultAxesStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsAxes"], DefaultFrameStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsFrame"], DefaultFrameTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsFrameTicks"], 
+             DefaultTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsTicks"]}, 
+           Graphics3DBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics3D"}}}, 
+          NumberPoint -> ".", CellSize -> {550, Automatic}, 
+          AutoStyleOptions -> {"HighlightFormattingErrors" -> False}, 
+          RenderingOptions -> {
+           "3DRenderingMethod" -> "BSPTreeOrDepthBuffer"}]}], 
+       XMLElement["dataformats", {}, {"plaintext,minput"}]}], 
+     XMLElement["expressiontypes", {"count" -> "1"}, {"\n   ", 
+       XMLElement["expressiontype", {"name" -> "Default"}, {}], "\n  "}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Global maximum", "scanner" -> "MaxMin", "id" -> 
+     "GlobalMaxima", "position" -> "100", "error" -> "false", "numsubpods" -> 
+     "2", "primary" -> "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "N[Maximize[(1 - E^(-0.0609 t))/(0.0609 t) - E^(-0.0609 t), {t}]]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            RowBox[{
+              RowBox[{
+                RowBox[{"max", "\[NoBreak]", 
+                  RowBox[{"{", 
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{
+                    RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+                    RowBox[{"0.0609`", " ", "t"}]], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{
+                    RowBox[{"-", "0.0609`"}], " ", "t"}]]}], HoldForm], 
+                    "}"}]}], "\[TildeTilde]", "0.2984256075256391`"}], 
+              StyleBox["\" at \"", {
+                GrayLevel[0.6], LinebreakAdjustments -> {1, 100, 1, 0, 100}, 
+                LineIndent -> 0}], 
+              RowBox[{
+                TagBox["t", HoldForm], "\[TildeTilde]", 
+                "29.446340441720213`"}]}], TraditionalForm]], "Output", {
+          Background -> None, 
+           GraphicsBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics"}, 
+             DefaultAxesStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsAxes"], DefaultFrameStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsFrame"], DefaultFrameTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsFrameTicks"], 
+             DefaultTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsTicks"]}, 
+           Graphics3DBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics3D"}}}, 
+          NumberPoint -> ".", CellSize -> {550, Automatic}, 
+          AutoStyleOptions -> {"HighlightFormattingErrors" -> False}, 
+          RenderingOptions -> {
+           "3DRenderingMethod" -> "BSPTreeOrDepthBuffer"}]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["subpod", {"title" -> "Possible intermediate steps"}, {
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             GridBox[{{
+                TagBox[
+                 GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    
+                    TemplateBox[{
+                    "\"Find and classify the global extrema of the following \
+function\""}, "RowDefault"], "\":\""}, "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    TagBox[
+                    TemplateBox[{
+                    RowBox[{
+                    RowBox[{"f", "(", "t", ")"}], "\[LongEqual]", 
+                    TagBox[
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], 
+                    RowBox[{"0.0609`", " ", "t"}]], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], 
+                    HoldForm]}]}, "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                  GridBoxSpacings -> {
+                   "Columns" -> {{None}}, "Rows" -> {{0.5}}}], "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"Find \"", "\"the \"", "\"critical \"", "\"points \"", 
+                    "\"of \"", 
+                    RowBox[{"f", "(", "t", ")"}]}, "RowDefault"]}, 
+                    "RowDefault"], "\":\""}, "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    TagBox[
+                    TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"Compute \"", "\"the \"", "\"critical \"", 
+                    "\"points \"", "\"of \"", 
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm]}, 
+                    "RowDefault"]}, "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"The \"", "\"domain \"", "\"of \"", 
+                    TemplateBox[{
+                    RowBox[{
+                    RowBox[{"f", "(", "t", ")"}], "\[LongEqual]", 
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm]}], 
+                    "\" \""}, "RowDefault"], "\"is \"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"{\"", 
+                    RowBox[{"t", "\[Element]", 
+                    TemplateBox[{}, "Reals"]}], "\" \"", "\":\"", "\" \""}, 
+                    "RowDefault"], 
+                    TemplateBox[{
+                    RowBox[{"t", "\[NotEqual]", "0"}], "\"}\""}, 
+                    "RowDefault"]}, "RowDefault"]}, "RowDefault"]}, 
+                    "RowDefault"], "\":\""}, "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]}, {
+                    TagBox[
+                    TemplateBox[{
+                    TemplateBox[{
+                    TemplateBox[{
+                    RowBox[{
+                    RowBox[{"f", "(", "t", ")"}], "\[LongEqual]", 
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm]}], 
+                    "\" \""}, "RowDefault"], "\"when \"", 
+                    RowBox[{"t", "\[NotEqual]", "0"}]}, "RowDefault"]}, 
+                    "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"To \"", "\"find \"", "\"all \"", "\"critical \"", 
+                    "\"points, \"", "\"first \"", "\"compute \"", 
+                    RowBox[{
+                    SuperscriptBox[
+                    "f", "\[Prime]", MultilineFunction -> None], "(", "t", 
+                    ")"}]}, "RowDefault"]}, "RowDefault"], "\":\""}, 
+                    "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    RowBox[{
+                    RowBox[{
+                    TagBox[
+                    FractionBox[
+                    RowBox[{"\[DifferentialD]", "\"\""}], 
+                    RowBox[{"\[DifferentialD]", "t"}], MultilineFunction -> 
+                    None], HoldForm], "\[InvisibleApplication]", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "\[LongEqual]", 
+                    TagBox[
+                    RowBox[{
+                    RowBox[{"0.0609`", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "-", 
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}], 
+                    SuperscriptBox["t", "2"]], "+", 
+                    FractionBox[
+                    RowBox[{"1", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "t"]}], 
+                    HoldForm]}]}, "RowDefault"], "\":\""}, 
+                    "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                    GridBoxSpacings -> {
+                    "Columns" -> {{None}}, "Rows" -> {{0.5}}}], "Column"]}, {
+                    TagBox[
+                    TemplateBox[{
+                    RowBox[{
+                    RowBox[{
+                    SuperscriptBox[
+                    "f", "\[Prime]", MultilineFunction -> None], "(", "t", 
+                    ")"}], "\[LongEqual]", 
+                    TagBox[
+                    RowBox[{
+                    RowBox[{"0.0609`", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "-", 
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}], 
+                    SuperscriptBox["t", "2"]], "+", 
+                    FractionBox[
+                    RowBox[{"1", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "t"]}], 
+                    HoldForm]}]}, "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"Solving \"", 
+                    TemplateBox[{
+                    TagBox[
+                    RowBox[{
+                    RowBox[{"0.0609`", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "-", 
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}], 
+                    SuperscriptBox["t", "2"]], "+", 
+                    FractionBox[
+                    RowBox[{"1", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "t"]}], HoldForm], 
+                    "\" \""}, "RowDefault"], "\"\[LongEqual] \"", 
+                    TemplateBox[{"0", "\" \""}, "RowDefault"], "\"yields \"", 
+                    RowBox[{"t", "\[LongEqual]", "29.446340441720213`"}]}, 
+                    "RowDefault"]}, "RowDefault"], "\":\""}, 
+                    "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    TagBox[
+                    TemplateBox[{
+                    RowBox[{"t", "\[LongEqual]", "29.446340441720213`"}]}, 
+                    "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    TemplateBox[{
+                    TemplateBox[{
+                    RowBox[{
+                    SuperscriptBox[
+                    "f", "\[Prime]", MultilineFunction -> None], "(", "t", 
+                    ")"}], "\" \""}, "RowDefault"], "\"exists \"", "\"for \"",
+                     "\"all \"", 
+                    TemplateBox[{"t", "\" \""}, "RowDefault"], "\"such \"", 
+                    "\"that \"", 
+                    RowBox[{"t", "\[NotEqual]", "0"}]}, "RowDefault"]}, 
+                    "RowDefault"], "\":\""}, "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    TagBox[
+                    TemplateBox[{
+                    TemplateBox[{
+                    TemplateBox[{
+                    TagBox[
+                    TagBox[
+                    RowBox[{
+                    RowBox[{"0.0609`", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "-", 
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}], 
+                    SuperscriptBox["t", "2"]], "+", 
+                    FractionBox[
+                    RowBox[{"1", " ", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], "t"]}], HoldForm], 
+                    HoldForm], "\" \""}, "RowDefault"], "\"exists \"", 
+                    "\"for \"", "\"all \"", 
+                    TemplateBox[{"t", "\" \""}, "RowDefault"], "\"such \"", 
+                    "\"that \"", 
+                    RowBox[{"t", "\[NotEqual]", "0"}]}, "RowDefault"]}, 
+                    "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"The \"", "\"only \"", "\"critical \"", "\"point \"", 
+                    "\"of \"", 
+                    TemplateBox[{
+                    TagBox[
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], 
+                    HoldForm], "\" \""}, "RowDefault"], "\"is \"", "\"at \"", 
+                    RowBox[{"t", "\[LongEqual]", "29.446340441720213`"}]}, 
+                    "RowDefault"]}, "RowDefault"], "\":\""}, 
+                    "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    TagBox[
+                    TemplateBox[{
+                    RowBox[{"t", "\[LongEqual]", "29.446340441720213`"}]}, 
+                    "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"The \"", "\"domain \"", "\"of \"", 
+                    TemplateBox[{
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], 
+                    "\" \""}, "RowDefault"], "\"is \"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"{\"", 
+                    RowBox[{"t", "\[Element]", 
+                    TemplateBox[{}, "Reals"]}], "\" \"", "\":\"", "\" \""}, 
+                    "RowDefault"], 
+                    TemplateBox[{
+                    RowBox[{"t", "\[NotEqual]", "0"}], "\"}\""}, 
+                    "RowDefault"]}, "RowDefault"]}, "RowDefault"]}, 
+                    "RowDefault"], "\":\""}, "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    TagBox[
+                    TemplateBox[{
+                    TemplateBox[{"\"The \"", "\"endpoints \"", "\"of \"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"{\"", 
+                    RowBox[{"t", "\[Element]", 
+                    TemplateBox[{}, "Reals"]}], "\" \"", "\":\"", "\" \""}, 
+                    "RowDefault"], 
+                    TemplateBox[{
+                    RowBox[{"t", "\[NotEqual]", "0"}], "\"}\""}, 
+                    "RowDefault"], "\" \""}, "RowDefault"], "\"are \"", 
+                    TemplateBox[{"t", "\" \""}, "RowDefault"], 
+                    "\"\[LongEqual] \"", 
+                    TemplateBox[{
+                    TemplateBox[{
+                    TemplateBox[{",", "\",\"", 
+                    RowBox[{"-", "\[Infinity]"}], "0"}, "RowWithSeparators"], 
+                    "\" \""}, "RowDefault"], "\"and \"", "\[Infinity]"}, 
+                    "RowDefault"]}, "RowDefault"]}, "RowDefault"], 
+                    HoldForm]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    TemplateBox[{"\"Evaluate \"", 
+                    TemplateBox[{
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], 
+                    "\" \""}, "RowDefault"], "\"at \"", 
+                    TemplateBox[{"t", "\" \""}, "RowDefault"], 
+                    "\"\[LongEqual] \"", 
+                    TemplateBox[{
+                    TemplateBox[{
+                    TemplateBox[{",", "\",\"", 
+                    RowBox[{"-", "\[Infinity]"}], "0", "29.446340441720213`"},
+                     "RowWithSeparators"], "\" \""}, "RowDefault"], 
+                    "\"and \"", "\[Infinity]"}, "RowDefault"]}, 
+                    "RowDefault"]}, "RowDefault"], "\":\""}, 
+                    "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"The \"", "\"open \"", "\"endpoints \"", "\"of \"", 
+                    "\"the \"", "\"domain \"", "\"are \"", "\"marked \"", 
+                    "\"in \"", "\"gray\""}, "RowDefault"], 
+                    GrayLevel[0.3], StripOnInput -> False]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]}, {
+                    TagBox[
+                    TemplateBox[{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox["t", 
+                    GrayLevel[0.3], StripOnInput -> False], 
+                    StyleBox[
+                    RowBox[{"f", "(", "t", ")"}], 
+                    GrayLevel[0.3], StripOnInput -> False]}, {
+                    StyleBox[
+                    RowBox[{"-", "\[Infinity]"}], 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox[
+                    RowBox[{"-", "\[Infinity]"}], 
+                    GrayLevel[0.5], StripOnInput -> False]}, {
+                    StyleBox[
+                    
+                    TemplateBox[{"0", "\"\[PlusMinus]\""}, "Superscript", 
+                    SyntaxForm -> SuperscriptBox], 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox["0", 
+                    GrayLevel[0.5], StripOnInput -> False]}, {
+                    StyleBox["29.446340441720213`", StripOnInput -> False], 
+                    StyleBox["0.2984256075256391`", StripOnInput -> False]}, {
+                    StyleBox["\[Infinity]", 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox["0", 
+                    GrayLevel[0.5], StripOnInput -> False]}}, AutoDelete -> 
+                    False, GridBoxDividers -> {
+                    "ColumnsIndexed" -> {2 -> GrayLevel[0.6]}, 
+                    "RowsIndexed" -> {2 -> GrayLevel[0.6]}}, 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                    GridBoxSpacings -> {"Columns" -> {{1}}, "Rows" -> {{1}}}],
+                     "Grid"]}, "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    
+                    TemplateBox[{
+                    "\"The \"", "\"largest \"", "\"value \"", 
+                    "\"corresponds \"", "\"to \"", "\"a \"", "\"global \"", 
+                    "\"maximum, \"", "\"and \"", "\"the \"", "\"smallest \"", 
+                    "\"value \"", "\"corresponds \"", "\"to \"", "\"a \"", 
+                    "\"global \"", "\"minimum\""}, "RowDefault"], "\":\""}, 
+                    "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"The \"", "\"open \"", "\"endpoints \"", "\"of \"", 
+                    "\"the \"", "\"domain \"", "\"are \"", "\"marked \"", 
+                    "\"in \"", "\"gray\""}, "RowDefault"], 
+                    GrayLevel[0.3], StripOnInput -> False]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]}, {
+                    TagBox[
+                    TemplateBox[{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox["t", 
+                    GrayLevel[0.3], StripOnInput -> False], 
+                    StyleBox[
+                    RowBox[{"f", "(", "t", ")"}], 
+                    GrayLevel[0.3], StripOnInput -> False], 
+                    StyleBox["\"extrema type\"", 
+                    GrayLevel[0.3], StripOnInput -> False]}, {
+                    StyleBox[
+                    RowBox[{"-", "\[Infinity]"}], 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox[
+                    RowBox[{"-", "\[Infinity]"}], 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox["\"global min\"", 
+                    GrayLevel[0.5], StripOnInput -> False]}, {
+                    StyleBox[
+                    
+                    TemplateBox[{"0", "\"\[PlusMinus]\""}, "Superscript", 
+                    SyntaxForm -> SuperscriptBox], 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox["0", 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox["\"neither\"", 
+                    GrayLevel[0.5], StripOnInput -> False]}, {
+                    StyleBox["29.446340441720213`", StripOnInput -> False], 
+                    StyleBox["0.2984256075256391`", StripOnInput -> False], 
+                    StyleBox["\"global max\"", StripOnInput -> False]}, {
+                    StyleBox["\[Infinity]", 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox["0", 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox["\"neither\"", 
+                    GrayLevel[0.5], StripOnInput -> False]}}, AutoDelete -> 
+                    False, GridBoxDividers -> {
+                    "ColumnsIndexed" -> {
+                    2 -> GrayLevel[0.6], 3 -> GrayLevel[0.6]}, 
+                    "RowsIndexed" -> {2 -> GrayLevel[0.6]}}, 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                    GridBoxSpacings -> {"Columns" -> {{1}}, "Rows" -> {{1}}}],
+                     "Grid"]}, "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox[
+                    TemplateBox[{"\"Remove \"", "\"the \"", "\"points \"", 
+                    TemplateBox[{"t", "\" \""}, "RowDefault"], 
+                    "\"\[LongEqual] \"", 
+                    TemplateBox[{
+                    TemplateBox[{
+                    TemplateBox[{",", "\",\"", 
+                    StyleBox[
+                    RowBox[{"-", "\[Infinity]"}], 
+                    GrayLevel[0.5], StripOnInput -> False], 
+                    StyleBox[
+                    
+                    TemplateBox[{"0", "\"\[PlusMinus]\""}, "Superscript", 
+                    SyntaxForm -> SuperscriptBox], StripOnInput -> False]}, 
+                    "RowWithSeparators"], "\" \""}, "RowDefault"], "\"and \"", 
+                    StyleBox["\[Infinity]", 
+                    GrayLevel[0.5], StripOnInput -> False], "\" \""}, 
+                    "RowDefault"], "\"from \"", "\"the \"", "\"table\""}, 
+                    "RowDefault"], 
+                    GrayLevel[0.3], StripOnInput -> False]}, {
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"These \"", "\"cannot \"", "\"be \"", "\"global \"", 
+                    "\"extrema, \"", "\"as \"", "\"the \"", "\"value \"", 
+                    "\"of \"", 
+                    TemplateBox[{
+                    RowBox[{"f", "(", "t", ")"}], "\" \""}, "RowDefault"], 
+                    "\"here \"", "\"is \"", "\"never \"", "\"achieved\""}, 
+                    "RowDefault"]}, "RowDefault"], "\":\""}, 
+                    "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]}, {
+                    TagBox[
+                    TemplateBox[{
+                    TagBox[
+                    GridBox[{{
+                    StyleBox["t", 
+                    GrayLevel[0.3], StripOnInput -> False], 
+                    StyleBox[
+                    RowBox[{"f", "(", "t", ")"}], 
+                    GrayLevel[0.3], StripOnInput -> False], 
+                    StyleBox["\"extrema type\"", 
+                    GrayLevel[0.3], StripOnInput -> False]}, {
+                    StyleBox["29.446340441720213`", StripOnInput -> False], 
+                    StyleBox["0.2984256075256391`", StripOnInput -> False], 
+                    StyleBox["\"global max\"", StripOnInput -> False]}}, 
+                    AutoDelete -> False, 
+                    GridBoxDividers -> {
+                    "ColumnsIndexed" -> {
+                    2 -> GrayLevel[0.6], 3 -> GrayLevel[0.6]}, 
+                    "RowsIndexed" -> {2 -> GrayLevel[0.6]}}, 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                    GridBoxSpacings -> {"Columns" -> {{1}}, "Rows" -> {{1}}}],
+                     "Grid"]}, "RowDefault"], HoldForm]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}, {
+                TagBox[
+                 GridBox[{{
+                    StyleBox[
+                    StyleBox[
+                    TemplateBox[{"\[NoBreak]", "\"\[NoBreak]\"", 
+                    TemplateBox[{
+                    TemplateBox[{
+                    TemplateBox[{
+                    TagBox[
+                    RowBox[{
+                    RowBox[{"f", "(", "t", ")"}], "\[LongEqual]", 
+                    TagBox[
+                    RowBox[{
+                    FractionBox[
+                    RowBox[{"16.420361247947454`", " ", 
+                    RowBox[{"(", 
+                    TagBox[
+                    RowBox[{"1", "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm], ")"}]}],
+                     "t"], "-", 
+                    SuperscriptBox["\[ExponentialE]", 
+                    RowBox[{"-", "0.0609`", " ", "t"}]]}], HoldForm]}], 
+                    HoldForm], "\" \""}, "RowDefault"], "\"has \"", 
+                    "\"one \"", "\"global \"", "\"maximum\""}, "RowDefault"]},
+                     "RowDefault"], "\":\""}, "RowWithSeparators"], 
+                    GrayLevel[0.3], StripOnInput -> False], {
+                    LinebreakAdjustments -> {1, 89, 100, 0, 100}, 
+                    LinebreakAdjustments -> {1, 100, 1, 0, 100}, LineIndent -> 
+                    0}]}, {
+                    FrameBox[
+                    TagBox[
+                    GridBox[{{
+                    StyleBox[
+                    TemplateBox[{"\"Answer:\""}, "RowDefault"], FontFamily -> 
+                    "Helvetica", FontSize -> 12, StripOnInput -> False], 
+                    "\[SpanFromLeft]"}, {"\"\"", 
+                    TagBox[
+                    TemplateBox[{
+                    TagBox[
+                    GridBox[{{
+                    TemplateBox[{
+                    TemplateBox[{
+                    RowBox[{"f", "(", "t", ")"}], "\" \""}, "RowDefault"], 
+                    "\"has \"", "\"a \"", "\"global \"", "\"maximum \"", 
+                    "\"at \"", 
+                    RowBox[{"t", "\[LongEqual]", "29.446340441720213`"}]}, 
+                    "RowDefault"]}}, 
+                    GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                    DefaultBaseStyle -> "Column", 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Column"]}, "RowDefault"], HoldForm]}}, 
+                    GridBoxAlignment -> {
+                    "Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, 
+                    AutoDelete -> False, 
+                    GridBoxItemSize -> {"Columns" -> {2.5, Automatic}}, 
+                    GridBoxSpacings -> {
+                    "Columns" -> {2, 0, 3}, "Rows" -> {1.5, 1, 2}}, 
+                    AllowScriptLevelChange -> False], "Grid"], FrameStyle -> {
+                    AbsoluteThickness[1], 
+                    RGBColor[0.52, 0.76, 0.86]}, Background -> 
+                    RGBColor[0.91, 0.98, 1], RoundingRadius -> 3, 
+                    FrameMargins -> 12, StripOnInput -> False]}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  AllowScriptLevelChange -> False, DefaultBaseStyle -> 
+                  "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                 "Column"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+              AllowScriptLevelChange -> False, DefaultBaseStyle -> "Column", 
+              GridBoxDividers -> {
+               "Columns" -> {{False}}, "Rows" -> {False, {True}, False}}, 
+              GridBoxItemSize -> {
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+              GridBoxSpacings -> {
+               "Columns" -> {{Automatic}}, "Rows" -> {{3}}}, FrameStyle -> 
+              GrayLevel[0.7]], "Column"], TraditionalForm]], "Output", {
+          Background -> None, 
+           GraphicsBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics"}, 
+             DefaultAxesStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsAxes"], DefaultFrameStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsFrame"], DefaultFrameTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsFrameTicks"], 
+             DefaultTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsTicks"]}, 
+           Graphics3DBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics3D"}}}, 
+          NumberPoint -> ".", CellSize -> {550, Automatic}, 
+          AutoStyleOptions -> {"HighlightFormattingErrors" -> False}, 
+          RenderingOptions -> {
+           "3DRenderingMethod" -> "BSPTreeOrDepthBuffer"}]}], 
+       XMLElement["dataformats", {}, {"plaintext"}], 
+       XMLElement["infos", {"count" -> "1"}, {
+         XMLElement["info", {"text" -> "R is the set of real numbers"}, {
+           XMLElement[
+           "link", {
+            "url" -> "http://reference.wolfram.com/language/ref/Reals.html", 
+             "text" -> "Documentation", "title" -> "Documentation"}, {}], 
+           XMLElement[
+           "link", {
+            "url" -> "http://mathworld.wolfram.com/R.html", "text" -> 
+             "Definition", "title" -> "MathWorld"}, {}]}]}]}], 
+     XMLElement["expressiontypes", {"count" -> "2"}, {"\n   ", 
+       XMLElement["expressiontype", {"name" -> "Default"}, {}], "\n   ", 
+       XMLElement["expressiontype", {"name" -> "Default"}, {}], "\n  "}], 
+     XMLElement["states", {"count" -> "3"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More digits", "input" -> "GlobalMaxima__More digits"}, {}], 
+       XMLElement[
+       "state", {
+        "name" -> "Exact form", "input" -> "GlobalMaxima__Exact form"}, {}], 
+       XMLElement[
+       "state", {
+        "name" -> "Hide steps", "input" -> 
+         "GlobalMaxima__Hide steps"}, {}]}]}], Typeset`pod3$$ = XMLElement[
+   "pod", {
+    "title" -> "Plot", "scanner" -> "MaxMin", "id" -> "Plot", "position" -> 
+     "300", "error" -> "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Plot[-E^(-0.0609 t) + (16.4204 (1 - E^(-0.0609 t)))/t, {t, -54.1872, \
+54.1872}, Epilog -> Point[{{Root[{-100000000 + (100000000 + 609 #1 (10000 + \
+609 #1))/E^((609 #1)/10000) & , 29.4463404417202135887}], (10000 - (10000 + \
+609 Root[{-100000000 + (100000000 + 609 #1 (10000 + 609 #1))/E^((609 \
+#1)/10000) & , 29.4463404417202135887}])/E^((609 Root[{-100000000 + \
+(100000000 + 609 #1 (10000 + 609 #1))/E^((609 #1)/10000) & , \
+29.4463404417202135887}])/10000))/(609 Root[{-100000000 + (100000000 + 609 #1 \
+(10000 + 609 #1))/E^((609 #1)/10000) & , 29.4463404417202135887}])}}]]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TemplateBox[{
+              GraphicsBox[{{{{}, {}, 
+                  TagBox[{
+                    Directive[
+                    Opacity[1.], 
+                    RGBColor[0.24720000000000014`, 0.24, 0.6], 
+                    AbsoluteThickness[1]], 
+                    LineBox[CompressedData["
+1:eJwB4QEe/iFib1JlAgAAAB0AAAACAAAAl3JLb0L6R8AM+QIJSR4pwDizy8Xa
+zEfAsIwcavF4KMCmDf//ob5GwANM0TjEHyXAsR8h+4GZRcAwPzgeoPkhwHE/
+r8Xxh0TAAhb1Q9zcHsDPFixRel9DwIaB7hGlGBrAL9+V/Go8QsD6xm1dehIW
+wES1a3frLEHA8E3pdnzTEsD3QjCzhAZAwPZg1KWckg/AvbzBfFvnPcApNEIT
+VK4KwJDV/NJ9zDvAguWiYCWGBsCfXRWr0YM5wKYz/4uiogLAFwEGIkViN8CO
+OhyiIAf/v8sT1BrqEjXAVgeLZK03+b+ECHxTX84ywCkxyYq/WfS/phj8KvSw
+MMB+kTwJOHXwvwgwswh1yyzAREgAzdSw6b+WZR75QIMowF4JYLtM8OO/m3lE
+7W/fI8BgB0gkVkbdv1SjPMJ+oh7APC+IF0591L8WwVAlnCIWwFB4/Xz/Fcu/
+jze1H//WCcBAfzRRrby8v3WQE9eFQ/G/QMoEVMOTob98rWgFkLzwv6AmUUd9
+BKG/gsq9M5o18L+gcbT6l3Wgvx4J0CBdT+6/AJOJht2xnr9S8XiTrhfqvwC3
+pZk3SJq/u8HKeFGo4b/ALohdh5iRv8Le416bsaG/ACiLs9hDUb+wkuwM
+                    "]], 
+                    LineBox[CompressedData["
+1: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
+                    "]]}, 
+                   Annotation[#, 
+                    "Charting`Private`Tag$2326738#1"]& ], {}}, {{}, {}}, {{}, \
+{}}}, {}}, {GridLines -> Dynamic[
+                  Map[{{#, 
+                    GrayLevel[0.7]}}& , 
+                   MousePosition[{"Graphics", Graphics}, None]]], 
+                AxesOrigin -> {0., 0.}, DisplayFunction -> Identity, 
+                Ticks -> {Automatic, Automatic}, AxesOrigin -> {0, 0}, 
+                FrameTicks -> {{Automatic, {{-12.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-10., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-7.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-5., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-2.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {0., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-15., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-14.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-14., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-13.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-13., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-12., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-11.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-11., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-10.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-9.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-9., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-8.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-8., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-7., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-6.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-6., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-5.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-4.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-4., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-3.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-3., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-2., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-1.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-1., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-0.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {0.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {1., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {1.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {2., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {2.5, 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}}}, {Automatic, {{-40., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-20., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {0., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {20., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {40., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.01, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-60., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-55., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-50., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-45., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-35., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-30., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-25., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-15., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-10., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {-5., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {5., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {10., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {15., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {25., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {30., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {35., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {45., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {50., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {55., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}, {60., 
+                    FormBox[
+                    TemplateBox[{0, 0}, "Spacer2"], TraditionalForm], {0.005, 
+                    0.}, {
+                    AbsoluteThickness[0.1]}}}}}, GridLines -> {None, None}, 
+                DisplayFunction -> Identity, PlotRangePadding -> {{
+                   Scaled[0.02], 
+                   Scaled[0.02]}, {0, 0}}, PlotRangeClipping -> True, 
+                ImagePadding -> All, DisplayFunction -> Identity, AspectRatio -> 
+                NCache[GoldenRatio^(-1), 0.6180339887498948], 
+                Axes -> {True, True}, AxesLabel -> {None, None}, 
+                AxesOrigin -> {0, 0}, AxesStyle -> Directive[
+                  AbsoluteThickness[0.2]], BaseStyle -> Automatic, 
+                DisplayFunction :> Identity, Epilog -> {
+                  PointSize[Medium], 
+                  RGBColor[1, 0, 0], {
+                   TagBox[
+                    TooltipBox[
+                    PointBox[{29.446340441720213`, 0.2984256075256391}], 
+                    
+                    TemplateBox[{
+                    "\"(\"", "29.446340441720213`", "\",\"", 
+                    "0.2984256075256391`", "\")\""}, "RowDefault"]], 
+                    Annotation[#, 
+                    
+                    Row[{"(", 29.446340441720213`, ",", 0.2984256075256391, 
+                    ")"}], "Tooltip"]& ]}}, 
+                Frame -> {{False, False}, {False, False}}, 
+                FrameLabel -> {{None, None}, {None, None}}, FrameStyle -> 
+                Directive[
+                  AbsoluteThickness[0.2]], 
+                FrameTicks -> {{Automatic, Automatic}, {
+                  Automatic, Automatic}}, GridLines -> {None, None}, 
+                GridLinesStyle -> {
+                  GrayLevel[0.85], 
+                  GrayLevel[0.9]}, ImageSize -> 412.5, 
+                Method -> {
+                 "DefaultBoundaryStyle" -> Automatic, 
+                  "DefaultGraphicsInteraction" -> {
+                   "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+                    "Effects" -> {
+                    "Highlight" -> {"ratio" -> 2}, 
+                    "HighlightPoint" -> {"ratio" -> 2}, 
+                    "Droplines" -> {
+                    "freeformCursorMode" -> True, 
+                    "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+                  "DefaultMeshStyle" -> PointSize[Medium], 
+                  "PointSizeFunction" -> "SmallPointSize", "ScalingFunctions" -> 
+                  None, "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+                    (Identity[#]& )[
+                    Part[#, 1]], 
+                    (Identity[#]& )[
+                    Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+                    (Identity[#]& )[
+                    Part[#, 1]], 
+                    (Identity[#]& )[
+                    Part[#, 2]]}& )}}, 
+                PlotRange -> {{-54.18718990650448, 
+                 54.18718990650448}, {-12.559150964367767`, 
+                 0.4884390424944014}}, PlotRangeClipping -> True, 
+                PlotRangePadding -> {{
+                   Scaled[0.02], 
+                   Scaled[0.02]}, {Automatic, Automatic}}, Prolog -> {
+                  Opacity[0], 
+                  TagBox[
+                   RectangleBox[
+                    Scaled[{0, 0}], 
+                    Scaled[{1, 1}]], Annotation[#, "Plot", "Frame"]& ]}, 
+                Ticks -> {Automatic, Automatic}}], 
+              StyleBox[
+               RowBox[{"\"(\"", "\[NoBreak]", 
+                 TemplateBox[{"x", 
+                   TemplateBox[{4}, "Spacer1"], "\"from \"", 
+                   RowBox[{"-", 
+                    TagBox["54.2", 
+                    $CellContext`TagBoxWrapper[
+                    "StringBoxes" -> "54.2", "SRString" -> "54.2"]]}], 
+                   "\" to \"", 
+                   TagBox["54.2", 
+                    $CellContext`TagBoxWrapper[
+                    "StringBoxes" -> "54.2", "SRString" -> "54.2"]]}, 
+                  "RowDefault"], "\[NoBreak]", "\")\""}], {
+               FontFamily -> "Verdana", FontSize -> 10, 
+                GrayLevel[0.5], LinebreakAdjustments -> {1, 100, 1, 0, 100}, 
+                LineIndent -> 0}]}, "Labeled", DisplayFunction -> (FormBox[
+               GridBox[{{
+                  TagBox[
+                   ItemBox[
+                    PaneBox[
+                    TagBox[#, "SkipImageSizeLevel"], 
+                    Alignment -> {Center, Baseline}, BaselinePosition -> 
+                    Baseline], DefaultBaseStyle -> "Labeled"], 
+                   "SkipImageSizeLevel"], 
+                  ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+                GridBoxAlignment -> {
+                 "Columns" -> {{Center}}, "Rows" -> {{Center}}}, AutoDelete -> 
+                False, GridBoxItemSize -> {
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                BaselinePosition -> {1, 1}], TraditionalForm]& ), 
+             InterpretationFunction -> (RowBox[{
+                StyleBox[
+                "Labeled", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], "[", 
+                RowBox[{#, ",", #2, ",", 
+                  RowBox[{"(", "\[NoBreak]", 
+                    GridBox[{{
+                    StyleBox[
+                    "Right", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], 
+                    StyleBox[
+                    "Center", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited]}}, RowSpacings -> 1, 
+                    ColumnSpacings -> 1, RowAlignments -> Baseline, 
+                    ColumnAlignments -> Center], "\[NoBreak]", ")"}]}], 
+                "]"}]& )], TraditionalForm]], "Output", {
+          Background -> None, 
+           GraphicsBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics"}, 
+             DefaultAxesStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsAxes"], DefaultFrameStyle -> Directive[
+               GrayLevel[0, 0.35], FontColor -> GrayLevel[0.25], FontOpacity -> 
+               1, "GraphicsFrame"], DefaultFrameTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsFrameTicks"], 
+             DefaultTicksStyle -> 
+             Directive[
+              FontFamily -> "Times", FontSize -> 10, "GraphicsTicks"]}, 
+           Graphics3DBoxOptions -> {
+            DefaultBaseStyle -> {FontFamily -> "Times", "Graphics3D"}}}, 
+          NumberPoint -> ".", CellSize -> {550, Automatic}, 
+          AutoStyleOptions -> {"HighlightFormattingErrors" -> False}, 
+          RenderingOptions -> {
+           "3DRenderingMethod" -> "BSPTreeOrDepthBuffer"}]}], 
+       XMLElement[
+       "dataformats", {}, {"minput,computabledata,formatteddata"}]}], 
+     XMLElement["expressiontypes", {"count" -> "1"}, {"\n  ", 
+       XMLElement["expressiontype", {"name" -> "Default"}, {}], "\n "}]}], 
+   Typeset`pod4$$, Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, 
+   Typeset`pod8$$, Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, 
+   Typeset`pod12$$, Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, 
+   Typeset`pod16$$, Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, 
+   Typeset`pod20$$, Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, 
+   Typeset`pod24$$, Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, 
+   Typeset`pod28$$, Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$, 
+   Typeset`pod32$$, Typeset`pod33$$, Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {
+   True, False, {False, False}, True}, Typeset`aux3$$ = {
+   True, False, {False}, True}, Typeset`aux4$$ = {True, False, {False}, True},
+    Typeset`aux5$$ = {True, False, {False}, True}, Typeset`aux6$$ = {
+   True, False, {False}, True}, Typeset`aux7$$ = {True, False, {False}, True},
+    Typeset`aux8$$ = {True, False, {False}, True}, Typeset`aux9$$ = {
+   True, False, {False}, True}, Typeset`aux10$$ = {
+   True, False, {False}, True}, Typeset`aux11$$ = {
+   True, False, {False}, True}, Typeset`aux12$$ = {
+   True, False, {False}, True}, Typeset`aux13$$ = {
+   True, False, {False}, True}, Typeset`aux14$$ = {
+   True, False, {False}, True}, Typeset`aux15$$ = {
+   True, False, {False}, True}, Typeset`aux16$$ = {
+   True, False, {False}, True}, Typeset`aux17$$ = {
+   True, False, {False}, True}, Typeset`aux18$$ = {
+   True, False, {False}, True}, Typeset`aux19$$ = {
+   True, False, {False}, True}, Typeset`aux20$$ = {
+   True, False, {False}, True}, Typeset`aux21$$ = {
+   True, False, {False}, True}, Typeset`aux22$$ = {
+   True, False, {False}, True}, Typeset`aux23$$ = {
+   True, False, {False}, True}, Typeset`aux24$$ = {
+   True, False, {False}, True}, Typeset`aux25$$ = {
+   True, False, {False}, True}, Typeset`aux26$$ = {
+   True, False, {False}, True}, Typeset`aux27$$ = {
+   True, False, {False}, True}, Typeset`aux28$$ = {
+   True, False, {False}, True}, Typeset`aux29$$ = {
+   True, False, {False}, True}, Typeset`aux30$$ = {
+   True, False, {False}, True}, Typeset`aux31$$ = {
+   True, False, {False}, True}, Typeset`aux32$$ = {
+   True, False, {False}, True}, Typeset`aux33$$ = {
+   True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {{
+    "success" -> "true", "error" -> "false", "numpods" -> "3", "datatypes" -> 
+     "Maximize", "timedout" -> "MaxMin", "timedoutpods" -> "", "timing" -> 
+     "3.52", "parsetiming" -> "1.094", "parsetimedout" -> "false", 
+     "recalculate" -> 
+     "https://www4d.wolframalpha.com/api/v1/recalc.jsp?id=\
+MSPa2333206h8a5hc4b5ddb70000589ii4df1c2b08gf5179438809786073608", "id" -> 
+     "MSP2334206h8a5hc4b5ddb700003b0abii16g759c5c", "host" -> 
+     "https://www4d.wolframalpha.com", "server" -> "22", "related" -> 
+     "https://www4d.wolframalpha.com/api/v1/relatedQueries.jsp?id=\
+MSPa2335206h8a5hc4b5ddb7000016db0c7ei6c23abi5179438809786073608", "version" -> 
+     "2.6"}, {"success" -> "true", "error" -> "false", "numpods" -> "0", 
+     "datatypes" -> "Maximize", "timedout" -> "MaxMin", "timedoutpods" -> "", 
+     "timing" -> "2.48", "parsetiming" -> "0.", "parsetimedout" -> "false", 
+     "recalculate" -> "", "id" -> "", "parseidserver" -> "14", "host" -> 
+     "https://www4d.wolframalpha.com", "server" -> "14", "related" -> "", 
+     "version" -> "2.6"}}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> 1., 
+    "Date" -> {2021, 3, 2, 14, 47, 50.7080671`9.457651909125019}, "Line" -> 
+    15, "SessionID" -> 27998713121314031044}, Typeset`showpods$$ = {1, 2, 3}, 
+   Typeset`failedpods$$ = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+   18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33}, 
+   Typeset`chosen$$ = {}, Typeset`open$$ = False, Typeset`newq$$ = 
+   "find maximum of (1-E^(-0.0609 t))/(0.0609 t)-E^(-0.0609 t)"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+         Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+         Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+         Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+         Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+         Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+         Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$, Typeset`pod32$$, 
+         Typeset`pod33$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+         Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+         Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+         Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+         Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+         Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+         Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$, Typeset`aux32$$, 
+         Typeset`aux33$$}, Typeset`chosen$$, Typeset`open$$, 
+        Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+        Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+        Typeset`failedpods$$, Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{1218., {1023., 1028.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], Null; AlphaIntegration`DoAsyncInitialization[
+       Hold[{
+        2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+          Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+          Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+          Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+          Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+          Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+          Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+          Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$, Typeset`pod32$$, 
+          Typeset`pod33$$}, {
+         Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+          Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+          Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+          Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+          Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+          Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+          Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+          Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$, Typeset`aux32$$, 
+          Typeset`aux33$$}, Typeset`chosen$$, Typeset`open$$, 
+         Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+         Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+         Typeset`failedpods$$, Typeset`newq$$, 
+         "https://www4d.wolframalpha.com/api/v1/recalc.jsp?id=\
+MSPa2333206h8a5hc4b5ddb70000589ii4df1c2b08gf5179438809786073608", 
+         Typeset`asyncpods$$}]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.823681670725011*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+2d019898-acb5-4d2b-80f3-e676296a389a\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.8236816759587393`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+d28febff-ffe6-41dd-b9e1-853f3673d039\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.8236816804460993`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+e95c941d-e359-4165-a3a5-dc4cfb76e5a6\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823681683329382*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"solve", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"16.4204", " ", 
+        RowBox[{"e", "^", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}]}], ")"}], "/", 
+      RowBox[{"t", "^", "2"}]}]}], "-", 
+    RowBox[{"16.4204", "/", 
+     RowBox[{"t", "^", "2"}]}], "+", 
+    RowBox[{"0.0609", " ", 
+     RowBox[{"e", "^", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}]}], "+", 
+    RowBox[{
+     RowBox[{"e", "^", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}], "/", "t"}]}], " ", 
+   "\[Equal]", "0"}]}]], "Input",
+ CellChangeTimes->{{3.8236817520582843`*^9, 3.8236817603843565`*^9}, {
+  3.8236818441088066`*^9, 3.823681853467823*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"0.0609`", " ", 
+    SuperscriptBox["e", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+   FractionBox["16.4204`", 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    RowBox[{"16.4204`", " ", 
+     SuperscriptBox["e", 
+      RowBox[{
+       RowBox[{"-", "0.0609`"}], " ", "t"}]], " ", "solve"}], 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    SuperscriptBox["e", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", 
+  "0"}]], "Output",
+ CellChangeTimes->{3.8236818539419208`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["e", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]], " ", "solve"}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "==", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.823681872994975*^9, 3.823681885055725*^9}},
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "inex"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients or the system obtained by direct rationalization of inexact \
+numbers present in the system. Since many of the methods used by Solve \
+require exact input, providing Solve with an exact version of the system may \
+help. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::inex\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.8236818787212133`*^9, 3.823681885459057*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["e", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]], " ", "solve"}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.8236818787212133`*^9, 3.8236818854617176`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"0.0609", " ", 
+    SuperscriptBox["e", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+   FractionBox["16.4204`", 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    RowBox[{"16.4204`", " ", 
+     SuperscriptBox["e", 
+      RowBox[{
+       RowBox[{"-", "0.0609`"}], " ", "t"}]], " ", "solve"}], 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    SuperscriptBox["e", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "=", "0"}]],
+ CellChangeTimes->{{3.823681872994975*^9, 3.823681885055725*^9}},
+ NumberMarks->False]], "WolframAlphaLong",
+ CellChangeTimes->{{3.8236818979909315`*^9, 3.8236819333664894`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+0b56468d-c365-41fc-a86c-27ae8b94e2ae\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.8236820288948298`*^9}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "0.0609 e^(-0.0609 t) - 16.4204/t^2 + (16.4204 e^(-0.0609 t) solve)/t^2 + \
+\n  e^(-0.0609 t)/t = 0", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {}, 
+   Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "false", "error" -> "false", "numpods" -> "0", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "6.364", 
+    "parsetiming" -> "", "parsetimedout" -> "false", "recalculate" -> "", 
+    "id" -> "", "parseidserver" -> "16", "host" -> 
+    "https://www4b.wolframalpha.com", "server" -> "16", "related" -> "", 
+    "version" -> "2.6"}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> 1., 
+    "Date" -> {2021, 3, 2, 14, 53, 48.9144982`9.44201246081879}, "Line" -> 2, 
+    "SessionID" -> 27998718482524866724}, Typeset`showpods$$ = {}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = 
+   "0.0609 e^(-0.0609 t) - 16.4204/t^2 + (16.4204 e^(-0.0609 t) solve)/t^2 + \
+\n  e^(-0.0609 t)/t = 0"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {}, {}, Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, 
+        Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{1218., {44., 49.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], Null; WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.823682028925254*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"0.0609", "/", 
+    RowBox[{"E", "^", 
+     RowBox[{"(", 
+      RowBox[{"0.0609", " ", "t"}], ")"}]}]}], "-", 
+   RowBox[{"16.4204", "/", 
+    RowBox[{"t", "^", "2"}]}], "+", 
+   RowBox[{
+    RowBox[{"16.4204", "/", 
+     RowBox[{"E", "^", 
+      RowBox[{"(", 
+       RowBox[{"0.0609", " ", "t"}], ")"}]}]}], "/", 
+    RowBox[{"t", "^", "2"}]}], "+", 
+   RowBox[{"1", "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"E", "^", 
+       RowBox[{"(", 
+        RowBox[{"0.0609", " ", "t"}], ")"}]}], " ", "t"}], ")"}]}]}], 
+  "\[Equal]", "0"}]], "Input",
+ CellChangeTimes->{{3.8236820226611986`*^9, 3.8236820226634593`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"0.0609`", " ", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+   FractionBox["16.4204`", 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    RowBox[{"16.4204`", " ", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", 
+  "0"}]], "Output",
+ CellChangeTimes->{3.8236820290041037`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "inex"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients or the system obtained by direct rationalization of inexact \
+numbers present in the system. Since many of the methods used by Solve \
+require exact input, providing Solve with an exact version of the system may \
+help. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::inex\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823682036248605*^9}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.8236820362520933`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "solve 0.0609/E^(0.0609 t) - 16.4204/t^2 + 16.4204/E^(0.0609 t)/t^2 + \
+1/(E^(0.0609 t) t) == 0", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Extrusion", "Warnings", "Assumptions", "Pods", "Unsuccessful"}, 
+    Asynchronous -> All, 
+    Method -> {
+     "ExtrusionChosen" -> {
+       "Fast parse", "Fast parse", 1, 0, "Input", 
+        "Solve[0.0609/E^(0.0609*t) - 16.4204/t^2 + 16.4204/(E^(0.0609*t)*t^2) \
++ 1/(E^(0.0609*t)*t) == 0, t]"}, "ExtrusionOpen" -> True, 
+      "Formats" -> {"cell", "minput", "moutput", "msound", "dataformats"}}}, 
+   Typeset`elements$$ = {
+   "Extrusion", "Warnings", "Assumptions", "Pods", "Unsuccessful"}, 
+   Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+   Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+   Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+   Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+   Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+   Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+   Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+   Typeset`pod29$$, Typeset`pod30$$, Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`aux3$$ = {True, False, {False}, True}, Typeset`aux4$$ = {
+   True, False, {False}, True}, Typeset`aux5$$ = {True, False, {False}, True},
+    Typeset`aux6$$ = {True, False, {False}, True}, Typeset`aux7$$ = {
+   True, False, {False}, True}, Typeset`aux8$$ = {True, False, {False}, True},
+    Typeset`aux9$$ = {True, False, {False}, True}, Typeset`aux10$$ = {
+   True, False, {False}, True}, Typeset`aux11$$ = {
+   True, False, {False}, True}, Typeset`aux12$$ = {
+   True, False, {False}, True}, Typeset`aux13$$ = {
+   True, False, {False}, True}, Typeset`aux14$$ = {
+   True, False, {False}, True}, Typeset`aux15$$ = {
+   True, False, {False}, True}, Typeset`aux16$$ = {
+   True, False, {False}, True}, Typeset`aux17$$ = {
+   True, False, {False}, True}, Typeset`aux18$$ = {
+   True, False, {False}, True}, Typeset`aux19$$ = {
+   True, False, {False}, True}, Typeset`aux20$$ = {
+   True, False, {False}, True}, Typeset`aux21$$ = {
+   True, False, {False}, True}, Typeset`aux22$$ = {
+   True, False, {False}, True}, Typeset`aux23$$ = {
+   True, False, {False}, True}, Typeset`aux24$$ = {
+   True, False, {False}, True}, Typeset`aux25$$ = {
+   True, False, {False}, True}, Typeset`aux26$$ = {
+   True, False, {False}, True}, Typeset`aux27$$ = {
+   True, False, {False}, True}, Typeset`aux28$$ = {
+   True, False, {False}, True}, Typeset`aux29$$ = {
+   True, False, {False}, True}, Typeset`aux30$$ = {
+   True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {{
+    "success" -> "true", "error" -> "false", "numpods" -> "0", "datatypes" -> 
+     "Solve", "timedout" -> "Solve", "timedoutpods" -> "", "timing" -> 
+     "5.1370000000000005", "parsetiming" -> "1.859", "parsetimedout" -> 
+     "false", "recalculate" -> 
+     "https://www4b.wolframalpha.com/api/v1/recalc.jsp?id=\
+MSPa63081300aca4f855g8hf00004hbbc5i3dfb03e4e1823913258652864178", "id" -> 
+     "MSP63091300aca4f855g8hf00006193ec0ha3ieafah", "host" -> 
+     "https://www4b.wolframalpha.com", "server" -> "2", "related" -> 
+     "https://www4b.wolframalpha.com/api/v1/relatedQueries.jsp?id=\
+MSPa63101300aca4f855g8hf0000138434hc90f80d761823913258652864178", "version" -> 
+     "2.6"}, {"success" -> "false", "error" -> "false", "numpods" -> "0", 
+     "datatypes" -> "Solve", "timedout" -> "Solve", "timedoutpods" -> "", 
+     "timing" -> "7.476", "parsetiming" -> "0.", "parsetimedout" -> "false", 
+     "recalculate" -> "", "id" -> "", "parseidserver" -> "3", "host" -> 
+     "https://www4b.wolframalpha.com", "server" -> "3", "related" -> 
+     "https://www4b.wolframalpha.com/api/v1/relatedQueries.jsp?id=\
+MSPa73113556c0cf3i9ha4e000059h3gc2g7834f9698425416300398683128", "version" -> 
+     "2.6"}}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> 1., 
+    "Date" -> {2021, 3, 2, 14, 54, 43.0919711`9.386971231786658}, "Line" -> 6,
+     "SessionID" -> 27998718482524866724}, Typeset`showpods$$ = {}, 
+   Typeset`failedpods$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
+   16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30}, 
+   Typeset`chosen$$ = {
+   "Fast parse", "Fast parse", 1, 0, "Input", 
+    "Solve[0.0609/E^(0.0609*t) - 16.4204/t^2 + 16.4204/(E^(0.0609*t)*t^2) + \
+1/(E^(0.0609*t)*t) == 0, t]"}, Typeset`open$$ = True, Typeset`newq$$ = 
+   "solve 0.0609/E^(0.0609 t) - 16.4204/t^2 + 16.4204/E^(0.0609 t)/t^2 + \
+1/(E^(0.0609 t) t) == 0"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+         Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+         Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+         Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+         Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+         Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+         Typeset`pod29$$, Typeset`pod30$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+         Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+         Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+         Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+         Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+         Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+         Typeset`aux29$$, Typeset`aux30$$}, Typeset`chosen$$, Typeset`open$$, 
+        Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+        Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+        Typeset`failedpods$$, Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{736., {86., 18.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], Null; AlphaIntegration`DoAsyncInitialization[
+       Hold[{
+        2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+          Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+          Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+          Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+          Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+          Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+          Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+          Typeset`pod29$$, Typeset`pod30$$}, {
+         Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+          Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+          Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+          Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+          Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+          Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+          Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+          Typeset`aux29$$, Typeset`aux30$$}, Typeset`chosen$$, Typeset`open$$,
+          Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+         Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+         Typeset`failedpods$$, Typeset`newq$$, 
+         "https://www4b.wolframalpha.com/api/v1/recalc.jsp?id=\
+MSPa63081300aca4f855g8hf00004hbbc5i3dfb03e4e1823913258652864178", 
+         Typeset`asyncpods$$}]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "WolframAlphaShortInput"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+fc61acd5-71f3-429f-b754-313bb10be3a3\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823682069154341*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "inex"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients or the system obtained by direct rationalization of inexact \
+numbers present in the system. Since many of the methods used by Solve \
+require exact input, providing Solve with an exact version of the system may \
+help. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::inex\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823682069256296*^9}],
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",",
+    "t"}], "]"}]], "Output",
+ CellChangeTimes->{3.8236820692572927`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+cdb7749b-a2f8-4e6c-8776-fb0d0316b92f\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.8236820830880156`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+7870aef8-abac-4ff0-b7f2-9550a7dc3001\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823682093119465*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"FindRoot", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"0.0609", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609"}], " ", "t"}]]}], "-", 
+      FractionBox["16.4204", 
+       SuperscriptBox["t", "2"]], "+", 
+      FractionBox[
+       RowBox[{"16.4204", " ", 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{
+          RowBox[{"-", "0.0609"}], " ", "t"}]]}], 
+       SuperscriptBox["t", "2"]], "+", 
+      FractionBox[
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+    RowBox[{"{", "t", "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.823682153426261*^9, 3.8236822020209813`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"FindRoot", "::", "srect"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Value \[NoBreak]\\!\\(t\\)\[NoBreak] in search \
+specification \[NoBreak]\\!\\({t}\\)\[NoBreak] is not a number or array of \
+numbers. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\
+\", ButtonFrame->None, ButtonData:>\\\"paclet:ref/FindRoot\\\", ButtonNote -> \
+\\\"FindRoot::srect\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.823682169402377*^9, 3.823682203804346*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FindRoot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.823682169404454*^9, 3.8236822038058805`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FindRoot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609", "/", 
+      RowBox[{"E", "^", 
+       RowBox[{"(", 
+        RowBox[{"0.0609", " ", "t"}], ")"}]}]}], "-", 
+     RowBox[{"16.4204", "/", 
+      RowBox[{"t", "^", "2"}]}], "+", 
+     RowBox[{
+      RowBox[{"16.4204", "/", 
+       RowBox[{"E", "^", 
+        RowBox[{"(", 
+         RowBox[{"0.0609", " ", "t"}], ")"}]}]}], "/", 
+      RowBox[{"t", "^", "2"}]}], "+", 
+     RowBox[{"1", "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"E", "^", 
+         RowBox[{"(", 
+          RowBox[{"0.0609", " ", "t"}], ")"}]}], " ", "t"}], ")"}]}]}], 
+    "\[Equal]", "0"}], ",", " ", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8236822256621127`*^9, 3.8236822367386165`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"FindRoot", "::", "srect"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Value \[NoBreak]\\!\\(t\\)\[NoBreak] in search \
+specification \[NoBreak]\\!\\({t}\\)\[NoBreak] is not a number or array of \
+numbers. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\
+\", ButtonFrame->None, ButtonData:>\\\"paclet:ref/FindRoot\\\", ButtonNote -> \
+\\\"FindRoot::srect\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.8236822376805353`*^9}],
+
+Cell[BoxData[
+ RowBox[{"FindRoot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     FractionBox["0.0609`", 
+      SuperscriptBox["\[ExponentialE]", 
+       RowBox[{"0.0609`", " ", "t"}]]], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox["16.4204`", 
+      RowBox[{
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"0.0609`", " ", "t"}]], " ", 
+       SuperscriptBox["t", "2"]}]], "+", 
+     FractionBox["1", 
+      RowBox[{
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{"0.0609`", " ", "t"}]], " ", "t"}]]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.8236822376814957`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NSolve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609", " ", 
+      RowBox[{"e", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}]}], "-", 
+     RowBox[{"16.4204", "/", 
+      RowBox[{"t", "^", "2"}]}], "+", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"16.4204", " ", 
+        RowBox[{"e", "^", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}]}], ")"}], "/", 
+      RowBox[{"t", "^", "2"}]}], "+", 
+     RowBox[{
+      RowBox[{"e", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "0.0609"}], " ", "t"}], ")"}]}], "/", "t"}]}], "==", 
+    "0"}], ",", " ", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8236822861209803`*^9, 3.823682294343009*^9}, {
+  3.8236823742576413`*^9, 3.8236823886706305`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"NSolve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["e", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Output",
+ CellChangeTimes->{
+  3.823682294961384*^9, {3.823682377456615*^9, 3.823682389093272*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"NSolve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"0.0609`", " ", 
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+     FractionBox["16.4204`", 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      RowBox[{"16.4204`", " ", 
+       SuperscriptBox["e", 
+        RowBox[{
+         RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+      SuperscriptBox["t", "2"]], "+", 
+     FractionBox[
+      SuperscriptBox["e", 
+       RowBox[{
+        RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"{", "t", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8236824057405925`*^9, 3.8236824265242076`*^9}, {
+  3.8236824730642385`*^9, 3.8236824734984264`*^9}},
+ NumberMarks->False],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryNoResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "solve 0.0609 e^(-0.0609 t) - 16.4204/t^2 + (16.4204 e^(-0.0609 t))/t^2 + \
+\n  e^(-0.0609 t)/t = 0", Typeset`newq$$ = 
+   "solve 0.0609 e^(-0.0609 t) - 16.4204/t^2 + (16.4204 e^(-0.0609 t))/t^2 + \
+\n  e^(-0.0609 t)/t = 0"}, 
+   FrameBox[
+    TagBox[GridBox[{
+       {
+        InputFieldBox[Dynamic[Typeset`newq$$], String,
+         Appearance->None,
+         BaseStyle->{"CalculateInput"},
+         ContinuousAction->True,
+         Enabled->True,
+         FieldSize->{{1, 40}, {1, 
+            DirectedInfinity[1]}},
+         TrapSelection->False], "\[SpanFromLeft]"},
+       {
+        StyleBox[
+         TemplateBox[{"\"(\"",DynamicBox[
+            ToBoxes[
+             FEPrivate`FrontEndResource["WAStrings", "NoInterpretations"], 
+             StandardForm], ImageSizeCache -> {143., {3., 9.}}],"\")\""},
+          "RowDefault"], "DialogStyle",
+         StripOnInput->False,
+         FontColor->GrayLevel[0.5]], 
+        TagBox[
+         TooltipBox[
+          ButtonBox[
+           
+           DynamicBox[FEPrivate`FrontEndResource[
+            "WABitmaps", "QuestionMarkSmallIcon"],
+            ImageSizeCache->{14., {5., 9.}}],
+           Appearance->None,
+           BaseStyle->{ShowStringCharacters -> False},
+           ButtonFunction:>(Quiet[
+              WolframAlpha[]]; 
+            WolframAlphaClient`Private`openSuggestionsDialog[
+             "NoResults", 
+              "solve 0.0609 e^(-0.0609 t) - 16.4204/t^2 + (16.4204 e^(-0.0609 \
+t))/t^2 + \n  e^(-0.0609 t)/t = 0"]),
+           Evaluator->Automatic,
+           Method->"Preemptive"],
+          "\"Information, tips and feedback\"",
+          TooltipStyle->"TextStyling"],
+         Annotation[#, "Information, tips and feedback", "Tooltip"]& ]}
+      },
+      AutoDelete->False,
+      BaselinePosition->{1, 1},
+      FrameStyle->GrayLevel[0.85],
+      GridBoxAlignment->{"Columns" -> {{Left}}},
+      GridBoxDividers->{
+       "Columns" -> {{False}}, "Rows" -> {False, {True}, False}},
+      GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+     "Grid"],
+    Alignment->Top,
+    Background->Dynamic[
+      FEPrivate`If[
+       FEPrivate`And[
+        FEPrivate`SameQ[
+         FEPrivate`Head[Typeset`newq$$], String], 
+        FEPrivate`UnsameQ[Typeset`q$$, Typeset`newq$$]], 
+       RGBColor[1., 0.975, 0.95], 
+       GrayLevel[1]]],
+    BaselinePosition->Baseline,
+    FrameStyle->GrayLevel[0.85],
+    ImageSize->Automatic,
+    RoundingRadius->5,
+    StripOnInput->False],
+   DynamicModuleValues:>{}],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "WolframAlphaShortInput"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+4d572cf3-6d70-418a-9b07-e9f3b35b470d\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.823682500603182*^9, 3.8236825257394466`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+e314ab61-f9a5-426c-9787-94bac7fc3d98\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823682500603182*^9, 3.823682531554138*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"solve", " ", "0.0609", " ", 
+    SuperscriptBox["e", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]]}], "-", 
+   FractionBox["16.4204`", 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    RowBox[{"16.4204`", " ", 
+     SuperscriptBox["e", 
+      RowBox[{
+       RowBox[{"-", "0.0609`"}], " ", "t"}]]}], 
+    SuperscriptBox["t", "2"]], "+", 
+   FractionBox[
+    SuperscriptBox["e", 
+     RowBox[{
+      RowBox[{"-", "0.0609`"}], " ", "t"}]], "t"]}], "=", "0"}]],
+ CellChangeTimes->{{3.8236824057405925`*^9, 3.8236824265242076`*^9}, {
+  3.8236824730642385`*^9, 3.8236824734984264`*^9}},
+ NumberMarks->False]], "WolframAlphaLong",
+ CellChangeTimes->{{3.823682532843316*^9, 3.823682536893716*^9}, {
+  3.8236827375686994`*^9, 3.8236827411381254`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "cdir"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot set current directory to \[NoBreak]\\!\\(\\\"C:\\\\\
+\\\\Users\\\\\\\\Juggle\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\m-\
+5bca1eaf-ea26-4b93-938e-97035f78f14b\\\"\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/cdir\\\", \
+ButtonNote -> \\\"General::cdir\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.823682747546963*^9}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "solve 0.0609 e^(-0.0609 t) - 16.4204/t^2 + (16.4204 e^(-0.0609 t))/t^2 + \
+\n  e^(-0.0609 t)/t = 0", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {}, 
+   Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "false", "error" -> "false", "numpods" -> "0", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "4.965", 
+    "parsetiming" -> "", "parsetimedout" -> "false", "recalculate" -> "", 
+    "id" -> "", "parseidserver" -> "41", "host" -> 
+    "https://www4d.wolframalpha.com", "server" -> "41", "related" -> "", 
+    "version" -> "2.6"}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> 1., 
+    "Date" -> {2021, 3, 2, 15, 5, 47.5853513`9.430048140814831}, "Line" -> 1, 
+    "SessionID" -> 27998723508477655104}, Typeset`showpods$$ = {}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = 
+   "solve 0.0609 e^(-0.0609 t) - 16.4204/t^2 + (16.4204 e^(-0.0609 t))/t^2 + \
+\n  e^(-0.0609 t)/t = 0"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {}, {}, Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, 
+        Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{1218., {44., 49.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], Null; WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.8236827476204844`*^9}]
+}, Open  ]]
+},
+WindowSize->{1287, 1680},
+WindowMargins->{{496, Automatic}, {Automatic, 27}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 596, 18, 31, "Input"],
+Cell[1178, 42, 561, 16, 53, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1776, 63, 591, 18, 51, "Input"],
+Cell[2370, 83, 645, 12, 39, "Message"],
+Cell[3018, 97, 615, 18, 53, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3670, 120, 679, 20, 31, "Input"],
+Cell[4352, 142, 389, 12, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4778, 159, 467, 15, 33, "Input"],
+Cell[5248, 176, 643, 12, 39, "Message"],
+Cell[5894, 190, 489, 15, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6420, 210, 610, 18, 31, "Input"],
+Cell[7033, 230, 619, 20, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7689, 255, 706, 22, 50, "Input"],
+Cell[8398, 279, 643, 12, 39, "Message"],
+Cell[9044, 293, 730, 22, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9811, 320, 785, 24, 50, "Input"],
+Cell[10599, 346, 665, 12, 39, "Message"],
+Cell[11267, 360, 752, 22, 50, "Output"]
+}, Open  ]],
+Cell[12034, 385, 502, 16, 52, "Input"],
+Cell[CellGroupData[{
+Cell[12561, 405, 586, 19, 31, "Input"],
+Cell[13150, 426, 228, 5, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13415, 436, 162, 3, 41, "WolframAlphaLong"],
+Cell[13580, 441, 571, 11, 21, "Message"],
+Cell[14154, 454, 82534, 1628, 2061, "Print"],
+Cell[96691, 2084, 571, 11, 21, "Message"],
+Cell[97265, 2097, 571, 11, 21, "Message"],
+Cell[97839, 2110, 569, 11, 21, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[98445, 2126, 863, 27, 52, "Input"],
+Cell[99311, 2155, 591, 20, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[99939, 2180, 738, 23, 50, "Input"],
+Cell[100680, 2205, 669, 12, 39, "Message"],
+Cell[101352, 2219, 728, 22, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[102117, 2246, 719, 21, 43, "WolframAlphaLong"],
+Cell[102839, 2269, 571, 11, 21, "Message"],
+Cell[103413, 2282, 2523, 49, 103, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[105973, 2336, 669, 22, 31, "Input"],
+Cell[106645, 2360, 619, 20, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[107301, 2385, 706, 22, 50, "Input"],
+Cell[108010, 2409, 643, 12, 39, "Message"],
+Cell[108656, 2423, 730, 22, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[109423, 2450, 8345, 137, 121, "WolframAlphaShortInput"],
+Cell[117771, 2589, 569, 11, 21, "Message"],
+Cell[118343, 2602, 643, 12, 39, "Message"],
+Cell[118989, 2616, 710, 22, 50, "Output"],
+Cell[119702, 2640, 571, 11, 21, "Message"],
+Cell[120276, 2653, 569, 11, 21, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[120882, 2669, 806, 23, 70, "Input"],
+Cell[121691, 2694, 528, 10, 21, "Message"],
+Cell[122222, 2706, 757, 22, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[123016, 2733, 797, 25, 31, "Input"],
+Cell[123816, 2760, 506, 10, 21, "Message"],
+Cell[124325, 2772, 688, 20, 49, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[125050, 2797, 887, 28, 31, "Input"],
+Cell[125940, 2827, 736, 23, 50, "Output"]
+}, Open  ]],
+Cell[126691, 2853, 788, 24, 50, "Input"],
+Cell[CellGroupData[{
+Cell[127504, 2881, 2734, 74, 102, "WolframAlphaShortInput"],
+Cell[130241, 2957, 595, 11, 21, "Message"],
+Cell[130839, 2970, 591, 11, 21, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[131467, 2986, 825, 23, 43, "WolframAlphaLong"],
+Cell[132295, 3011, 569, 11, 21, "Message"],
+Cell[132867, 3024, 2525, 49, 103, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

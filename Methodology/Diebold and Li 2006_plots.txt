@@ -1,0 +1,13 @@
+Beta_{1t} factor loading:
+plot y = 1
+
+Beta_{2t} factor loading:
+plot y = [1 - e^(-0.0609 * t)]/[0.0609 * t], t = 0 to 120
+plot y = [1 - e^(-0.0609 * t)]/[0.0609 * t]
+
+Beta_{3t} factor loading:
+plot y = [1 - e^(-0.0609 * t)]/[0.0609 * t] - e^(-0.0609 * t), t = 0 to 120, y = 0 to 1
+plot y = [1 - e^(-0.0609 * t)]/[0.0609 * t] - e^(-0.0609 * t)
+
+Beta_{3t} factor loading maximum:
+e^(-0.0609 * t) * [(-0.0609)^2 * t^2 + -0.0609 * t + 1] - 1 = 0
