@@ -1,7 +1,6 @@
 # Master Thesis
 # Data conversion follows
-# v1.4 - MWE for aggregated data, fixed some break labels for aggregation to work flawlessly
-# apart from "04 - Aggregated data" it a fairly cleaned up version, took out code chunks to Benchmarking.R and Code_Cleanup_leftovers.R
+# v1.5 - "04 - Aggregated data" cleaned up testing chunks and polished w lapply()?
 
 
 
