@@ -18,6 +18,7 @@
     # Workspace
     setwd("E:/Google_Drive/Diploma_Thesis/Code")
     load(file = "Workspaces/Data_04_aggregated_TUFVTYUS.RData") # 0min
+    load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS-small.RData") # 0min
     print("Workspace rdy set go!")
 
 
