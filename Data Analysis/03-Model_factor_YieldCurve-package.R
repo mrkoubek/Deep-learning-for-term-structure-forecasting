@@ -1,6 +1,6 @@
 # Master Thesis
 # Factor models - YieldCurve package examples
-# v1.0 - basic formatting
+# v1.0 - custom Nelson.Siegel_custom_lambda function for a fixed lambda, real data fitting
 
 
 
@@ -17,10 +17,12 @@
 
     # Workspace
     setwd("E:/Google_Drive/Diploma_Thesis/Code")
-    load(file = "Workspaces/Data_04_aggregated_TUFVTYUS.RData") # 0min
+    # Loading basic environment functions
+    load(file = "Workspaces/00_Environment_functions.RData")
+    # Loading data
+    # load(file = "Workspaces/Data_04_aggregated_TUFVTYUS.RData") # 0min
+    load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS-small-ayear.RData") # 0min
     print("Workspace rdy set go!")
-
-
 
 ###############################################
 ###### Factor models ##########################
@@ -33,14 +35,240 @@
 
 
 ###############################################
+###### Fixed lambda custom function ###########
+###############################################
+
+
+lambda <- 7
+optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambda, maximum = TRUE)$maximum
+
+
+    # A custom DNS function for use with a time fixed lambda (feeding a number), or a time-varying lambda (feeding a default, or a character "time_varying")
+    # Adapted from the YieldCurve package, Nelson.Siegel function.
+    Nelson.Siegel_custom_lambda <- function (rate, maturity, lambda = "time_varying") {
+        rate <- try.xts(rate, error = as.matrix) # converts the data into xts, if it comes across an error, tries to convert to a matrix
+        if (ncol(rate) == 1) # one maturity column
+            rate <- matrix(as.vector(rate), 1, nrow(rate)) # makes a matrix of 1xN, matrix(data, nrow = 1, ncol = number of original xts rows/observations)
+        pillars.number <- length(maturity) # number of maturities
+        lambdaValues <- seq(maturity[1], maturity[pillars.number], by = 0.5) # sequence from smallest maturity, by 0.5 increments, to largest, in this example omits 10Y maturity (last one 9.75 since start at 0.25+0.5*n)
+        FinalResults <- matrix(0, nrow(rate), 5) # prepare an empty matrix of 0s, ncol = 4 for 4 coefficients (3 betas and 1 lambda), nrow # of observations
+        print(paste("Analysing", nrow(rate), "observations."))
+        colnames(FinalResults) <- c("beta_0", "beta_1", "beta_2", "lambda", "SSR")
+
+        j <- 1
+        while (j <= nrow(rate)) { # loop thru all the observations (j-th observation)
+            InterResults <- matrix(0, length(lambdaValues), 5) # (re)initialise an empty matrix for fitting results, matrix(data, nrow, ncol)
+            colnames(InterResults) <- c("beta0", "beta1", "beta2", "lambda", "SSR")
+            rownames(InterResults) <- c(lambdaValues)
+
+            i <- 1
+            for (i in 1:length(lambdaValues)) { # for each fractional maturity/lambda (for the InterResults matrix rows)
+                if (lambda == "time_varying") {
+                    # The following picks an optimal lambda for each maturity
+                    lambdaTemp <- optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambdaValues[i], maximum = TRUE)$maximum
+                } else {
+                    # To fix the lambda across time, we feed just the one value of medium term maturity to the optimization
+                    lambdaTemp <- optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambda, maximum = TRUE)$maximum
+                }
+
+                InterEstimation <- .NS.estimator(as.numeric(rate[j, ]), maturity, lambdaTemp) # !!!! main estimation of betas !!!!
+                BetaCoef <- InterEstimation$Par # extract betas
+                if (BetaCoef[1] > 0 & BetaCoef[1] < 20) { # reasonable coefficients
+                    SSR <- sum(InterEstimation$Res^2)
+                    InterResults[i, ] <- c(BetaCoef, lambdaTemp, SSR) # log fitting results into 5 columns
+                }
+                else { # unreasonable coefficients
+                    InterResults[i, ] <- c(BetaCoef, lambdaTemp, 1e+05) # logging a weirdly high error SSR if first beta (i.e. constant Beta_0) too weird (negative, or >=20)
+                }
+            }
+
+            BestRow <- which.min(InterResults[, 5]) # pick lowest SSR row from all fractional maturity/lambda fitting rows
+            FinalResults[j, ] <- InterResults[BestRow, 1:5] # log the best result info for the j-th observation/row
+            j <- j + 1
+        }
+
+        FinalResults_reclassed <- reclass(FinalResults, rate) # reclasses the FinalResults matrix into the original rate format, e.g. xts (with same attributes, like row dates etc) if it was passed as xts, reclass(x, match.to), match.to - xts object whose attributes will be passed to x
+    }
+
+    # Passing the first 10 observations/months
+    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = first(FedYieldCurve, '10 month'), maturity = maturity.Fed)
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = first(FedYieldCurve, '10 month'), maturity = maturity.Fed, lambda = 7)
+
+    # Passing the full dataset length
+    start <- time_start()
+    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
+    time_end(start)
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
+
+    head(NSParameters_lambda_varying)
+    tail(NSParameters_lambda_varying)
+    head(NSParameters_lambda_fixed)
+    tail(NSParameters_lambda_fixed)
+
+    # Plot the estimated coefficients:
+    # Pick if time varying or fixed to plot
+    NSParameters <- NSParameters_lambda_varying
+    NSParameters <- NSParameters_lambda_fixed
+    # melt xts format into a ggplot compatible dataframe format, exclude lambda
+    meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
+    meltlambda <- fortify(NSParameters[, "lambda"], melt = TRUE)
+
+    # Plot single series
+    ggplot(data = meltbetas[meltbetas$Series == "beta_0", ], aes(x = Index, y = Value)) +
+        geom_line() + xlab("Index") + ylab("beta_0")
+
+    ggplot(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value)) +
+        geom_line() + xlab("Index") + ylab("beta_1")
+
+    ggplot(data = meltbetas[meltbetas$Series == "beta_2", ], aes(x = Index, y = Value)) +
+        geom_line() + xlab("Index") + ylab("beta_2")
+
+    ggplot(data = meltlambda, aes(x = Index, y = Value)) +
+        geom_line() + xlab("Index") + ylab("lambda")
+
+    # adding series one at a time
+    last_plot() + geom_line(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value), colour = "red")
+
+    # MAIN GRAPH - multivariate plotting
+    loadings_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
+        geom_line() +
+        geom_line(data = meltlambda, aes(x = Index, y = Value)) +
+        xlab("Index") + ylab("loadings")
+    loadings_graph
+
+
+
+    # On our datasets
+    maturities <- c(2, 5, 10, 30) # in years
+    str(dataFutures_H1)
+    data <- dataFutures_H1
+    data <- yields
+    str(data)
+
+    # TBD CLEAN UP I put this to 02-Prices_to_yields.R
+        # data.table playground joining columns
+            # Observations from TU, that are not in FV
+            test <- data$TU[!data$FV, on = .(Hour)]
+                # 95 obs.
+            test <- data$FV[!data$TU, on = .(Hour)]
+                # 341 obs.
+
+            # Observations from TU, that are not in TY
+            test <- data$TU[!data$TY, on = .(Hour)]
+                # 0 obs.
+            test <- data$TY[!data$TU, on = .(Hour)]
+                # 355 obs.
+
+            # Observations from TU, that are not in US
+            test <- data$TU[!data$US, on = .(Hour)]
+                # 1: 2008-11-27 17:00:00   108
+            test <- data$US[!data$TU, on = .(Hour)]
+                # 354 obs.
+
+
+
+        str(data)
+
+        # Set "Hour" as the key for each data.table
+        data <- lapply(data, function(x) setkey(x, Hour))
+
+        # Merge all data.tables using Reduce
+        result <- Reduce(function(x, y) merge(x, y, by = "Hour", all = TRUE), data)
+
+        # Rename the "Close" columns w maturity suffixes
+        setnames(result, c("Hour", paste0("Close_", names(data))))
+
+        str(result)
+        head(result)
+
+
+        # Subset the data to contain just a month for testing the NS function
+        data_amonth <- result[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2006-02-01", tz = "GMT")]
+        head(data_amonth)
+        str(data_amonth)
+            # 443 obs.
+
+        # Quick NAs check
+        sum(is.na(data_amonth))
+            # 14
+        NA_rows <- data_amonth[rowSums(is.na(data_amonth)) > 0, ]
+        str(NA_rows)
+        head(NA_rows)
+        NA_rows
+
+
+        # We use linear interpolation for the few NAs (missing values, mostly in the TU maturity)
+        # From the zoo package, na.approx() function:
+        data_amonth[, (2:ncol(data_amonth)) := lapply(.SD, na.approx, na.rm = FALSE), .SDcols = 2:ncol(data_amonth)]
+        str(data_amonth)
+        sum(is.na(data_amonth))
+            # 0
+
+
+    # Passing the first month of our data, it has 443 observations
+    start <- time_start()
+    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities)
+    time_end(start)
+        # 20s for 1 month of hourly data, would be 60min total, needs slight optimising
+
+    start <- time_start()
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities, lambda = 7)
+    time_end(start)
+
+    NSParameters <- NSParameters_lambda_fixed
+
+    NSParameters
+
+    # We're getting too large Beta_0 (115), and negative Beta_1 (-17), Beta_2 (-3.5). TBD DELVE
+
+    NSParameters <- Nelson.Siegel(rate = data, maturity = maturities)
+    NSParameters
+
+
+    data_amonth_yieldsdiv100 <- data[, (2:ncol(data)) := lapply(.SD, function(x) x / 100), .SDcols = 2:ncol(data)]
+    str(data_amonth_yieldsdiv100)
+    head(data_amonth_yieldsdiv100)
+
+    start <- time_start()
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = data_amonth_yieldsdiv100, maturity = maturities, lambda = 7)
+    time_end(start)
+
+    NSParameters <- NSParameters_lambda_fixed
+
+    NSParameters
+
+
+
+    # Yields data
+    # 2015-12-31 14:00
+        str(result)
+        result[Hour == as.POSIXct("2015-12-31 14:00:00", tz = "GMT")]
+            #                Hour Close_TU Close_FV Close_TY Close_US
+            # 2015-12-31 14:00:00 108.6406 118.3594 125.8906 153.4688
+
+
+
+
+    # Passing the full dataset length
+    start <- time_start()
+    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities)
+    time_end(start)
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities, lambda = 7)
+
+    NSParameters <- NSParameters_lambda_varying
+    NSParameters <- NSParameters_lambda_fixed
+
+    NSParameters
+
+
+
+###############################################
 ###### Example from package YieldCurve ########
 ###############################################
 
     data(FedYieldCurve) # Fed data set
-
     str(FedYieldCurve) # 8 maturities in columns, 372 months in rows as observations
     head(FedYieldCurve)
-    tail(FedYieldCurve)
 
     maturity.Fed <- c(3/12, 0.5, 1, 2, 3, 5, 7, 10)
 
@@ -69,6 +297,9 @@
     rate <- FedYieldCurve
     maturity <- maturity.Fed
 
+    rate <- data_amonth
+    maturity <- c(2, 5, 10, 30)
+
     # My data
     # rate <- 
     # maturity <- maturity_bonds
@@ -93,8 +324,7 @@
             InterResults <- matrix(0, length(lambdaValues), 5) # (re)initialise an empty matrix for fitting results, matrix(data, nrow, ncol)
             colnames(InterResults) <- c("beta0", "beta1", "beta2", "lambda", "SSR")
             rownames(InterResults) <- c(lambdaValues)
-            # head(InterResults)
-            # tail(InterResults)
+            head(InterResults)
 
             i <- 1
             for (i in 1:length(lambdaValues)) { # for each fractional maturity/lambda (for the InterResults matrix rows)
@@ -102,9 +332,9 @@
                 optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambdaValues[i], maximum = TRUE)
                 lambdaTemp <- optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambdaValues[i], maximum = TRUE)$maximum
                 # To fix the lambda across time, overwrite it with the fixed one
-                fixed_lambda_maturity <- c(2.5) # TBD could edit the whole function to accept this as an argument)
-                optimize(.factorBeta2, interval = c(0.001, 1), maturity = fixed_lambda_maturity, maximum = TRUE)$maximum
-                lambdaTemp <- optimize(.factorBeta2, interval = c(0.001, 1), maturity = fixed_lambda_maturity, maximum = TRUE)$maximum
+                # fixed_lambda_maturity <- c(2.5) # TBD could edit the whole function to accept this as an argument)
+                # optimize(.factorBeta2, interval = c(0.001, 1), maturity = fixed_lambda_maturity, maximum = TRUE)$maximum
+                # lambdaTemp <- optimize(.factorBeta2, interval = c(0.001, 1), maturity = fixed_lambda_maturity, maximum = TRUE)$maximum
                 # print(lambdaTemp)
                 # as.numeric(rate[j, ]) # j-th observation
                 InterEstimation <- .NS.estimator(as.numeric(rate[j, ]), maturity, lambdaTemp) # !!!! main estimation of betas !!!!
@@ -112,7 +342,7 @@
                 if (BetaCoef[1] > 0 & BetaCoef[1] < 20) {
                     SSR <- sum(InterEstimation$Res^2)
                     InterResults[i, ] <- c(BetaCoef, lambdaTemp, SSR) # log fitting results into 5 columns
-                    # head(InterResults)
+                    head(InterResults)
                 }
                 else {
                     InterResults[i, ] <- c(BetaCoef, lambdaValues[i], 1e+05) # logging a weirdly high error SSR if first beta (i.e. constant Beta_0) too weird (negative, or >=20)
@@ -121,7 +351,7 @@
 
             BestRow <- which.min(InterResults[, 5]) # pick lowest SSR row from all fractional maturity/lambda fitting rows
             FinalResults[j, ] <- InterResults[BestRow, 1:4] # log the best result info for the j-th observation/row
-            # head(FinalResults)
+            head(FinalResults)
             j <- j + 1
         }
 
