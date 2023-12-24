@@ -1,6 +1,6 @@
 # Master Thesis
 # Data conversion follows
-# v1.5 - "04 - Aggregated data" cleaned up testing chunks and polished w lapply()?
+# v1.5 - WIP "04 - Aggregated data" cleaned up testing chunks and polished w lapply()?
 
 
 
@@ -521,6 +521,17 @@
 	head(labels_breaks_4H)
 	tail(labels_breaks_4H)
 
+	# Create 1D breaks
+	# Add 2 hours to the last one, to include the last day, since it ends at 4pm.
+	breaks_1D <- seq(from = breaks_start_time, to = breaks_end_time + (2*3600 + 1), by = "1 day")
+	head(breaks_1D)
+	tail(breaks_1D)
+	# Format 1D breaks
+	labels_breaks_1D <- format(breaks_1D, "%Y-%m-%d")
+	str(labels_breaks_1D)
+	head(labels_breaks_1D)
+	tail(labels_breaks_1D)
+
 	# Might be faster to do a M5 first, then H1 from it, but it fast and small enough like this anyway (a few minutes), no need to optimise
 
 	dataFutures_M5 <- data
@@ -535,7 +546,7 @@
 
 	str(dataFutures_M5)
 	head(dataFutures_M5)
-	# TU M5 it starts with 18:01 instead of 18:00, np for 5min data, for 1min it'd be issue
+	# TU M5 it starts with 18:01 instead of 18:00, np for 5min data, for 1min it'd be an issue
 
 	dataFutures_H1 <- data
 	for (i in 1:dim) { # 2min, 5Mb
@@ -563,10 +574,23 @@
 	str(dataFutures_H4)
 	head(dataFutures_H4)
 
+	dataFutures_D1 <- data
+	for (i in 1:dim) { # 4min, 1Mb
+		print(paste("Aggregating", names(data[i]), "to be daily data"))
+		dataFutures_D1[[i]]$Day <- cut(data[[i]]$Time, breaks = "1 day", labels = labels_breaks_1D) # replace data w/ aggregated hourly data
+		# dataFutures_D1[[i]] <- as.data.table(ddply(dataFutures_D1[[i]], .(Day), summarize, Close = tail(Close, n = 1)))
+		# data.table equivalent to ddply:
+		dataFutures_D1[[i]] <- dataFutures_D1[[i]][ , .(Close = tail(Close, n = 1)), by = Day]
+		dataFutures_D1[[i]]$Day <- as.POSIXct(fast_strptime(as.character(dataFutures_D1[[i]]$Day), format = "%Y-%m-%d", tz = "GMT"))
+	}
+
+	str(dataFutures_D1)
+	head(dataFutures_D1)
+
 	size_objects()
 
 	# Delete the variables we won't be needing
-	rm(list = setdiff(ls(), c("dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dim", "futurenames",
+	rm(list = setdiff(ls(), c("dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1", "dim", "futurenames",
 								"size_objects", "time_start", "time_end")))
 
 
@@ -582,7 +606,7 @@
 	dim <- 4
 	par(mfrow = c(dim, 1))
 	for (i in 1:dim) {
-		plot(data_small[[i]]$Time, data_small[[i]]$Close, type = "l", main = paste(futurenames[i], "H1 2017"), xlab = "Time", ylab = "Price")
+		plot(dataFutures_D1[[i]]$Day, dataFutures_D1[[i]]$Close, type = "l", main = paste(futurenames[i], "D1 2006-2019"), xlab = "Time", ylab = "Price")
 	}
 
 
