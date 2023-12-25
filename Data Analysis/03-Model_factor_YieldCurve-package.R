@@ -112,6 +112,13 @@ optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambda, maximum = TRUE
         #  For the time-varying: 0.05976451 0.06181972 0.06404860 0.06640777 0.06900377 0.07171477 0.07470026 0.07797724
     length(unique(NSParameters$lambda))
 
+    # NSrates(Coeff, maturity), returns the interest rates by Nelson-Siegel's model:
+    # - https://www.rdocumentation.org/packages/YieldCurve/versions/5.1/topics/Nelson.Siegel
+    (y <- NSrates(Coeff = NSParameters[1000,], maturity = maturities)) # NS fitted rates
+    plot(maturities, try.xts(data[1000, ]), main = "Fitting Nelson-Siegel yield curve", xlab = c("Pillars in months"), type = "o") # original observed data rates
+    lines(maturities, y, col = 2, type = "o") # add NS fitted rates
+    legend("topleft", legend = c("observed yield curve", "fitted yield curve"), col = c(1, 2), lty = 1)
+    grid()
 
     # melt xts format into a ggplot compatible dataframe format, exclude lambda
     meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
@@ -123,6 +130,17 @@ optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambda, maximum = TRUE
         geom_line(data = meltlambda, aes(x = Index, y = Value)) +
         xlab("Index") + ylab("loadings")
     loadings_graph
+
+    # TBD edit for yield graph
+    # melt xts format into a ggplot compatible dataframe format, exclude lambda
+    meltbetas <- fortify(try.xts(data), melt = TRUE)
+
+    # MAIN GRAPH - multivariate plotting
+    yields_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
+        geom_line() +
+        xlab("Time") + ylab("Yields (in percent)")
+    yields_graph
+
 
     # Save the graphs to file
         custom_scale <- 1.5
@@ -823,6 +841,7 @@ optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambda, maximum = TRUE
     ### Svensson function and ECB data-set ###
     data(ECBYieldCurve)
     rate.ECB = ECBYieldCurve[1:5,]
+    rate.ECB
     maturity.ECB = c(0.25,0.5,seq(1,30,by=1))
     SvenssonParameters <- Svensson(rate.ECB, maturity.ECB)
     Svensson.rate <- Srates( SvenssonParameters ,maturity.ECB,"Spot")
