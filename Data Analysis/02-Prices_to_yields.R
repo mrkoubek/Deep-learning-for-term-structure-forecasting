@@ -30,29 +30,32 @@
 
     # Our datasets
     maturities <- c(2, 5, 10, 30) # in years
-    str(dataFutures_H1)
-    str(dataFutures_D1)
-    data <- dataFutures_H1
-    data <- dataFutures_D1
-    str(data)
 
-    # Set "Hour" as the key for each data.table. Or "Day" for daily data.
-    data <- lapply(data, function(x) setkey(x, Hour))
-    data <- lapply(data, function(x) setkey(x, Day))
+    # A function for preparing the data into a better format for the Nelson-Siegel
+    # Merges the maturities from separate lists into one data.table
+    merge_maturities <- function (data, frequency) {
+	    # Set "Hour" as the key for each data.table. Or "Day" for daily data.
+	    data <- lapply(data, function(x) setkeyv(x, frequency))
 
-    # Merge all data.tables using Reduce
-    result <- Reduce(function(x, y) merge(x, y, by = "Hour", all = TRUE), data)
-	result <- Reduce(function(x, y) merge(x, y, by = "Day", all = TRUE), data)
+	    # Merge all data.tables using Reduce, suppress a warning about duplicate column names, we're renaming right after this.
+	    result <- suppressWarnings(Reduce(function(x, y) merge(x, y, by = frequency, all = TRUE), data))
+
+	    # Rename the "Close" columns w maturity suffixes.
+	    setnames(result, c(frequency, paste0("Close_", names(data))))
+
+	    return(result)
+    }
+
+    result_hourly <- merge_maturities(data = dataFutures_H1, frequency = "Hour")
+    result_daily <- merge_maturities(data = dataFutures_D1, frequency = "Day")
+
+    str(result_hourly)
+    head(result_hourly)
+    tail(result_hourly)
+    str(result_daily)
+ 
     
-
-    # Rename the "Close" columns w maturity suffixes
-    setnames(result, c("Hour", paste0("Close_", names(data))))
-    setnames(result, c("Day", paste0("Close_", names(data))))
-
-    str(result)
-    head(result)
-    tail(result)
-
+    # TBC write a function for the following:
 
     # Subset the data to contain just a month for testing the NS function
     data_amonth <- result[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2006-02-01", tz = "GMT")]
@@ -176,8 +179,8 @@
 
 
 	# Delete the variables we won't be needing
-	rm(list = setdiff(ls(), c("yields", "dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1", "dim", "futurenames",
-								"size_objects", "time_start", "time_end")))
+	rm(list = setdiff(ls(), c("yields", "dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
+								"maturities", "dim", "futurenames", "size_objects", "time_start", "time_end")))
 
 	start <- time_start()
 	# Save the workspace
