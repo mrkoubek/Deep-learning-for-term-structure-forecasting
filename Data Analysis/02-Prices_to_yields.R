@@ -52,16 +52,16 @@
     str(result_hourly)
     head(result_hourly)
     tail(result_hourly)
-    str(result_daily)
- 
-    
-    # TBC write a function for the following:
 
-    # Subset the data to contain just a month for testing the NS function
-    data_amonth <- result[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2006-02-01", tz = "GMT")]
-    data_ayear <- result[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2007-01-01", tz = "GMT")]
-    data_all <- result[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2019-09-20", tz = "GMT")]
-    data_Fedcompare <- result[Day >= as.POSIXct("2006-01-01", tz = "GMT") & Day < as.POSIXct("2012-11-30", tz = "GMT")]
+    str(result_daily)
+    	# 4249 obs.
+ 
+    # Subset the hourly data to contain just a month for further testing purposes
+    data_amonth <- result_hourly[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2006-02-01", tz = "GMT")]
+    data_ayear <- result_hourly[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2007-01-01", tz = "GMT")]
+    data_hourly_all <- result_hourly[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2019-09-20", tz = "GMT")]
+    data_daily_Fedcompare <- result_daily[Day >= as.POSIXct("2006-01-01", tz = "GMT") & Day < as.POSIXct("2012-11-30", tz = "GMT")]
+    data_daily_all <- result_daily
 
     head(data_amonth)
     str(data_amonth)
@@ -70,32 +70,39 @@
     	# 5451 obs.
     str(data_all)
     	# 79973 obs.
-    str(data_Fedcompare)
+    str(data_daily_Fedcompare)
     	# 2135 obs.
 
-    # Quick NAs check
-    data <- data_amonth
-    data <- data_ayear
-    data <- data_all
-    data <- data_Fedcompare
-    sum(is.na(data))
-        # 14 for a month
-        # 167 for a year
-        # 474 for all
-        # 0 for Fedcompare
-    NA_rows <- data[rowSums(is.na(data)) > 0, ]
-    str(NA_rows)
-    head(NA_rows)
-    # NA_rows
+    # Quick NAs check and filling the missing values with interpolation
+    NA_remove <- function(data) {
+    	print(paste0("Processing NAs in ", deparse(substitute(data))))
+	    print(paste("Number of NAs before:", sum(is.na(data))))
+	        # 14 for a month
+	        # 167 for a year
+	        # 474 for all hourly
+	        # 0 for Fedcompare
+	        # 0 for all daily
 
-    # We use linear interpolation for the few NAs (missing values, mostly in the TU maturity)
-    # From the zoo package, na.approx() function:
-    data[, (2:ncol(data)) := lapply(.SD, na.approx, na.rm = FALSE), .SDcols = 2:ncol(data)]
-    str(data)
-    sum(is.na(data))
-        # 0
+	    # Extract just the rows with contain any NA
+		NA_rows <- data[rowSums(is.na(data)) > 0, ]
+	    print(str(NA_rows))
+	    print(head(NA_rows))
+
+	    # We use linear interpolation for the few NAs (missing values, mostly in the TU maturity)
+	    # From the zoo package, na.approx() function:
+	    data[, (2:ncol(data)) := lapply(.SD, na.approx, na.rm = FALSE), .SDcols = 2:ncol(data)]
+	    print(paste("Number of NAs after interpolation:", sum(is.na(data))))
+	        # 0
+    }
+
+    NA_remove(data = data_amonth)
+    NA_remove(data = data_ayear)
+    NA_remove(data = data_hourly_all)
+    NA_remove(data = data_daily_Fedcompare)
+    NA_remove(data = data_daily_all)
 
 
+    # TBC
 
 	# Load the excel file with the conversion factor lookup tables
 
