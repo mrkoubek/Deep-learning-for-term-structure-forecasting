@@ -27,6 +27,13 @@
 ##################################
 ### 05 - Prices to yields ########
 ##################################
+	# TBD restructure the numbering of sections, renew in this file
+
+
+
+##################################
+### 05.01 - Merge maturities #####
+##################################
 
     # Our datasets
     maturities <- c(2, 5, 10, 30) # in years
@@ -56,6 +63,12 @@
     str(result_daily)
     	# 4249 obs.
  
+
+
+##################################
+### 05.02 - Subset time series ###
+##################################
+
     # Subset the hourly data to contain just a month for further testing purposes
     data_amonth <- result_hourly[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2006-02-01", tz = "GMT")]
     data_ayear <- result_hourly[Hour >= as.POSIXct("2006-01-01", tz = "GMT") & Hour < as.POSIXct("2007-01-01", tz = "GMT")]
@@ -68,10 +81,16 @@
         # 444 obs.
     str(data_ayear)
     	# 5451 obs.
-    str(data_all)
+    str(data_hourly_all)
     	# 79973 obs.
     str(data_daily_Fedcompare)
     	# 2135 obs.
+
+
+
+##################################
+### 05.03 - Missing values #######
+##################################
 
     # Quick NAs check and filling the missing values with interpolation
     NA_remove <- function(data) {
@@ -102,7 +121,10 @@
     NA_remove(data = data_daily_all)
 
 
-    # TBC
+
+#######################################
+### 05.04 - Excel conversion factor ###
+#######################################
 
 	# Load the excel file with the conversion factor lookup tables
 
@@ -124,7 +146,7 @@
 		maturity <- maturities_longdash[i]
 	    tibble <- conversion_factors[[i]]
 		if (maturity %in% names(tibble)) {
-			as.numeric(tibble[tibble$Coupon == 0, maturity])
+			as.numeric(tibble[tibble$Coupon == 0, maturity]) # pick out the first row (zero coupon), and column corresponding to our maturity
 		} else { # when the specified maturity column isn't found
 			NULL
 		}
@@ -135,6 +157,12 @@
 	conversion_factors_zerocoupon
 		#     TU     FV     TY     US 
 		#	0.8885 0.7441 0.5537 0.1697 
+
+
+
+#######################################
+### 05.05 - Yield calculation #########
+#######################################
 
 	# For the (2, 5, 10, 30)Y US Treasure Bond Futures, in USD:
 	# https://www.cmegroup.com/trading/interest-rates/basics-of-us-treasury-futures.html
@@ -154,7 +182,10 @@
 
 	bonds_specs
 
-	prices <- data
+	# TBC refactor the following functions so we can easily do the yields for all our data excerpts
+
+	prices <- data_hourly_all
+	prices <- data_daily_all
 	str(prices)
 
 	# Calculation of Treasury bond yields from prices, using prespecified bond specs
@@ -175,36 +206,45 @@
 	    yields[, paste0("Yield_", bonds_specs$Name[i]) := yields_list[[i]]]
 	}
 
-	# Or add the Day column for daily data:
-	yields <- data.table(Day = prices$Day)
-	for (i in 1:nrow(bonds_specs)) {
-	    yields[, paste0("Yield_", bonds_specs$Name[i]) := yields_list[[i]]]
-	}
+		# Or add the Day column for daily data:
+		# yields <- data.table(Day = prices$Day)
+		# for (i in 1:nrow(bonds_specs)) {
+		#     yields[, paste0("Yield_", bonds_specs$Name[i]) := yields_list[[i]]]
+		# }
 
 	str(yields)
 	head(yields)
 
 
+
+#######################################
+### 05.06 - Save the variables ########
+#######################################
+
 	# Delete the variables we won't be needing
-	rm(list = setdiff(ls(), c("yields", "dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
+	rm(list = setdiff(ls(), c("yields", "data_hourly_all",
+								"dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
 								"maturities", "dim", "futurenames", "size_objects", "time_start", "time_end")))
 
-	start <- time_start()
 	# Save the workspace
 	# The following takes 0min to save and is 14MB
 	# save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS-small-amonth.RData")
 	# save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS-small-ayear.RData")
 	save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData")
-	time_end(start)
 
 
 
-	# TBD plot all maturities
-	# Plotting the data again
+#######################################
+### 05.07 - Visualisation #############
+#######################################
+
+	# TBD plot all maturities, or move this to next file?
+
+	# Plotting the hourly data
 	dim <- 4
 	par(mfrow = c(dim, 1))
 	for (i in 1:dim) {
-		plot(yields$Day, yields[[i+1]], type = "l", main = paste(futurenames[i], "D1 2006-2019 yields"), xlab = "Time", ylab = "Yield")
+		plot(yields$Hour, yields[[i+1]], type = "l", main = paste(futurenames[i], "H1 2006-2019 yields"), xlab = "Time", ylab = "Yield")
 	}
 
 
@@ -212,6 +252,8 @@
 #############
 ### TO DO ###
 #############
-	# 
+	
+	# Port the basic plots into ggplot format, but first check the file 03-Model_factor_YieldCurve-package.R, there's already
+	# a yields_graph ggplot, maybe what we want?
 
 

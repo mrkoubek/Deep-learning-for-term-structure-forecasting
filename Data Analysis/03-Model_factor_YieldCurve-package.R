@@ -136,6 +136,7 @@ optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambda, maximum = TRUE
     meltbetas <- fortify(try.xts(data), melt = TRUE)
 
     # MAIN GRAPH - multivariate plotting
+    # TBD save this graph!!
     yields_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
         geom_line() +
         xlab("Time") + ylab("Yields (in percent)")
