@@ -182,15 +182,17 @@
 
 	bonds_specs
 
-	# TBC refactor the following functions so we can easily do the yields for all our data excerpts
-
-	prices <- data_hourly_all
-	prices <- data_daily_all
-	str(prices)
+	# Put all the various data excerpts and frequencies in one list variable
+    data_list <- list(data_amonth = data_amonth,
+				      data_ayear = data_ayear,
+				      data_hourly_all = data_hourly_all,
+				      data_daily_Fedcompare = data_daily_Fedcompare,
+				      data_daily_all = data_daily_all)
+	lapply(data_list, print(names))	
 
 	# Calculation of Treasury bond yields from prices, using prespecified bond specs
-	calculate_yield <- function(specs) { 
-	    adjusted_prices <- prices[[paste0("Close_", specs$Name)]] * specs$Conversion_Factor # multiply each price observation by the corresponding conversion factor (depends on maturity)
+	calculate_yield <- function(specs, data) { 
+	    adjusted_prices <- data[[paste0("Close_", specs$Name)]] * specs$Conversion_Factor # multiply each price observation by the corresponding conversion factor (depends on maturity)
 	    total_prices <- adjusted_prices * specs$Contract_Multiplier
 	    yields <- (specs$Face_Value / total_prices)^(1/specs$Maturity) - 1 # the yield-to-maturity calculation
 	    yields <- 100 * yields
@@ -198,7 +200,14 @@
 	}
 
 	# Create a list to store the results
-	yields_list <- lapply(1:nrow(bonds_specs), function(i) calculate_yield(bonds_specs[i, ]))
+	yields_list <- lapply(data_list, function(d) {
+		return(lapply(1:nrow(bonds_specs), function(i) calculate_yield(specs = bonds_specs[i, ], data = d)))
+		}
+	)
+
+	str(yields_list)
+
+	# TBC
 
 	# Add the Hour column
 	yields <- data.table(Hour = prices$Hour)
