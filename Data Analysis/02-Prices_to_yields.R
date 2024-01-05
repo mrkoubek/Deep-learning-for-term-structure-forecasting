@@ -188,7 +188,7 @@
 				      data_hourly_all = data_hourly_all,
 				      data_daily_Fedcompare = data_daily_Fedcompare,
 				      data_daily_all = data_daily_all)
-	lapply(data_list, print(names))	
+	lapply(data_list, print(names))
 
 	# Calculation of Treasury bond yields from prices, using prespecified bond specs
 	calculate_yield <- function(specs, data) { 
@@ -199,30 +199,40 @@
 	    return(yields)
 	}
 
-	# Create a list to store the results
-	yields_list <- lapply(data_list, function(d) {
-		return(lapply(1:nrow(bonds_specs), function(i) calculate_yield(specs = bonds_specs[i, ], data = d)))
+	# Create a list to store all the yields
+	yields <- lapply(data_list, function(d) {
+		yield_set <- lapply(1:nrow(bonds_specs), function(i) calculate_yield(specs = bonds_specs[i, ], data = d))
+
+		# Format the lists as data.table and name the columns
+		yield_set <- as.data.table(yield_set)
+		setnames(yield_set, paste0("Yield_", bonds_specs$Name))
+
+		# Add the Hour or Day column
+		first_col_name <- NULL # initialise
+		if ("Hour" %in% names(d)) {
+			yield_set[, Hour := d$Hour]
+			first_col_name <- "Hour"
+		} else if ("Day" %in% names(d)) {
+			yield_set[, Day := d$Day]
+			first_col_name <- "Day"
+		}
+
+		# Rearrange columns so the Hour or Day is the first column
+		if (!is.null(first_col_name)) {
+        	setcolorder(yield_set, c(first_col_name, setdiff(names(yield_set), first_col_name)))
+    	}
+
+    	# Clone the sorted attribute from the original data.table
+	    if (!is.null(attributes(d)$sorted)) {
+	        setattr(yield_set, "sorted", attributes(d)$sorted)
+	    }
+
+		return(yield_set)
 		}
 	)
 
-	str(yields_list)
-
-	# TBC
-
-	# Add the Hour column
-	yields <- data.table(Hour = prices$Hour)
-	for (i in 1:nrow(bonds_specs)) {
-	    yields[, paste0("Yield_", bonds_specs$Name[i]) := yields_list[[i]]]
-	}
-
-		# Or add the Day column for daily data:
-		# yields <- data.table(Day = prices$Day)
-		# for (i in 1:nrow(bonds_specs)) {
-		#     yields[, paste0("Yield_", bonds_specs$Name[i]) := yields_list[[i]]]
-		# }
-
 	str(yields)
-	head(yields)
+	head(yields$data_hourly_all)
 
 
 
@@ -231,14 +241,12 @@
 #######################################
 
 	# Delete the variables we won't be needing
-	rm(list = setdiff(ls(), c("yields", "data_hourly_all",
+	rm(list = setdiff(ls(), c("yields", "data_list",
 								"dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
 								"maturities", "dim", "futurenames", "size_objects", "time_start", "time_end")))
 
 	# Save the workspace
 	# The following takes 0min to save and is 14MB
-	# save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS-small-amonth.RData")
-	# save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS-small-ayear.RData")
 	save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData")
 
 
@@ -246,6 +254,8 @@
 #######################################
 ### 05.07 - Visualisation #############
 #######################################
+
+	# TBC
 
 	# TBD plot all maturities, or move this to next file?
 
