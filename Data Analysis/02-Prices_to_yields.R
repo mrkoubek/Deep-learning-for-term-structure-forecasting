@@ -1,12 +1,20 @@
 # Master Thesis
 # Prices to yields conversion
-# v1.0 - real data calculation of yields and a basic NAs treatment, for amonth and ayear of data
+# v2.0 - an ok scalable version with several data excerpts and frequencies, nicely structured
 
 
 
-################################
-### Workspace setup ############
-################################
+##################################
+##################################
+### Prices to yields #############
+##################################
+##################################
+
+
+
+##################################
+### Workspace setup ##############
+##################################
 
 	rm(list = ls())
 
@@ -23,16 +31,8 @@
 
 
 
-
 ##################################
-### 05 - Prices to yields ########
-##################################
-	# TBD restructure the numbering of sections, renew in this file
-
-
-
-##################################
-### 05.01 - Merge maturities #####
+### 01 - Merge maturities ########
 ##################################
 
     # Our datasets
@@ -66,7 +66,7 @@
 
 
 ##################################
-### 05.02 - Subset time series ###
+### 02 - Subset time series ######
 ##################################
 
     # Subset the hourly data to contain just a month for further testing purposes
@@ -89,7 +89,7 @@
 
 
 ##################################
-### 05.03 - Missing values #######
+### 03 - Missing values ##########
 ##################################
 
     # Quick NAs check and filling the missing values with interpolation
@@ -123,7 +123,7 @@
 
 
 #######################################
-### 05.04 - Excel conversion factor ###
+### 04 - Excel conversion factor ######
 #######################################
 
 	# Load the excel file with the conversion factor lookup tables
@@ -161,7 +161,7 @@
 
 
 #######################################
-### 05.05 - Yield calculation #########
+### 05 - Yield calculation ############
 #######################################
 
 	# For the (2, 5, 10, 30)Y US Treasure Bond Futures, in USD:
@@ -237,7 +237,7 @@
 
 
 #######################################
-### 05.06 - Save the variables ########
+### 06 - Save the variables ###########
 #######################################
 
 	# Delete the variables we won't be needing
@@ -252,7 +252,7 @@
 
 
 #######################################
-### 05.07 - Visualisation #############
+### 07 - Visualisation ################
 #######################################
 
 	# TBC
