@@ -255,16 +255,49 @@
 ### 07 - Visualisation ################
 #######################################
 
-	# TBC
+	# Plot all the maturities for each dataset
 
-	# TBD plot all maturities, or move this to next file?
-
-	# Plotting the hourly data
+	# Plotting the hourly data - TBD remove this once ggplot is done
+	# TBC add this heading into the ggplot below
 	dim <- 4
 	par(mfrow = c(dim, 1))
 	for (i in 1:dim) {
-		plot(yields$Hour, yields[[i+1]], type = "l", main = paste(futurenames[i], "H1 2006-2019 yields"), xlab = "Time", ylab = "Yield")
+		plot(yields$data_hourly_all$Hour, yields$data_hourly_all[[i+1]], type = "l",
+			 main = paste(futurenames[i], "H1 2006-2019 yields"), xlab = "Time", ylab = "Yield")
 	}
+
+	# ggplot for all the data excerpts
+	p_load(xts, Cairo)
+	str(yields)
+
+    # Melt format into a ggplot compatible dataframe format.
+    # We convert the data from wide to long format.
+    # TBD maybe better use the data.table's function melt(), delve and test replacing fortify() with it
+    meltyields <- lapply(yields, function(dataset) fortify(try.xts(dataset), melt = TRUE))
+    str(meltyields)
+
+    # Multivariate plotting
+    yields_graphs <- lapply(meltyields, function(dataset) {
+    	ggplot(data = dataset, aes(x = Index, y = Value, group = Series, colour = Series)) +
+	        geom_line() +
+	        xlab("Time") + ylab("Yields (in percent)")
+	    })
+    names(yields_graphs)
+   	yields_graphs$data_amonth
+   	yields_graphs$data_hourly_all
+
+    # Save the graphs to file
+        custom_scale <- 1.5
+        GoldenRatio <- (1 + sqrt(5)) / 2
+        # plots_width <- 5.55226 # width in inches of thesis template textwidth
+        plots_width <- 10 * custom_scale # 10 inches plus have nicely smallish graph elements, adjust custom scale for each graph type what looks nice
+        plots_height <- plots_width / GoldenRatio
+
+    # Save all the graphs of the datasets at once
+		# lapply(names(yields_graphs), function(dataset_name) {
+		# 	ggsave(yields_graphs[[dataset_name]], filename = paste0("Graphs/Model_factor/Yields/yields_percent_", dataset_name, ".pdf"), device = cairo_pdf,
+		# 		width = plots_width, height = plots_height, units = "in")
+		# 	})
 
 
 
