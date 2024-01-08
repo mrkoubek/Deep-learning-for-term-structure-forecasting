@@ -305,7 +305,6 @@
 ### TO DO ###
 #############
 	
-	# Port the basic plots into ggplot format, but first check the file 03-Model_factor_YieldCurve-package.R, there's already
-	# a yields_graph ggplot, maybe what we want?
+	# 
 
 
