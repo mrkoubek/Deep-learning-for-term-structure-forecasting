@@ -237,22 +237,7 @@
 
 
 #######################################
-### 06 - Save the variables ###########
-#######################################
-
-	# Delete the variables we won't be needing
-	rm(list = setdiff(ls(), c("yields", "data_list",
-								"dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
-								"maturities", "dim", "futurenames", "size_objects", "time_start", "time_end")))
-
-	# Save the workspace
-	# The following takes 0min to save and is 14MB
-	save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData")
-
-
-
-#######################################
-### 07 - Visualisation ################
+### 06 - Visualisation ################
 #######################################
 
 	# Plot all the maturities for each dataset
@@ -298,6 +283,21 @@
 		# 	ggsave(yields_graphs[[dataset_name]], filename = paste0("Graphs/Model_factor/Yields/yields_percent_", dataset_name, ".pdf"), device = cairo_pdf,
 		# 		width = plots_width, height = plots_height, units = "in")
 		# 	})
+
+
+
+#######################################
+### 07 - Save the variables ###########
+#######################################
+
+	# Delete the variables we won't be needing
+	rm(list = setdiff(ls(), c("yields", "data_list", "yields_graphs",
+								"dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
+								"maturities", "dim", "futurenames", "size_objects", "time_start", "time_end")))
+
+	# Save the workspace
+	# The following takes 0min to save and is 19MB
+	# save.image(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData")
 
 
 
