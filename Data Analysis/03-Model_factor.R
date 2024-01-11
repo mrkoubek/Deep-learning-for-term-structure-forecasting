@@ -1,6 +1,6 @@
 # Master Thesis
 # Factor models
-# v1.2 - restructure, puts in YieldCurve custom function chunk of code from another file
+# v1.3 - WIP - code cleanup and revive
 
 
 
@@ -40,52 +40,17 @@
 ###############################################
 ###### Fixed lambda custom function ###########
 ###############################################
+  
+    ls()
+    str(yields)
+    str(yields$data_hourly_all)
 
-    lambda <- 7
-    optimize(.factorBeta2, interval = c(0.001, 1), maturity = lambda, maximum = TRUE)$maximum
-
-
-    # OPTIMISING - PROFILING THE FUNCTION
-    Rprof("Profiling/profile_output_Nelson-Siegel-custom-lambda.txt")  # start the profiling, output to a text file
-
-    # Passing the full dataset length
-    start <- time_start()
-    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities)
-    time_end(start)
-    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities, lambda = 7)
-
-    NSParameters <- NSParameters_lambda_varying
-    NSParameters <- NSParameters_lambda_fixed
-
-    NSParameters
-
-
-
-           beta <- lm(rate ~ 1 + .factorBeta1(lambda, maturity) + .factorBeta2(lambda, maturity))
-        # beta
-        betaPar <- coef(beta)
-        # betaPar
-        NaValues <- na.omit(betaPar) # if there's an NA in one of the coefficients, the NaValues will drop it
-        if (length(NaValues) < 3) # and then it's length will decrease below 3 coefficients
-            betaPar <- c(0, 0, 0)
-        names(betaPar) <- c("beta_0", "beta_1", "beta_2")
-        EstResults <- list(Par = betaPar, Res = resid(beta))
-        # EstResults
-        # return(EstResults)
-
-
-
-    Rprof(NULL)  # Stop profiling
-
-    summary <- summaryRprof("Profiling/profile_output_Nelson-Siegel-custom-lambda.txt")
-    print(summary)
-
-
-
-    maturities <- c(2, 5, 10, 30) # in years
-    data <- yields
+    data <- yields$data_hourly_all
     str(data)
     data <- data[1:10000, ]
+
+    # TBC
+
     # Passing the full dataset length
     # Takes 31.8min for the full dataset but w seq(by=1) instead of by=0.5 in the lambda maturities inside the function
     start <- time_start()

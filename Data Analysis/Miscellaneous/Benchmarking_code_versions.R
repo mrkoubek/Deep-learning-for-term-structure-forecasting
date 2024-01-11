@@ -13,7 +13,7 @@
 
 
 ################################
-### 01-Data_conversion #########
+### 01-Data_conversion.R #######
 ################################
 
 	################################
@@ -77,3 +77,44 @@
 		dataFuturesUS_head <- head(dataFutures$US)
 		dataFuturesUS_head$Date <- as.character(dataFuturesUS_head$Date) # in order for xtable to work, it doesn't work with date classes
 		options(op_backup) # reset options, only after the above as.character is performed, else it writes the data_head w/o milliseconds
+
+
+
+################################
+### 03-Model_factor.R ##########
+################################
+
+    # OPTIMISING - PROFILING THE FUNCTION
+    Rprof("Profiling/profile_output_Nelson-Siegel-custom-lambda.txt")  # start the profiling, output to a text file
+
+    # Passing the full dataset length
+    start <- time_start()
+    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities)
+    time_end(start)
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities, lambda = 7)
+
+    NSParameters <- NSParameters_lambda_varying
+    NSParameters <- NSParameters_lambda_fixed
+
+    NSParameters
+
+
+
+           beta <- lm(rate ~ 1 + .factorBeta1(lambda, maturity) + .factorBeta2(lambda, maturity))
+        # beta
+        betaPar <- coef(beta)
+        # betaPar
+        NaValues <- na.omit(betaPar) # if there's an NA in one of the coefficients, the NaValues will drop it
+        if (length(NaValues) < 3) # and then it's length will decrease below 3 coefficients
+            betaPar <- c(0, 0, 0)
+        names(betaPar) <- c("beta_0", "beta_1", "beta_2")
+        EstResults <- list(Par = betaPar, Res = resid(beta))
+        # EstResults
+        # return(EstResults)
+
+
+
+    Rprof(NULL)  # Stop profiling
+
+    summary <- summaryRprof("Profiling/profile_output_Nelson-Siegel-custom-lambda.txt")
+    print(summary)
