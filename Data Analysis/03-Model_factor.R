@@ -56,12 +56,11 @@
 ###### A parallel approach ####################
 ###############################################
 
-
-# TBC
-
-    # A custom DNS function for use with a time fixed lambda (feeding a number), or a time-varying lambda (feeding a default, or a character "time_varying")
-    # Adapted from the YieldCurve package, Nelson.Siegel function.
+    # Nelson.Siegel function adapted from the YieldCurve package.
+    # A custom DNS function for use with a time fixed lambda (feeding a number),
+    # or a time-varying lambda (feeding a default, or a character lambda = "time_varying").
     Nelson.Siegel_custom_lambda_parallel <- function (rate, maturity, lambda = "time_varying") {
+        # TBC
         rate <- try.xts(rate, error = as.matrix) # converts the data into xts, if it comes across an error, tries to convert to a matrix
         if (ncol(rate) == 1) rate <- matrix(as.vector(rate), 1, nrow(rate)) # makes a matrix of 1xN, matrix(data, nrow = 1, ncol = number of original xts rows/observations)
         pillars.number <- length(maturity) # number of maturities
@@ -123,64 +122,56 @@
         FinalResults_reclassed <- reclass(result, rate) # reclasses the FinalResults matrix into the original rate format, e.g. xts (with same attributes, like row dates etc) if it was passed as xts, reclass(x, match.to), match.to - xts object whose attributes will be passed to x
     }
 
-    # 20s to 6s on the 444 obs. month excerpt, with 11 cores, works well
-    # 1min on the 5.5k obs. year excerpt
-        p_load(parallel, beepr)
+        # Using the parallel package to spead out the workload on all CPU cores
+            # 20s to 6s on the 444 obs. amonth data excerpt, with 11 cores, works well
+            # 1min on the 5.5k obs. year excerpt
+            # 2min on 10k obs. TBD
+            # 16min on 80k obs.
 
-        # Set up the cluster
-        (numCores <- detectCores() - 1)
-        cl <- makeCluster(numCores)
-        clusterExport(cl, c(".NS.estimator", ".factorBeta1", ".factorBeta2"))
+            p_load(parallel, beepr)
 
-        # Takes about 6sec for the 444obs amonth dataset
-        start <- time_start()
-        NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities)
-        time_end(start)
-        beep(3) # make a sound once it finishes
+            # Set up the cluster
+            (numCores <- detectCores() - 1)
+            cl <- makeCluster(numCores)
+            clusterExport(cl, c(".NS.estimator", ".factorBeta1", ".factorBeta2")) # prepares the most important functions into memory TBD
 
-        # Takes about 1min for the 80k obs. full dataset
-        start <- time_start()
-        NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = 7)
-        time_end(start)
-        beep(3) # make a sound once it finishes
+            # Time varying lambda
+            # Takes about 6sec for the amonth dataset of 444 obs.
+            start <- time_start()
+            NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities)
+            time_end(start)
+            beep(3) # make a sound once it finishes
 
-        str(NSParameters_lambda_varying)
-        head(NSParameters_lambda_varying)
-        tail(NSParameters_lambda_varying)
-        rm(NSParameters_lambda_varying)
+            str(NSParameters_lambda_varying)
+            head(NSParameters_lambda_varying)
+            tail(NSParameters_lambda_varying)
+            # rm(NSParameters_lambda_varying) # TBD don't need to remove once function is final
 
-        str(NSParameters_lambda_fixed)
-        head(NSParameters_lambda_fixed)
-        tail(NSParameters_lambda_fixed)
-        rm(NSParameters_lambda_fixed)
+            # Fixed lambda
+            # !!! WARNING LONG !!! Takes about 16min for the full dataset of 80k obs.
+            start <- time_start()
+            NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = 7)
+            time_end(start)
+            beep(3) # make a sound once it finishes
 
-        gc()
+            str(NSParameters_lambda_fixed)
+            head(NSParameters_lambda_fixed)
+            tail(NSParameters_lambda_fixed)
+            # rm(NSParameters_lambda_fixed) # TBD don't need to remove once function is final
 
-        # Stop the cluster
-        stopCluster(cl)
-        
+            # Clear the memory TBD
+            gc()
 
-        # Passing the first 10 observations/months
-        NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = first(FedYieldCurve, '10 month'), maturity = maturity.Fed)
-        NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = first(FedYieldCurve, '10 month'), maturity = maturity.Fed, lambda = 7)
+            # Stop the cluster
+            stopCluster(cl)
 
-        # Passing the full dataset length
-        start <- time_start()
-        NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
-        time_end(start)
-        NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
-
-        head(NSParameters_lambda_varying)
-        tail(NSParameters_lambda_varying)
-        head(NSParameters_lambda_fixed)
-        tail(NSParameters_lambda_fixed)
-
-
+# TBC decide which graph layouts we want, single or multivariate?
 
     # Plot the estimated coefficients:
     # Pick if time varying or fixed to plot
     NSParameters <- NSParameters_lambda_varying
     NSParameters <- NSParameters_lambda_fixed
+    head(NSParameters)
     # melt xts format into a ggplot compatible dataframe format, exclude lambda
     meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
     meltlambda <- fortify(NSParameters[, "lambda"], melt = TRUE)
@@ -207,6 +198,19 @@
         geom_line(data = meltlambda, aes(x = Index, y = Value)) +
         xlab("Index") + ylab("loadings")
     loadings_graph
+
+
+    # TBD do we need this? The dataset from the package example.
+        # Passing the full FedYieldCurve dataset length
+        start <- time_start()
+        NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
+        time_end(start)
+        NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
+
+        head(NSParameters_lambda_varying)
+        tail(NSParameters_lambda_varying)
+        head(NSParameters_lambda_fixed)
+        tail(NSParameters_lambda_fixed)
 
 
 
