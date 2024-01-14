@@ -192,7 +192,7 @@
     # adding series one at a time
     last_plot() + geom_line(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value), colour = "red")
 
-    # MAIN GRAPH - multivariate plotting
+    # MAIN LOADINGS GRAPH - multivariate plotting
     loadings_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
         geom_line() +
         geom_line(data = meltlambda, aes(x = Index, y = Value)) +
@@ -200,75 +200,31 @@
     loadings_graph
 
 
-    # TBD do we need this? The dataset from the package example.
-        # Passing the full FedYieldCurve dataset length
-        start <- time_start()
-        NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
-        time_end(start)
-        NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
-
-        head(NSParameters_lambda_varying)
-        tail(NSParameters_lambda_varying)
-        head(NSParameters_lambda_fixed)
-        tail(NSParameters_lambda_fixed)
-
-
-
-###############################################
-###### TBD CLEAN UP - SLOW NONPARALLEL ########
-###############################################
-
-    # Passing the full dataset length
-    # Takes 31.8min for the full dataset, with seq(by=1) instead of by=0.5 in the lambda maturities inside the function
+    # For comparison of the lambda development, fit the YieldCurve package example dataset FedYieldCurve.
+    # Passing the full FedYieldCurve dataset length
     start <- time_start()
-    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities)
-    # NSParameters_lambda_varying <- Nelson.Siegel(rate = data, maturity = maturities)
+    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
     time_end(start)
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
 
-    # Takes 1min for the full 1H 80k obs. dataset for the fixed lambda:
-    start <- time_start()
-    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities, lambda = 7.5)
-    time_end(start)
+    head(NSParameters_lambda_varying)
+    tail(NSParameters_lambda_varying)
+    head(NSParameters_lambda_fixed)
+    tail(NSParameters_lambda_fixed)
 
-    NSParameters <- NSParameters_lambda_varying
-    NSParameters <- NSParameters_lambda_fixed
 
-    NSParameters
-    
-    # unique(NSParameters$lambda)
-        #  For the time-varying: 0.05976451 0.06181972 0.06404860 0.06640777 0.06900377 0.07171477 0.07470026 0.07797724
-    length(unique(NSParameters$lambda))
+    # Yield graph
+    meltyields <- fortify(try.xts(data), melt = TRUE)
 
-    # NSrates(Coeff, maturity), returns the interest rates by Nelson-Siegel's model:
-    # - https://www.rdocumentation.org/packages/YieldCurve/versions/5.1/topics/Nelson.Siegel
-    (y <- NSrates(Coeff = NSParameters[1000,], maturity = maturities)) # NS fitted rates
-    plot(maturities, try.xts(data[1000, ]), main = "Fitting Nelson-Siegel yield curve", xlab = c("Pillars in months"), type = "o") # original observed data rates
-    lines(maturities, y, col = 2, type = "o") # add NS fitted rates
-    legend("topleft", legend = c("observed yield curve", "fitted yield curve"), col = c(1, 2), lty = 1)
-    grid()
-
-    # melt xts format into a ggplot compatible dataframe format, exclude lambda
-    meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
-    meltlambda <- fortify(NSParameters[, "lambda"], melt = TRUE)
-
-    # MAIN GRAPH - multivariate plotting
-    loadings_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
-        geom_line() +
-        geom_line(data = meltlambda, aes(x = Index, y = Value)) +
-        xlab("Index") + ylab("loadings")
-    loadings_graph
-
-    # TBD edit for yield graph
-    # melt xts format into a ggplot compatible dataframe format, exclude lambda
-    meltbetas <- fortify(try.xts(data), melt = TRUE)
-
-    # MAIN GRAPH - multivariate plotting
+    # MAIN YIELDS GRAPH - multivariate plotting
     # TBD save this graph!!
-    yields_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
+    yields_graph <- ggplot(data = meltyields, aes(x = Index, y = Value, group = Series, colour = Series)) +
         geom_line() +
         xlab("Time") + ylab("Yields (in percent)")
     yields_graph
 
+
+# TBC
 
     # Save the graphs to file
         custom_scale <- 1.5
@@ -283,16 +239,13 @@
     # ggsave(loadings_graph, filename = "Graphs/Model_factor/factor_loadings_estimated_my-all-data_lambda-varying.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
 
-
-
-
     # Delete the variables we won't be needing
     rm(list = setdiff(ls(), c("NSParameters_lambda_varying", "NSParameters_lambda_fixed", "yields", "dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dim", "futurenames",
                                 "size_objects", "time_start", "time_end")))
 
     # Save the workspace
     # The following takes 0min to save and is 16MB
-    # save.image(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData")
+    save.image(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData")
 
 
 

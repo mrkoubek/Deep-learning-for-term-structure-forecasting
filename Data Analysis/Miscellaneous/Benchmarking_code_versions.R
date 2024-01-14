@@ -118,3 +118,48 @@
 
     summary <- summaryRprof("Profiling/profile_output_Nelson-Siegel-custom-lambda.txt")
     print(summary)
+    
+
+	###############################################
+	###### TBD CLEAN UP - SLOW NONPARALLEL ########
+	###############################################
+
+    # Passing the full dataset length
+    # Takes 31.8min for the full dataset, with seq(by=1) instead of by=0.5 in the lambda maturities inside the function
+    start <- time_start()
+    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities)
+    # NSParameters_lambda_varying <- Nelson.Siegel(rate = data, maturity = maturities)
+    time_end(start)
+
+    # Takes 1min for the full 1H 80k obs. dataset for the fixed lambda:
+    start <- time_start()
+    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = data, maturity = maturities, lambda = 7.5)
+    time_end(start)
+
+    NSParameters <- NSParameters_lambda_varying
+    NSParameters <- NSParameters_lambda_fixed
+
+    NSParameters
+    
+    # unique(NSParameters$lambda)
+        #  For the time-varying: 0.05976451 0.06181972 0.06404860 0.06640777 0.06900377 0.07171477 0.07470026 0.07797724
+    length(unique(NSParameters$lambda))
+
+    # NSrates(Coeff, maturity), returns the interest rates by Nelson-Siegel's model:
+    # - https://www.rdocumentation.org/packages/YieldCurve/versions/5.1/topics/Nelson.Siegel
+    (y <- NSrates(Coeff = NSParameters[1000,], maturity = maturities)) # NS fitted rates
+    plot(maturities, try.xts(data[1000, ]), main = "Fitting Nelson-Siegel yield curve", xlab = c("Pillars in months"), type = "o") # original observed data rates
+    lines(maturities, y, col = 2, type = "o") # add NS fitted rates
+    legend("topleft", legend = c("observed yield curve", "fitted yield curve"), col = c(1, 2), lty = 1)
+    grid()
+
+    # melt xts format into a ggplot compatible dataframe format, exclude lambda
+    meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
+    meltlambda <- fortify(NSParameters[, "lambda"], melt = TRUE)
+
+    # MAIN GRAPH - multivariate plotting
+    loadings_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
+        geom_line() +
+        geom_line(data = meltlambda, aes(x = Index, y = Value)) +
+        xlab("Index") + ylab("loadings")
+    loadings_graph
