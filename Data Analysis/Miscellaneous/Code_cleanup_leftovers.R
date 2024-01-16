@@ -849,3 +849,5 @@
 	    str(yield_curve) # 4 maturities in columns, 372 months in rows as observations
 	    head(yield_curve)
 
+	    # Notes
+	    # Work with: dataFutures_train, probably window the data after the NS, as is the case currently in Model_fit.R

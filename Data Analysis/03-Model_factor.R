@@ -47,8 +47,7 @@
 
     data <- yields$data_hourly_all
     str(data)
-    data <- data[1:10000, ]
-    str(data)
+    # data <- data[1:10000, ] # to have a shorter excerpt for testing purposes only
 
 
 
@@ -122,48 +121,49 @@
         FinalResults_reclassed <- reclass(result, rate) # reclasses the FinalResults matrix into the original rate format, e.g. xts (with same attributes, like row dates etc) if it was passed as xts, reclass(x, match.to), match.to - xts object whose attributes will be passed to x
     }
 
-        # Using the parallel package to spead out the workload on all CPU cores
-            # 20s to 6s on the 444 obs. amonth data excerpt, with 11 cores, works well
-            # 1min on the 5.5k obs. year excerpt
-            # 2min on 10k obs. TBD
-            # 16min on 80k obs.
+    # Using the parallel package to spead out the workload on all CPU cores:
+        # 20s to 6s on the 444 obs. amonth data excerpt, with 11 cores, works well
+        # 1min on the 5.5k obs. year excerpt
+        # 2min on 10k obs. TBD
+        # 16min on 80k obs.
 
-            p_load(parallel, beepr)
+        p_load(parallel, beepr)
 
-            # Set up the cluster
-            (numCores <- detectCores() - 1)
-            cl <- makeCluster(numCores)
-            clusterExport(cl, c(".NS.estimator", ".factorBeta1", ".factorBeta2")) # prepares the most important functions into memory TBD
+        # Set up the cluster
+        (numCores <- detectCores() - 1)
+        cl <- makeCluster(numCores)
+        clusterExport(cl, c(".NS.estimator", ".factorBeta1", ".factorBeta2")) # prepares the most important functions into memory TBD
 
-            # Time varying lambda
-            # Takes about 6sec for the amonth dataset of 444 obs.
-            start <- time_start()
-            NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities)
-            time_end(start)
-            beep(3) # make a sound once it finishes
+        # Time varying lambda
+        # !!! WARNING LONG !!! Takes about 13min for the full hourly dataset of 80k obs.
+        start <- time_start()
+        NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities)
+        time_end(start)
+        beep(3) # make a sound once it finishes
 
-            str(NSParameters_lambda_varying)
-            head(NSParameters_lambda_varying)
-            tail(NSParameters_lambda_varying)
-            # rm(NSParameters_lambda_varying) # TBD don't need to remove once function is final
+        str(NSParameters_lambda_varying)
+        head(NSParameters_lambda_varying)
+        tail(NSParameters_lambda_varying)
+        # rm(NSParameters_lambda_varying) # TBD don't need to remove once function is final
 
-            # Fixed lambda
-            # !!! WARNING LONG !!! Takes about 16min for the full dataset of 80k obs.
-            start <- time_start()
-            NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = 7)
-            time_end(start)
-            beep(3) # make a sound once it finishes
+        # Fixed lambda
+        # !!! WARNING LONG !!! Takes about 16min for the full hourly dataset of 80k obs.
+        start <- time_start()
+        # 2024-01-16: ran the function call with "lambda = 7"
+        NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = 7)
+        time_end(start)
+        beep(3) # make a sound once it finishes
 
-            str(NSParameters_lambda_fixed)
-            head(NSParameters_lambda_fixed)
-            tail(NSParameters_lambda_fixed)
-            # rm(NSParameters_lambda_fixed) # TBD don't need to remove once function is final
+        str(NSParameters_lambda_fixed)
+        head(NSParameters_lambda_fixed)
+        tail(NSParameters_lambda_fixed)
+        # rm(NSParameters_lambda_fixed) # TBD don't need to remove once function is final
 
-            # Clear the memory TBD
-            gc()
+        # Clear the memory TBD
+        gc()
 
-            # Stop the cluster
-            stopCluster(cl)
+        # Stop the cluster
+        stopCluster(cl)
 
 # TBC decide which graph layouts we want, single or multivariate?
 
@@ -253,16 +253,6 @@
 ####### Notes #################################
 ###############################################
 
-    # Work with: dataFutures_train, probably window the data after the NS, as is the case currently in Model_fit.R
-
-    # We need to change our prices data into a different shape, with columns representing maturities.
-    # What are our maturities? Do we load up the 2, 5, 10, 30Y maturity prices as columns?
-    # For this we need to go back to Data_conversion.R and load up more datasets.
-    # Do we then add maturity interpolations?
-
-
-    # TBD:
-    	# go thru the Nelson.Siegel function source code
-    	# factor models documentation, find packages inspiration and test out
+    # 
 
 
