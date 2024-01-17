@@ -20,8 +20,8 @@
     # Loading basic environment functions
     load(file = "Workspaces/00_Environment_functions.RData")
     # Loading data
-    load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min
-    # load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min
+    # load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min
+    load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min
     print("Workspace rdy set go!")
 
 
@@ -147,7 +147,7 @@
         # rm(NSParameters_lambda_varying) # TBD don't need to remove once function is final
 
         # Fixed lambda
-        # !!! WARNING LONG !!! Takes about 16min for the full hourly dataset of 80k obs.
+        # Takes about 1min for the full hourly dataset of 80k obs.
         start <- time_start()
         # 2024-01-16: ran the function call with "lambda = 7"
         NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = 7)
@@ -200,17 +200,18 @@
     loadings_graph
 
 
+    # TBD do we want this here? Maybe at the end of the file?
     # For comparison of the lambda development, fit the YieldCurve package example dataset FedYieldCurve.
     # Passing the full FedYieldCurve dataset length
-    start <- time_start()
-    NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
-    time_end(start)
-    NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
+        # start <- time_start()
+        # NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
+        # time_end(start)
+        # NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
 
-    head(NSParameters_lambda_varying)
-    tail(NSParameters_lambda_varying)
-    head(NSParameters_lambda_fixed)
-    tail(NSParameters_lambda_fixed)
+        # head(NSParameters_lambda_varying)
+        # tail(NSParameters_lambda_varying)
+        # head(NSParameters_lambda_fixed)
+        # tail(NSParameters_lambda_fixed)
 
 
     # Yield graph
@@ -234,9 +235,11 @@
         plots_height <- plots_width / GoldenRatio
 
     # Save the main graph
-    # ggsave(loadings_graph, filename = "Graphs/Model_factor/factor_loadings_estimated_my-all-data_lambda-fixed.pdf", device = cairo_pdf,
+    # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-varying.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
-    # ggsave(loadings_graph, filename = "Graphs/Model_factor/factor_loadings_estimated_my-all-data_lambda-varying.pdf", device = cairo_pdf,
+    # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-fixed.pdf", device = cairo_pdf,
+    #     width = plots_width, height = plots_height, units = "in")
+    # ggsave(yields_graph, filename = "Graphs/Model_factor/Yields/yields_percent_data_hourly_all.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
 
     # Delete the variables we won't be needing
