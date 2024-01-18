@@ -293,7 +293,8 @@
 	# Delete the variables we won't be needing
 	rm(list = setdiff(ls(), c("yields", "data_list", "yields_graphs",
 								"dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
-								"maturities", "dim", "futurenames", "size_objects", "time_start", "time_end")))
+								"maturities", "dim", "futurenames",
+								"size_objects", "time_start", "time_end")))
 
 	# Save the workspace
 	# The following takes 0min to save and is 19MB

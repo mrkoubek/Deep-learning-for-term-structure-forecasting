@@ -20,8 +20,8 @@
     # Loading basic environment functions
     load(file = "Workspaces/00_Environment_functions.RData")
     # Loading data
-    # load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min
-    load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min
+    load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min
+    # load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min
     print("Workspace rdy set go!")
 
 
@@ -120,6 +120,75 @@
         result <- do.call(rbind, result_lists)
         FinalResults_reclassed <- reclass(result, rate) # reclasses the FinalResults matrix into the original rate format, e.g. xts (with same attributes, like row dates etc) if it was passed as xts, reclass(x, match.to), match.to - xts object whose attributes will be passed to x
     }
+    
+    # We define and empty variable with the structure we need to save all of our NS parameters in this variable
+    # It has two lists, one for the fixed and one for the varying lambdas.
+    # Each of these two lists contains our various data excerpts: data_amonth, data_ayear, data_hourly_all, data_daily_Fedcompare, data_daily_all
+    NS_parameters <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
+    NS_parameters$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    NS_parameters$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    NS_parameters
+
+    # Rewrite the older one dataset code to run on all the yields datasets
+    str(yields)
+
+    # Using the parallel package to spead out the workload on all CPU cores:
+        # 20s to 6s on the 444 obs. amonth data excerpt, with 11 cores, works well
+        # 1min on the 5.5k obs. year excerpt
+        # 2min on 10k obs. TBD
+        # 16min on 80k obs.
+
+        p_load(parallel, beepr)
+
+        # Set up the cluster
+        (numCores <- detectCores() - 1)
+        cl <- makeCluster(numCores)
+        clusterExport(cl, c(".NS.estimator", ".factorBeta1", ".factorBeta2")) # prepares the most important functions into memory TBD
+
+        # Fixed lambda
+        # Takes about 1min for the full hourly dataset of 80k obs.
+        start <- time_start()
+        # 2024-01-XX: ran the function call with "lambda = 7"
+        # TBD maybe use mapply() to simplify the following lapply()?
+        NS_parameters$lambda_fixed <- lapply(yields, function(data) {
+            Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = 7)
+            })
+        time_end(start)
+        beep(3) # make a sound once it finishes
+
+        str(NS_parameters)
+        head(NS_parameters)
+        tail(NS_parameters)
+        # rm(NS_parameters) # TBD don't need to remove once function is final
+#TBC
+        # Time varying lambda
+        # !!! WARNING LONG !!! Takes about 13min for the full hourly dataset of 80k obs.
+        start <- time_start()
+        # TBD maybe use mapply() to simplify the following lapply()?
+        NS_parameters$lambda_varying <- lapply(yields, function(data) {
+            Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities)
+            })
+        time_end(start)
+        beep(3) # make a sound once it finishes
+
+        str(NSParameters_lambda_varying)
+        head(NSParameters_lambda_varying)
+        tail(NSParameters_lambda_varying)
+        # rm(NSParameters_lambda_varying) # TBD don't need to remove once function is final
+
+        # Clear the memory TBD
+        gc()
+
+        # Stop the cluster
+        stopCluster(cl)
+
+
+
+
+
+
+
+##### OLDER CODE FOR JUST ONE DATASET #####
 
     # Using the parallel package to spead out the workload on all CPU cores:
         # 20s to 6s on the 444 obs. amonth data excerpt, with 11 cores, works well
@@ -243,7 +312,10 @@
     #     width = plots_width, height = plots_height, units = "in")
 
     # Delete the variables we won't be needing
-    rm(list = setdiff(ls(), c("NSParameters_lambda_varying", "NSParameters_lambda_fixed", "yields", "dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dim", "futurenames",
+    rm(list = setdiff(ls(), c("NSParameters_lambda_varying", "NSParameters_lambda_fixed",
+                                "yields",
+                                "dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
+                                "maturities", "dim", "futurenames",
                                 "size_objects", "time_start", "time_end")))
 
     # Save the workspace
