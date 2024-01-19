@@ -185,55 +185,6 @@
 
 
 
-
-
-
-##### OLDER CODE FOR JUST ONE DATASET #####
-
-    # Using the parallel package to spead out the workload on all CPU cores:
-        # 20s to 6s on the 444 obs. amonth data excerpt, with 11 cores, works well
-        # 1min on the 5.5k obs. year excerpt
-        # 2min on 10k obs. TBD
-        # 16min on 80k obs.
-
-        p_load(parallel, beepr)
-
-        # Set up the cluster
-        (numCores <- detectCores() - 1)
-        cl <- makeCluster(numCores)
-        clusterExport(cl, c(".NS.estimator", ".factorBeta1", ".factorBeta2")) # prepares the most important functions into memory TBD
-
-        # Time varying lambda
-        # !!! WARNING LONG !!! Takes about 13min for the full hourly dataset of 80k obs.
-        start <- time_start()
-        NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities)
-        time_end(start)
-        beep(3) # make a sound once it finishes
-
-        str(NSParameters_lambda_varying)
-        head(NSParameters_lambda_varying)
-        tail(NSParameters_lambda_varying)
-        # rm(NSParameters_lambda_varying) # TBD don't need to remove once function is final
-
-        # Fixed lambda
-        # Takes about 1min for the full hourly dataset of 80k obs.
-        start <- time_start()
-        # 2024-01-16: ran the function call with "lambda = 7"
-        NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = 7)
-        time_end(start)
-        beep(3) # make a sound once it finishes
-
-        str(NSParameters_lambda_fixed)
-        head(NSParameters_lambda_fixed)
-        tail(NSParameters_lambda_fixed)
-        # rm(NSParameters_lambda_fixed) # TBD don't need to remove once function is final
-
-        # Clear the memory TBD
-        gc()
-
-        # Stop the cluster
-        stopCluster(cl)
-
 # TBC decide which graph layouts we want, single or multivariate?
 
     # Plot the estimated coefficients:
