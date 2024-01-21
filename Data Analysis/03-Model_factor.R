@@ -38,25 +38,11 @@
 
 
 ###############################################
-###### Fixed lambda custom function ###########
-###############################################
-  
-    ls()
-    str(yields)
-    str(yields$data_hourly_all)
-
-    data <- yields$data_hourly_all
-    str(data)
-    # data <- data[1:10000, ] # to have a shorter excerpt for testing purposes only
-
-
-
-###############################################
 ###### A parallel approach ####################
 ###############################################
 
     # Nelson.Siegel function adapted from the YieldCurve package.
-    # A custom DNS function for use with a time fixed lambda (feeding a number),
+    # A custom DNS function for use with a time-fixed lambda (feeding a number),
     # or a time-varying lambda (feeding a default, or a character lambda = "time_varying").
     Nelson.Siegel_custom_lambda_parallel <- function (rate, maturity, lambda = "time_varying") {
         # TBC
@@ -121,16 +107,19 @@
         FinalResults_reclassed <- reclass(result, rate) # reclasses the FinalResults matrix into the original rate format, e.g. xts (with same attributes, like row dates etc) if it was passed as xts, reclass(x, match.to), match.to - xts object whose attributes will be passed to x
     }
     
-    # We define and empty variable with the structure we need to save all of our NS parameters in this variable
+    # We define and empty variable with the structure we need to save all of our NS parameters in this variable.
     # It has two lists, one for the fixed and one for the varying lambdas.
-    # Each of these two lists contains our various data excerpts: data_amonth, data_ayear, data_hourly_all, data_daily_Fedcompare, data_daily_all
+    # Each of these two lists contains our various data excerpts or formats/frequencies:
+    # data_amonth, data_ayear, data_hourly_all, data_daily_Fedcompare, data_daily_all
     NS_parameters <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
     NS_parameters$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     NS_parameters$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     NS_parameters
 
-    # Rewrite the older one dataset code to run on all the yields datasets
+    # Explore our datasets
+    ls()
     str(yields)
+    str(yields$data_hourly_all) # our main focus is on this hourly data frequency
 
     # Using the parallel package to spead out the workload on all CPU cores:
         # 20s to 6s on the 444 obs. amonth data excerpt, with 11 cores, works well
@@ -159,8 +148,8 @@
         str(NS_parameters)
         head(NS_parameters)
         tail(NS_parameters)
-        # rm(NS_parameters) # TBD don't need to remove once function is final
-#TBC
+
+#TBC run this later, takes time, and then save the env..
         # Time varying lambda
         # !!! WARNING LONG !!! Takes about 13min for the full hourly dataset of 80k obs.
         start <- time_start()
@@ -171,10 +160,9 @@
         time_end(start)
         beep(3) # make a sound once it finishes
 
-        str(NSParameters_lambda_varying)
-        head(NSParameters_lambda_varying)
-        tail(NSParameters_lambda_varying)
-        # rm(NSParameters_lambda_varying) # TBD don't need to remove once function is final
+        str(NS_parameters)
+        head(NS_parameters)
+        tail(NS_parameters)
 
         # Clear the memory TBD
         gc()
@@ -185,13 +173,38 @@
 
 
 
-# TBC decide which graph layouts we want, single or multivariate?
+# TBC, decide which graph layouts we want, single or multivariate?
+
+    # Plot the estimated coefficients
+    str(NS_parameters)
+    head(NS_parameters)
+    # Need for the two following categories to compare them:
+    # NS_parameters$lambda_varying
+    # NS_parameters$lambda_fixed
+
+    # Rewrite the one dataset code into a multi dataset code: WIP
+
+    # We define and empty variable with the structure we need to save all of our NS parameters in this variable.
+    # It has two lists, one for the fixed and one for the varying lambdas.
+    # Each of these two lists contains our various data excerpts or formats/frequencies:
+    # data_amonth, data_ayear, data_hourly_all, data_daily_Fedcompare, data_daily_all
+    NS_parameters_melted <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
+    NS_parameters_melted$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    NS_parameters_melted$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    NS_parameters_melted
+    NS_parameters_melted$lambda_fixed <- lapply(NS_parameters, function(data) {
+        fortify(NS_parameters_melted[, !colnames(NS_parameters_melted) %in% "lambda"], melt = TRUE)
+        })
+
+
+    # Older version:
 
     # Plot the estimated coefficients:
     # Pick if time varying or fixed to plot
     NSParameters <- NSParameters_lambda_varying
     NSParameters <- NSParameters_lambda_fixed
     head(NSParameters)
+
     # melt xts format into a ggplot compatible dataframe format, exclude lambda
     meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
     meltlambda <- fortify(NSParameters[, "lambda"], melt = TRUE)
