@@ -192,9 +192,16 @@
     NS_parameters_melted$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     NS_parameters_melted$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     NS_parameters_melted
-    NS_parameters_melted$lambda_fixed <- lapply(NS_parameters, function(data) {
-        fortify(NS_parameters_melted[, !colnames(NS_parameters_melted) %in% "lambda"], melt = TRUE)
+    NS_parameters_melted$lambda_fixed <- lapply(NS_parameters$lambda_fixed, function(data) {
+        fortify(data, melt = TRUE)
         })
+
+    # MAIN LOADINGS GRAPH - multivariate plotting
+    loadings_graph <- ggplot(data = NS_parameters_melted$lambda_fixed[[1]], aes(x = Index, y = Value, group = Series, colour = Series)) +
+        geom_line() +
+        # geom_line(data = meltlambda, aes(x = Index, y = Value)) + # we melted the lambdas too above, so prolly don't need this
+        xlab("Index") + ylab("loadings")
+    loadings_graph
 
 
     # Older version:
