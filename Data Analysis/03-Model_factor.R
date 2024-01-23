@@ -20,8 +20,8 @@
     # Loading basic environment functions
     load(file = "Workspaces/00_Environment_functions.RData")
     # Loading data
-    load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min
-    # load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min
+    # load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min
+    load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min
     print("Workspace rdy set go!")
 
 
@@ -147,11 +147,9 @@
 
         str(NS_parameters)
         head(NS_parameters)
-        tail(NS_parameters)
 
-#TBC run this later, takes time, and then save the env..
         # Time varying lambda
-        # !!! WARNING LONG !!! Takes about 13min for the full hourly dataset of 80k obs.
+        # !!! WARNING LONG !!! Takes about 13min for the full hourly dataset of 80k obs., and 17min for all the dataset variations
         start <- time_start()
         # TBD maybe use mapply() to simplify the following lapply()?
         NS_parameters$lambda_varying <- lapply(yields, function(data) {
@@ -162,7 +160,6 @@
 
         str(NS_parameters)
         head(NS_parameters)
-        tail(NS_parameters)
 
         # Clear the memory TBD
         gc()
@@ -170,11 +167,7 @@
         # Stop the cluster
         stopCluster(cl)
 
-
-
-
-# TBC, decide which graph layouts we want, single or multivariate?
-
+# TBC, polish graphs
     # Plot the estimated coefficients
     str(NS_parameters)
     head(NS_parameters)
@@ -283,7 +276,7 @@
     #     width = plots_width, height = plots_height, units = "in")
 
     # Delete the variables we won't be needing
-    rm(list = setdiff(ls(), c("NSParameters_lambda_varying", "NSParameters_lambda_fixed",
+    rm(list = setdiff(ls(), c("NS_parameters",
                                 "yields",
                                 "dataFutures", "dataFutures_M5", "dataFutures_H1", "dataFutures_H4", "dataFutures_D1",
                                 "maturities", "dim", "futurenames",
