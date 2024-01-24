@@ -196,57 +196,6 @@
         xlab("Index") + ylab("loadings")
     loadings_graph
 
-
-    # Older version:
-
-    # Plot the estimated coefficients:
-    # Pick if time varying or fixed to plot
-    NSParameters <- NSParameters_lambda_varying
-    NSParameters <- NSParameters_lambda_fixed
-    head(NSParameters)
-
-    # melt xts format into a ggplot compatible dataframe format, exclude lambda
-    meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
-    meltlambda <- fortify(NSParameters[, "lambda"], melt = TRUE)
-
-    # Plot single series
-    ggplot(data = meltbetas[meltbetas$Series == "beta_0", ], aes(x = Index, y = Value)) +
-        geom_line() + xlab("Index") + ylab("beta_0")
-
-    ggplot(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value)) +
-        geom_line() + xlab("Index") + ylab("beta_1")
-
-    ggplot(data = meltbetas[meltbetas$Series == "beta_2", ], aes(x = Index, y = Value)) +
-        geom_line() + xlab("Index") + ylab("beta_2")
-
-    ggplot(data = meltlambda, aes(x = Index, y = Value)) +
-        geom_line() + xlab("Index") + ylab("lambda")
-
-    # adding series one at a time
-    last_plot() + geom_line(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value), colour = "red")
-
-    # MAIN LOADINGS GRAPH - multivariate plotting
-    loadings_graph <- ggplot(data = meltbetas, aes(x = Index, y = Value, group = Series, colour = Series)) +
-        geom_line() +
-        geom_line(data = meltlambda, aes(x = Index, y = Value)) +
-        xlab("Index") + ylab("loadings")
-    loadings_graph
-
-
-    # TBD do we want this here? Maybe at the end of the file?
-    # For comparison of the lambda development, fit the YieldCurve package example dataset FedYieldCurve.
-    # Passing the full FedYieldCurve dataset length
-        # start <- time_start()
-        # NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
-        # time_end(start)
-        # NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
-
-        # head(NSParameters_lambda_varying)
-        # tail(NSParameters_lambda_varying)
-        # head(NSParameters_lambda_fixed)
-        # tail(NSParameters_lambda_fixed)
-
-
     # Yield graph
     meltyields <- fortify(try.xts(data), melt = TRUE)
 
@@ -256,9 +205,6 @@
         geom_line() +
         xlab("Time") + ylab("Yields (in percent)")
     yields_graph
-
-
-# TBC
 
     # Save the graphs to file
         custom_scale <- 1.5
@@ -289,9 +235,27 @@
 
 
 ###############################################
+####### FedYieldCurve dataset comparison ######
+###############################################
+
+    # TBD do we want this here?
+    # For comparison of the lambda development, fit the YieldCurve package example dataset FedYieldCurve.
+    # Passing the full FedYieldCurve dataset length
+        # start <- time_start()
+        # NSParameters_lambda_varying <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed)
+        # time_end(start)
+        # NSParameters_lambda_fixed <- Nelson.Siegel_custom_lambda(rate = FedYieldCurve, maturity = maturity.Fed, lambda = 7)
+
+        # head(NSParameters_lambda_varying)
+        # tail(NSParameters_lambda_varying)
+        # head(NSParameters_lambda_fixed)
+        # tail(NSParameters_lambda_fixed)
+
+
+
+###############################################
 ####### Notes #################################
 ###############################################
 
     # 
-
-
+    

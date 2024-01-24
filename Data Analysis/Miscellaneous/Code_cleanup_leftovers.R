@@ -899,3 +899,26 @@
 
         # Stop the cluster
         stopCluster(cl)
+
+
+	##### OLDER CODE FOR JUST UNIVARIATE PLOTS #####
+
+	    # melt xts format into a ggplot compatible dataframe format, exclude lambda
+	    meltbetas <- fortify(NSParameters[, !colnames(NSParameters) %in% "lambda"], melt = TRUE)
+	    meltlambda <- fortify(NSParameters[, "lambda"], melt = TRUE)
+
+	    # Plot single series
+	    ggplot(data = meltbetas[meltbetas$Series == "beta_0", ], aes(x = Index, y = Value)) +
+	        geom_line() + xlab("Index") + ylab("beta_0")
+
+	    ggplot(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value)) +
+	        geom_line() + xlab("Index") + ylab("beta_1")
+
+	    ggplot(data = meltbetas[meltbetas$Series == "beta_2", ], aes(x = Index, y = Value)) +
+	        geom_line() + xlab("Index") + ylab("beta_2")
+
+	    ggplot(data = meltlambda, aes(x = Index, y = Value)) +
+	        geom_line() + xlab("Index") + ylab("lambda")
+
+	    # adding series one at a time
+	    last_plot() + geom_line(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value), colour = "red")
