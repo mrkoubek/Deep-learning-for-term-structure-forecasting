@@ -185,16 +185,31 @@
     NS_parameters_melted$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     NS_parameters_melted$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     NS_parameters_melted
+
     NS_parameters_melted$lambda_fixed <- lapply(NS_parameters$lambda_fixed, function(data) {
         fortify(data, melt = TRUE)
         })
+    str(NS_parameters_melted)
+
+    # Prepare an empty variable
+    loadings_graphs <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
+    loadings_graphs$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    loadings_graphs$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    loadings_graphs
 
     # MAIN LOADINGS GRAPH - multivariate plotting
-    loadings_graph <- ggplot(data = NS_parameters_melted$lambda_fixed[[1]], aes(x = Index, y = Value, group = Series, colour = Series)) +
+    # Use ggplot for all the datasets at once
+    # For now just for the lambda_fixed:
+    loadings_graphs$lambda_fixed <- lapply(NS_parameters_melted$lambda_fixed, function(data) {
+        ggplot(data = data, aes(x = Index, y = Value, group = Series, colour = Series)) +
         geom_line() +
         # geom_line(data = meltlambda, aes(x = Index, y = Value)) + # we melted the lambdas too above, so prolly don't need this
         xlab("Index") + ylab("loadings")
-    loadings_graph
+        })
+    loadings_graphs$lambda_fixed[[1]]
+    loadings_graphs$lambda_fixed[[2]]
+
+#TBC
 
     # Yield graph
     meltyields <- fortify(try.xts(data), melt = TRUE)
