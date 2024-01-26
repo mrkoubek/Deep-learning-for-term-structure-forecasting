@@ -209,7 +209,24 @@
     loadings_graphs$lambda_fixed[[1]]
     loadings_graphs$lambda_fixed[[2]]
 
+    # Prepare an empty variable
+    yields_graphs <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
+    yielda_graphs$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    yields_graphs$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    yields_graphs
+
 #TBC
+    # MAIN LOADINGS GRAPH - multivariate plotting
+    # Use ggplot for all the datasets at once
+    # For now just for the lambda_fixed:
+    yielda_graphs$lambda_fixed <- lapply(NS_parameters_melted$lambda_fixed, function(data) {
+        ggplot(data = data, aes(x = Index, y = Value, group = Series, colour = Series)) +
+        geom_line() +
+        xlab("Time") + ylab("Yields (in percent)")
+        })
+    yields_graphs$lambda_fixed[[1]]
+    yields_graphs$lambda_fixed[[2]]
+
 
     # Yield graph
     meltyields <- fortify(try.xts(data), melt = TRUE)
