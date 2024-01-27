@@ -186,12 +186,11 @@
     NS_parameters_melted$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     NS_parameters_melted
 
-    NS_parameters_melted$lambda_fixed <- lapply(NS_parameters$lambda_fixed, function(data) {
-        fortify(data, melt = TRUE)
-        })
+    NS_parameters_melted$lambda_fixed <- lapply(NS_parameters$lambda_fixed, function(data) fortify(data, melt = TRUE))
     str(NS_parameters_melted)
 
     # Prepare an empty variable
+    # TBD we're repeating code here for each empty variable - optimise?
     loadings_graphs <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
     loadings_graphs$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     loadings_graphs$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
@@ -209,36 +208,31 @@
     loadings_graphs$lambda_fixed[[1]]
     loadings_graphs$lambda_fixed[[2]]
 
-    # Prepare an empty variable
-    yields_graphs <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
-    yielda_graphs$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
-    yields_graphs$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+
+    # Prepare an empty variable for yields
+    yields_melted <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    yields_melted
+
+    # Melt the yields
+    yields_melted <- lapply(yields, function(data) fortify(try.xts(data), melt = TRUE))
+    str(yields_melted)
+
+    # Prepare an empty variable for yields graphs
+    yields_graphs <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     yields_graphs
 
-#TBC
-    # MAIN LOADINGS GRAPH - multivariate plotting
+    # MAIN YIELDS GRAPH
     # Use ggplot for all the datasets at once
-    # For now just for the lambda_fixed:
-    yielda_graphs$lambda_fixed <- lapply(NS_parameters_melted$lambda_fixed, function(data) {
+    yields_graphs <- lapply(yields_melted, function(data) {
         ggplot(data = data, aes(x = Index, y = Value, group = Series, colour = Series)) +
         geom_line() +
         xlab("Time") + ylab("Yields (in percent)")
         })
-    yields_graphs$lambda_fixed[[1]]
-    yields_graphs$lambda_fixed[[2]]
+    yields_graphs[[1]]
+    yields_graphs[[2]]
 
-
-    # Yield graph
-    meltyields <- fortify(try.xts(data), melt = TRUE)
-
-    # MAIN YIELDS GRAPH - multivariate plotting
-    # TBD save this graph!!
-    yields_graph <- ggplot(data = meltyields, aes(x = Index, y = Value, group = Series, colour = Series)) +
-        geom_line() +
-        xlab("Time") + ylab("Yields (in percent)")
-    yields_graph
-
-    # Save the graphs to file
+#TBC
+    # Save the graphs to files
         custom_scale <- 1.5
         GoldenRatio <- (1 + sqrt(5)) / 2
         # plots_width <- 5.55226 # width in inches of thesis template textwidth
