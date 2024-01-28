@@ -231,7 +231,6 @@
     yields_graphs[[1]]
     yields_graphs[[2]]
 
-#TBC
     # Save the graphs to files
         custom_scale <- 1.5
         GoldenRatio <- (1 + sqrt(5)) / 2
@@ -239,9 +238,47 @@
         plots_width <- 10 * custom_scale # 10 inches plus have nicely smallish graph elements, adjust custom scale for each graph type what looks nice
         plots_height <- plots_width / GoldenRatio
 
-    # Save the main graph
-    # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-varying.pdf", device = cairo_pdf,
-    #     width = plots_width, height = plots_height, units = "in")
+    # Set file names for all the graphs
+    graphs_names <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
+    graphs_names$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    graphs_names$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    graphs_names
+    for (lambda_name in names(loadings_graphs)) {
+        # Get the names of the sublists for this top-level list
+        print(names(loadings_graphs[[lambda_name]]))
+    }
+
+    # Recursive function to get names of all sublists
+    get_list_names <- function(lst) {
+        # Check if the element is a list
+        if (is.list(lst)) {
+            # Get the names of the elements in the list
+            list_names <- names(lst)
+            # Apply the function recursively to each element of the list
+            named_list <- setNames(lapply(lst, get_list_names), list_names)
+            return(named_list)
+        }
+        # Return NULL for non-list elements
+        return(NULL)
+    }
+
+    # Apply the function to NS_parameters
+    list_of_names <- get_list_names(NS_parameters)
+
+    # Print the result
+    print(list_of_names)
+
+
+
+    paste0(names(loadings_graphs[[1]]), "_", names(loadings_graphs)[1])
+    paste0(names(loadings_graphs[[2]]), "_", names(loadings_graphs)[2])
+    graphs_names <- paste0("factor_loadings_estimated_", "", "lambda")
+    # Save all the main graphs at once
+    lapply(loadings_graphs, function(graph) {
+        ggsave(graph, filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
+            width = plots_width, height = plots_height, units = "in")
+
+        })
     # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-fixed.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
     # ggsave(yields_graph, filename = "Graphs/Model_factor/Yields/yields_percent_data_hourly_all.pdf", device = cairo_pdf,
