@@ -248,26 +248,34 @@
         print(names(loadings_graphs[[lambda_name]]))
     }
 
-    # Recursive function to get names of all sublists
-    get_list_names <- function(lst) {
+    # Recursive function to replace list elements with their names, including parent names
+    replace_with_full_names <- function(lst, parent_name = "") {
         # Check if the element is a list
         if (is.list(lst)) {
             # Get the names of the elements in the list
             list_names <- names(lst)
-            # Apply the function recursively to each element of the list
-            named_list <- setNames(lapply(lst, get_list_names), list_names)
+            # Apply the function recursively and set names
+            named_list <- setNames(lapply(seq_along(lst), function(i) {
+                # Construct the full name
+                full_name <- paste0(parent_name, list_names[i])
+                # For each element, call replace_with_full_names
+                if(is.list(lst[[i]])) {
+                    replace_with_full_names(lst[[i]], paste0(full_name, "_"))
+                } else {
+                    full_name
+                }
+            }), list_names)
             return(named_list)
         }
-        # Return NULL for non-list elements
+        # Return NULL for non-list elements (shouldn't be reached in this context)
         return(NULL)
     }
 
     # Apply the function to NS_parameters
-    list_of_names <- get_list_names(NS_parameters)
+    list_of_full_names <- replace_with_full_names(NS_parameters)
 
     # Print the result
-    print(list_of_names)
-
+    print(list_of_full_names)
 
 
     paste0(names(loadings_graphs[[1]]), "_", names(loadings_graphs)[1])
