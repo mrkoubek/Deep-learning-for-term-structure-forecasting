@@ -280,12 +280,28 @@
 
     paste0(names(loadings_graphs[[1]]), "_", names(loadings_graphs)[1])
     paste0(names(loadings_graphs[[2]]), "_", names(loadings_graphs)[2])
-    graphs_names <- paste0("factor_loadings_estimated_", "", "lambda")
-    # Save all the main graphs at once
-    lapply(loadings_graphs, function(graph) {
-        ggsave(graph, filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
-            width = plots_width, height = plots_height, units = "in")
+    graphs_names <- lapply(list_of_full_names, function(name) return(paste0("factor_loadings_estimated_", name)))
+    graphs_names
 
+    # Save all the main graphs at once
+    # for version:
+    for (lambda in names(loadings_graphs)) {
+        # print(lambda)
+        for (graph in names(loadings_graphs[[lambda]])) {
+            # print(graph)
+            print(graphs_names[[lambda]][graph])
+        }
+    }
+
+    # lapply version:
+    lapply(loadings_graphs, function(lambda) {
+        lapply(lambda, function(graph) {
+            print(graphs_names$lambda$graph)
+            # ggsave(graph, filename = paste0("Graphs/Model_factor/WIP/", graphs_names$lambda$graph, ".pdf"), device = cairo_pdf,
+            #     width = plots_width, height = plots_height, units = "in")
+            })
+        # ggsave(graph, filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
+        #     width = plots_width, height = plots_height, units = "in")
         })
     # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-fixed.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
