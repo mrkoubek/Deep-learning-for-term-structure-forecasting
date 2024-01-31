@@ -277,19 +277,23 @@
     # Print the result
     print(list_of_full_names)
 
-
-    paste0(names(loadings_graphs[[1]]), "_", names(loadings_graphs)[1])
-    paste0(names(loadings_graphs[[2]]), "_", names(loadings_graphs)[2])
-    graphs_names <- lapply(list_of_full_names, function(name) return(paste0("factor_loadings_estimated_", name)))
+    graphs_names <- lapply(list_of_full_names, function(lambda) {
+        lapply(lambda, function(name) {
+            return(paste0("factor_loadings_estimated_", name))
+            })
+        })
     graphs_names
 
     # Save all the main graphs at once
-    # for version:
+    # for loop version:
     for (lambda in names(loadings_graphs)) {
-        # print(lambda)
         for (graph in names(loadings_graphs[[lambda]])) {
-            # print(graph)
-            print(graphs_names[[lambda]][graph])
+            graph_name <- graphs_names[[lambda]][graph]
+
+            print(paste0("Saving graph: ", graph_name, ".pdf"))
+
+            ggsave(loadings_graphs[[lambda]][[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
+                width = plots_width, height = plots_height, units = "in")
         }
     }
 
