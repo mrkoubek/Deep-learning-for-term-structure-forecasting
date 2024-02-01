@@ -300,13 +300,15 @@
     # lapply version:
     lapply(loadings_graphs, function(lambda) {
         lapply(lambda, function(graph) {
-            print(graphs_names$lambda$graph)
-            # ggsave(graph, filename = paste0("Graphs/Model_factor/WIP/", graphs_names$lambda$graph, ".pdf"), device = cairo_pdf,
-            #     width = plots_width, height = plots_height, units = "in")
+            graph_name <- graphs_names[[lambda]][graph]
+
+            print(paste0("Saving graph: ", graph_name, ".pdf"))
+
+            ggsave(loadings_graphs[[lambda]][[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
+                width = plots_width, height = plots_height, units = "in")
             })
-        # ggsave(graph, filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
-        #     width = plots_width, height = plots_height, units = "in")
         })
+    
     # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-fixed.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
     # ggsave(yields_graph, filename = "Graphs/Model_factor/Yields/yields_percent_data_hourly_all.pdf", device = cairo_pdf,
