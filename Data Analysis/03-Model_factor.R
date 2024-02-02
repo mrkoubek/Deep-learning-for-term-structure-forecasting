@@ -243,10 +243,6 @@
     graphs_names$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     graphs_names$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
     graphs_names
-    for (lambda_name in names(loadings_graphs)) {
-        # Get the names of the sublists for this top-level list
-        print(names(loadings_graphs[[lambda_name]]))
-    }
 
     # Recursive function to replace list elements with their names, including parent names
     replace_with_full_names <- function(lst, parent_name = "") {
@@ -288,7 +284,7 @@
     # for loop version:
     for (lambda in names(loadings_graphs)) {
         for (graph in names(loadings_graphs[[lambda]])) {
-            graph_name <- graphs_names[[lambda]][graph]
+            graph_name <- graphs_names[[lambda]][[graph]]
 
             print(paste0("Saving graph: ", graph_name, ".pdf"))
 
@@ -298,17 +294,17 @@
     }
 
     # lapply version:
-    lapply(loadings_graphs, function(lambda) {
-        lapply(lambda, function(graph) {
-            graph_name <- graphs_names[[lambda]][graph]
+    invisible(lapply(names(loadings_graphs), function(lambda) {
+        lapply(names(loadings_graphs[[lambda]]), function(graph) {
+            graph_name <- graphs_names[[lambda]][[graph]]
 
             print(paste0("Saving graph: ", graph_name, ".pdf"))
 
             ggsave(loadings_graphs[[lambda]][[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
                 width = plots_width, height = plots_height, units = "in")
             })
-        })
-    
+        }))
+        
     # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-fixed.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
     # ggsave(yields_graph, filename = "Graphs/Model_factor/Yields/yields_percent_data_hourly_all.pdf", device = cairo_pdf,
