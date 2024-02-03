@@ -245,22 +245,35 @@
     graphs_names
 
     # Recursive function to replace list elements with their names, including parent names
-    replace_with_full_names <- function(lst, parent_name = "") {
+    replace_with_full_names <- function(lst, parent_name = "", iterate_sublists = TRUE) {
         # Check if the element is a list
         if (is.list(lst)) {
             # Get the names of the elements in the list
             list_names <- names(lst)
-            # Apply the function recursively and set names
-            named_list <- setNames(lapply(seq_along(lst), function(i) {
-                # Construct the full name
-                full_name <- paste0(parent_name, list_names[i])
-                # For each element, call replace_with_full_names
-                if(is.list(lst[[i]])) {
-                    replace_with_full_names(lst[[i]], paste0(full_name, "_"))
-                } else {
-                    full_name
+
+            # Initialize an empty list for named_list
+            named_list <- vector("list", length(list_names))
+            names(named_list) <- list_names
+
+            # If iterating sublists, apply function recursively and set names
+            if(iterate_sublists == TRUE) {
+                named_list <- setNames(lapply(seq_along(lst), function(i) {
+                    # Construct the full name
+                    full_name <- paste0(parent_name, list_names[i])
+                    # For each element, call replace_with_full_names
+                    if(is.list(lst[[i]])) {
+                        replace_with_full_names(lst[[i]], paste0(full_name, "_"), iterate_sublists)
+                    } else {
+                        full_name
+                    }
+                }), list_names)
+            } else if(iterate_sublists == FALSE) {
+                # Directly return the top-level names without recursion into sublists
+                for (i in seq_along(list_names)) {
+                    named_list[[i]] <- paste0(parent_name, list_names[i])
                 }
-            }), list_names)
+            }
+
             return(named_list)
         }
         # Return NULL for non-list elements (shouldn't be reached in this context)
@@ -298,15 +311,34 @@
         lapply(names(loadings_graphs[[lambda]]), function(graph) {
             graph_name <- graphs_names[[lambda]][[graph]]
 
-            print(paste0("Saving graph: ", graph_name, ".pdf"))
+            print(paste0("Saving loadings graph: ", graph_name, ".pdf"))
 
             ggsave(loadings_graphs[[lambda]][[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
                 width = plots_width, height = plots_height, units = "in")
             })
         }))
+
+    # Yields graphs saving
+    # Get the names of the yield datasets
+    list_of_full_names_yields <- replace_with_full_names(yields, iterate_sublists = FALSE)
+    list_of_full_names_yields
+
+    # Add the yields prefix to the names
+    graphs_names_yields <- lapply(list_of_full_names_yields, function(name) {
+            return(paste0("yields_", name))
+        })    
+    graphs_names_yields
+
+    # lapply version:
+    invisible(lapply(names(yields_graphs), function(graph) {
+            graph_name <- graphs_names_yields[[graph]] 
+
+            print(paste0("Saving yields graph: ", graph_name, ".pdf"))
+
+            ggsave(yields_graphs[[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
+                width = plots_width, height = plots_height, units = "in")
+            }))
         
-    # ggsave(loadings_graph, filename = "Graphs/Model_factor/WIP/factor_loadings_estimated_my-all-data_lambda-fixed.pdf", device = cairo_pdf,
-    #     width = plots_width, height = plots_height, units = "in")
     # ggsave(yields_graph, filename = "Graphs/Model_factor/Yields/yields_percent_data_hourly_all.pdf", device = cairo_pdf,
     #     width = plots_width, height = plots_height, units = "in")
 
