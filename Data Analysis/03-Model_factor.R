@@ -1,6 +1,6 @@
 # Master Thesis
 # Factor models
-# v1.3 - WIP - code cleanup and revive
+# v1.4 - 
 
 
 
@@ -167,7 +167,7 @@
         # Stop the cluster
         stopCluster(cl)
 
-# TBC, polish graphs
+# TBC, refactor graphs code where any duplicity? But seems good enough already probably.
     # Plot the estimated coefficients
     str(NS_parameters)
     head(NS_parameters)
@@ -378,5 +378,6 @@
 ####### Notes #################################
 ###############################################
 
-    # 
+    # Run the varying lambda for 15min, then save the graphs again so we have them all.
+    #
     
