@@ -1,6 +1,6 @@
 # Master Thesis
 # Factor models
-# v1.4 - 
+# v1.4 - refactored code, scalable functions and automated saving of all graphs
 
 
 
@@ -167,33 +167,40 @@
         # Stop the cluster
         stopCluster(cl)
 
-# TBC, refactor graphs code where any duplicity? But seems good enough already probably.
     # Plot the estimated coefficients
     str(NS_parameters)
     head(NS_parameters)
-    # Need for the two following categories to compare them:
-    # NS_parameters$lambda_varying
-    # NS_parameters$lambda_fixed
 
-    # Rewrite the one dataset code into a multi dataset code: WIP
-
-    # We define and empty variable with the structure we need to save all of our NS parameters in this variable.
+    # We define an empty variable with the structure we need to save all of our NS parameters in this variable.
     # It has two lists, one for the fixed and one for the varying lambdas.
     # Each of these two lists contains our various data excerpts or formats/frequencies:
     # data_amonth, data_ayear, data_hourly_all, data_daily_Fedcompare, data_daily_all
-    NS_parameters_melted <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
-    NS_parameters_melted$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
-    NS_parameters_melted$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+
+    # Function to create an empty variable structure we need
+    create_empty_variable <- function(low_level_dimension = 5, yield_names = names(yields)) {
+        # Create an empty array of 2 lists for the top level
+        variable <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying")))
+
+        # Create low_level_dimension number empty lists for each of the two top-level lists
+        variable$lambda_fixed <- array(list(NULL), dim = low_level_dimension, dimnames = list(yield_names))
+        variable$lambda_varying <- array(list(NULL), dim = low_level_dimension, dimnames = list(yield_names))
+
+        return(variable)
+    }
+
+    # Create NS_parameters_melted variable
+    NS_parameters_melted <- create_empty_variable()
+    str(NS_parameters_melted)
     NS_parameters_melted
 
     NS_parameters_melted$lambda_fixed <- lapply(NS_parameters$lambda_fixed, function(data) fortify(data, melt = TRUE))
+    # Uncomment once lambda_varying data is fitted
+    # NS_parameters_melted$lambda_varying <- lapply(NS_parameters$lambda_varying, function(data) fortify(data, melt = TRUE))
+
     str(NS_parameters_melted)
 
-    # Prepare an empty variable
-    # TBD we're repeating code here for each empty variable - optimise?
-    loadings_graphs <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
-    loadings_graphs$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
-    loadings_graphs$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    # Prepare an empty loadings_graphs variable
+    loadings_graphs <- create_empty_variable()
     loadings_graphs
 
     # MAIN LOADINGS GRAPH - multivariate plotting
