@@ -117,7 +117,6 @@
     NS_parameters
 
     # Explore our datasets
-    ls()
     str(yields)
     str(yields$data_hourly_all) # our main focus is on this hourly data frequency
 
@@ -212,9 +211,7 @@
         # geom_line(data = meltlambda, aes(x = Index, y = Value)) + # we melted the lambdas too above, so prolly don't need this
         xlab("Index") + ylab("loadings")
         })
-    loadings_graphs$lambda_fixed[[1]]
     loadings_graphs$lambda_fixed[[2]]
-
 
     # Prepare an empty variable for yields
     yields_melted <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
@@ -235,7 +232,6 @@
         geom_line() +
         xlab("Time") + ylab("Yields (in percent)")
         })
-    yields_graphs[[1]]
     yields_graphs[[2]]
 
     # Save the graphs to files
@@ -300,20 +296,7 @@
         })
     graphs_names
 
-    # Save all the main graphs at once
-    # for loop version:
-    for (lambda in names(loadings_graphs)) {
-        for (graph in names(loadings_graphs[[lambda]])) {
-            graph_name <- graphs_names[[lambda]][[graph]]
-
-            print(paste0("Saving graph: ", graph_name, ".pdf"))
-
-            ggsave(loadings_graphs[[lambda]][[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
-                width = plots_width, height = plots_height, units = "in")
-        }
-    }
-
-    # lapply version:
+    # Save all the loadings graphs at once
     invisible(lapply(names(loadings_graphs), function(lambda) {
         lapply(names(loadings_graphs[[lambda]]), function(graph) {
             graph_name <- graphs_names[[lambda]][[graph]]
@@ -336,7 +319,7 @@
         })    
     graphs_names_yields
 
-    # lapply version:
+    # Save all the yields graphs at once
     invisible(lapply(names(yields_graphs), function(graph) {
             graph_name <- graphs_names_yields[[graph]] 
 
@@ -345,9 +328,6 @@
             ggsave(yields_graphs[[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
                 width = plots_width, height = plots_height, units = "in")
             }))
-        
-    # ggsave(yields_graph, filename = "Graphs/Model_factor/Yields/yields_percent_data_hourly_all.pdf", device = cairo_pdf,
-    #     width = plots_width, height = plots_height, units = "in")
 
     # Delete the variables we won't be needing
     rm(list = setdiff(ls(), c("NS_parameters",
