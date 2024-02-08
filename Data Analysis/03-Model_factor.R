@@ -163,7 +163,7 @@
     start <- time_start()
     # TBD maybe use mapply() to simplify the following lapply()?
     NS_parameters$lambda_varying <- lapply(yields, function(data) {
-        Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities)
+        Nelson.Siegel_custom_lambda_parallel(rate = data, maturity = maturities, lambda = "time_varying")
         })
     time_end(start)
     beep(3) # make a sound once it finishes
@@ -183,6 +183,7 @@
 ###### Plot the coefficients  #################
 ###############################################
 
+    NS_parameters$lambda_varying <- NS_parameters$lambda_fixed
     str(NS_parameters)
     head(NS_parameters)
 
@@ -191,9 +192,9 @@
     str(NS_parameters_melted)
     NS_parameters_melted
 
-    NS_parameters_melted$lambda_fixed <- lapply(NS_parameters$lambda_fixed, function(data) fortify(data, melt = TRUE))
-    # Uncomment once lambda_varying data is fitted
-    # NS_parameters_melted$lambda_varying <- lapply(NS_parameters$lambda_varying, function(data) fortify(data, melt = TRUE))
+    NS_parameters_melted <- lapply(NS_parameters, function(lambda) {
+        lapply(lambda, function(data) fortify(data, melt = TRUE))
+        })
 
     str(NS_parameters_melted)
 
@@ -203,12 +204,13 @@
 
     # MAIN LOADINGS GRAPH - multivariate plotting
     # Use ggplot for all the datasets at once
-    # For now just for the lambda_fixed:
-    loadings_graphs$lambda_fixed <- lapply(NS_parameters_melted$lambda_fixed, function(data) {
-        ggplot(data = data, aes(x = Index, y = Value, group = Series, colour = Series)) +
-        geom_line() +
-        # geom_line(data = meltlambda, aes(x = Index, y = Value)) + # we melted the lambdas too above, so prolly don't need this
-        xlab("Index") + ylab("loadings")
+    loadings_graphs <- lapply(NS_parameters_melted, function(lambda) {
+        lapply(lambda, function(data) {
+            ggplot(data = data, aes(x = Index, y = Value, group = Series, colour = Series)) +
+            geom_line() +
+            # geom_line(data = meltlambda, aes(x = Index, y = Value)) + # we melted the lambdas too above, so prolly don't need this
+            xlab("Index") + ylab("loadings")
+            })
         })
     loadings_graphs$lambda_fixed[[2]]
 
@@ -241,9 +243,7 @@
         plots_height <- plots_width / GoldenRatio
 
     # Set file names for all the graphs
-    graphs_names <- array(list(NULL), dim = 2, dimnames = list(c("lambda_fixed", "lambda_varying"))) # an empty array of 2 lists
-    graphs_names$lambda_fixed <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
-    graphs_names$lambda_varying <- array(list(NULL), dim = 5, dimnames = list(names(yields))) # 5 empty lists
+    graphs_names <- create_empty_variable()
     graphs_names
 
     # Recursive function to replace list elements with their names, including parent names
