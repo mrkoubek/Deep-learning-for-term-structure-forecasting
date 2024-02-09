@@ -159,7 +159,7 @@
     head(NS_parameters)
 
     # Time varying lambda
-    # !!! WARNING LONG !!! Takes about 13min for the full hourly dataset of 80k obs., and 17min for all the dataset variations
+    # !!! WARNING LONG !!! Takes about 15min for all the dataset variations, or 13min for the full hourly dataset of 80k obs.
     start <- time_start()
     # TBD maybe use mapply() to simplify the following lapply()?
     NS_parameters$lambda_varying <- lapply(yields, function(data) {
@@ -202,8 +202,8 @@
     loadings_graphs <- create_empty_variable()
     loadings_graphs
 
-    # MAIN LOADINGS GRAPH - multivariate plotting
-    # Use ggplot for all the datasets at once
+    # MAIN LOADINGS GRAPH
+    # Use ggplot for all the datasets at once and save them
     loadings_graphs <- lapply(NS_parameters_melted, function(lambda) {
         lapply(lambda, function(data) {
             ggplot(data = data, aes(x = Index, y = Value, group = Series, colour = Series)) +
@@ -227,7 +227,7 @@
     yields_graphs
 
     # MAIN YIELDS GRAPH
-    # Use ggplot for all the datasets at once
+    # Use ggplot for all the datasets at once and save them
     yields_graphs <- lapply(yields_melted, function(data) {
         ggplot(data = data, aes(x = Index, y = Value, group = Series, colour = Series)) +
         geom_line() +
@@ -236,12 +236,6 @@
     yields_graphs[[2]]
 
     # Save the graphs to files
-        custom_scale <- 1.5
-        GoldenRatio <- (1 + sqrt(5)) / 2
-        # plots_width <- 5.55226 # width in inches of thesis template textwidth
-        plots_width <- 10 * custom_scale # 10 inches plus have nicely smallish graph elements, adjust custom scale for each graph type what looks nice
-        plots_height <- plots_width / GoldenRatio
-
     # Set file names for all the graphs
     graphs_names <- create_empty_variable()
     graphs_names
@@ -294,6 +288,13 @@
             })
         })
     graphs_names
+
+    # Graph parameters scaling
+        custom_scale <- 1.5
+        GoldenRatio <- (1 + sqrt(5)) / 2
+        # plots_width <- 5.55226 # width in inches of thesis template textwidth
+        plots_width <- 10 * custom_scale # 10 inches plus have nicely smallish graph elements, adjust custom scale for each graph type what looks nice
+        plots_height <- plots_width / GoldenRatio
 
     # Save all the loadings graphs at once
     invisible(lapply(names(loadings_graphs), function(lambda) {
