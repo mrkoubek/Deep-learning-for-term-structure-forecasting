@@ -1,6 +1,6 @@
 # Master Thesis
 # Factor models
-# v1.4 - refactored code, scalable functions and automated saving of all graphs
+# v1.5 - a well rounded version with scalable code and automated saving of all graphs
 
 
 
@@ -177,6 +177,10 @@
     # Stop the cluster
     stopCluster(cl)
 
+    # Save the workspace
+    # The following takes 0min to save and is 25MB
+    save.image(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS_midfile.RData")
+
 
 
 ###############################################
@@ -303,7 +307,7 @@
 
             print(paste0("Saving loadings graph: ", graph_name, ".pdf"))
 
-            ggsave(loadings_graphs[[lambda]][[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
+            ggsave(loadings_graphs[[lambda]][[graph]], filename = paste0("Graphs/Model_factor/Mine/", graph_name, ".pdf"), device = cairo_pdf,
                 width = plots_width, height = plots_height, units = "in")
             })
         }))
@@ -325,7 +329,7 @@
 
             print(paste0("Saving yields graph: ", graph_name, ".pdf"))
 
-            ggsave(yields_graphs[[graph]], filename = paste0("Graphs/Model_factor/WIP/", graph_name, ".pdf"), device = cairo_pdf,
+            ggsave(yields_graphs[[graph]], filename = paste0("Graphs/Model_factor/Mine/", graph_name, ".pdf"), device = cairo_pdf,
                 width = plots_width, height = plots_height, units = "in")
             }))
 
@@ -337,7 +341,7 @@
                                 "size_objects", "time_start", "time_end")))
 
     # Save the workspace
-    # The following takes 0min to save and is 16MB
+    # The following takes 0min to save and is 20MB
     save.image(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData")
 
 
@@ -365,6 +369,5 @@
 ####### Notes #################################
 ###############################################
 
-    # Run the varying lambda for 15min, then save the graphs again so we have them all.
     #
     
