@@ -20,8 +20,8 @@
     # Loading basic environment functions
     load(file = "Workspaces/00_Environment_functions.RData")
     # Loading data
-    load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min
-    # load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min
+    # load(file = "Workspaces/Data_05_pricestoyields_TUFVTYUS.RData") # 0min, env before this file
+    load(file = "Workspaces/Data_06_yields-to-NSparameters_TUFVTYUS.RData") # 0min, env after this file
     print("Workspace rdy set go!")
 
 
