@@ -22,9 +22,9 @@
 	if (!require("pacman")) install.packages("pacman") # installs pacman package if not installed yet
 	pacman::p_load(pacman, dplyr, tidyr, ggplot2, scales, Cairo, zoo, xtable, tibble, forecast, naturalsort) # load packages TBD e.g. these, edit when u determine which needed/used..
 	p_load(reticulate, tensorflow, keras)
-	py_config()
-	tf_config()
-	devtools::session_info()
+	# py_config()
+	# tf_config()
+	# devtools::session_info()
 
 	# Workspace
 	setwd("E:/Google_Drive/Diploma_Thesis/Code")
@@ -58,12 +58,9 @@
 	str(yields$data_amonth)
 	head(yields$data_amonth)
 
-	# TBC
-	
-
-	
-
-# OLD CODE FROM HERE, not refactored
+	# Pick the future
+	dataFutures_tmp <- yields$data_amonth$Yield_TU # all data, H1, 80k obs
+	head(dataFutures_tmp)
 
 
 
@@ -71,21 +68,8 @@
 ###### Split datasets #######
 #############################
 
-	ls()
-
-	# Picks the future
-	futurenames # shall contain US and EU various maturities eventually
-	future <- 1
-	futurenames[future]
-
-	str(dataFutures_H1[[future]]$Close)
-
-	# Train and test split
-	# dataFutures_tmp <- data_small_aday$Close # one day of data, 24k obs
-	# dataFutures_tmp <- data_small_amonth$Close # one month of data, 780k obs
-	# dataFutures_tmp <- dataFutures_M5[[future]]$Close # all data, M5, 781k obs
-	dataFutures_tmp <- dataFutures_H1[[future]]$Close # all data, H1, 80k obs
-	# dataFutures_tmp <- dataFutures_H4[[future]]$Close # all data, H4, 22k obs
+# TBD edit the code so the variables are named more intuitively (yields/prices etc?)
+	# Split the dataset into 60% training, 20% validation, 20% testing sets
 	(end <- length(dataFutures_tmp))
 	(split_train <- round(3/5 * end))
 	(split_val <- round(4/5 * end))
@@ -104,9 +88,14 @@
 	dataFutures_val <- diff(dataFutures_val)
 	dataFutures_test <- diff(dataFutures_test)
 	summary(dataFutures_train)
+	str(dataFutures_train)
+
+	
+
+# OLD CODE FROM HERE, not refactored
 
 
-
+# TBC
 #############################
 ### Data Exploration - WIP ##
 #############################
