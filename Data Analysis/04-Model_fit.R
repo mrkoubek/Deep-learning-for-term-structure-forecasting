@@ -69,6 +69,7 @@
 #############################
 
 # TBD edit the code so the variables are named more intuitively (yields/prices etc?)
+# TBD edit the code to be multivariate
 	# Split the dataset into 60% training, 20% validation, 20% testing sets
 	(end <- length(dataFutures_tmp))
 	(split_train <- round(3/5 * end))
@@ -102,6 +103,7 @@
 
 	# IES revive tinker
 
+	# For the prices, we explore the following.
 	# Print unique values in our dataset, how many of them and the first few
 
 	# getOption("digits") # global number of rounding digits, default is 7
@@ -147,12 +149,16 @@
 	str(timpyyy)
 	plot(timpyyy)
 
+	# For the yields, we explore the following.
+	# TBD
 
 
 #############################
 ###### Graph datasets #######
 #############################
 
+	# TBD change the labels from prices to yields. Or do we care about the prices at all? Maybe have both?
+	
 	# Graph of the split original dataset
 		data_df <- data_frame(time = 1:(length(dataFutures_train_orig) + length(dataFutures_val_orig) + length(dataFutures_test_orig)),
 		                 	  train = c(dataFutures_train_orig, rep(NA, length(dataFutures_val_orig) + length(dataFutures_test_orig))),
