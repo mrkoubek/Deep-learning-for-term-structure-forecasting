@@ -158,7 +158,7 @@
 #############################
 
 	# TBD change the labels from prices to yields. Or do we care about the prices at all? Maybe have both?
-	
+
 	# Graph of the split original dataset
 		data_df <- data_frame(time = 1:(length(dataFutures_train_orig) + length(dataFutures_val_orig) + length(dataFutures_test_orig)),
 		                 	  train = c(dataFutures_train_orig, rep(NA, length(dataFutures_val_orig) + length(dataFutures_test_orig))),
@@ -238,7 +238,8 @@
 	### Prepare parameters ###
 
 	# Windowing the data
-	lstm_num_timesteps <- 4
+	lstm_num_timesteps <- 2
+	# lstm_num_timesteps <- 4
 	# lstm_num_timesteps <- 12
 
 	window_data <- function(data) { # window the input data
