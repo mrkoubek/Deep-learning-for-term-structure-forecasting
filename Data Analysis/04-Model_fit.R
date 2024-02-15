@@ -299,7 +299,7 @@
 	##### TBD Tune #####
 	# Define manually parameters here that will be used in the model
 	### MAE ###
-		n_epochs <- 50 # for now 50 takes 10min for smallest network, later obviously need to train longer to optimise until it starts overfitting
+		n_epochs <- 5 # for now 50 takes 10min for smallest network, later obviously need to train longer to optimise until it starts overfitting
 		batch <- 128
 
 		parameters_architecture <- list(nlayers = 1, units = c(8, 0, 0), dropout = 0.2, recurrent_dropout = 0.2) # 11s per epoch on a month of data
@@ -421,5 +421,6 @@
 # TBD:
 	# revive
 		# add yields data instead of prices
+		
 	# extensive hyperpar tuning once the code is scalable
 
