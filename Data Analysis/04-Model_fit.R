@@ -36,30 +36,28 @@
 
 
 
-# NEW CODE FROM HERE
+# NEW CODE FROM HERE, cleaned up
 
 #############################
-#### TBD Factor models ######
+#### Factor models ##########
 #############################
 
-	# Not programmed yet, shall run the data through the factor models (DNS) before training the NNs.
-	# In a separate script probably, Model_factor.R
-	# Run script. TBD read up and organise code/files..
-	# source("./dl-git-repo/deep-learning-for-term-structure-forecasting/Data Analysis/Model_factor-test.R")
-
-	# TBD move this info - To run more scripts:
-	# p_load(tidyverse) # to pipe (%>%) and map across each file
-
-	# List files and source each
-	# list.files("./dl-git-repo/deep-learning-for-term-structure-forecasting/Data Analysis", full.names = TRUE)# %>% map(source)
+	# We run the data through the factor models (DNS) before training the NNs.
+	# In a previous separate file 03-Model_factor.R.
+	# The output is the DNS parameters, "NS_parameters", which contains the processed datasets for a fixed lambda and a time-varying one.
 
 	ls()
+	str(NS_parameters)
+	head(NS_parameters$lambda_fixed$data_hourly_all)
+
+	# We also have yields available, calculated from the prices in a file 02-Prices_to_yields.R.
 	str(yields)
 	str(yields$data_amonth)
 	head(yields$data_amonth)
 
 	# Pick the future
-	dataFutures_tmp <- yields$data_amonth$Yield_TU # all data, H1, 80k obs
+	dataFutures_tmp <- NS_parameters$lambda_fixed$data_amonth
+	# dataFutures_tmp <- yields$data_amonth$Yield_TU
 	head(dataFutures_tmp)
 
 
@@ -421,6 +419,6 @@
 # TBD:
 	# revive
 		# add yields data instead of prices
-		
+
 	# extensive hyperpar tuning once the code is scalable
 

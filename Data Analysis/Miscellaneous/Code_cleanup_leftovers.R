@@ -922,3 +922,20 @@
 
 	    # adding series one at a time
 	    last_plot() + geom_line(data = meltbetas[meltbetas$Series == "beta_1", ], aes(x = Index, y = Value), colour = "red")
+
+
+
+###########################################################
+### File: 04-Model_fit.R ############
+###########################################################
+
+	#############################
+	#### Factor models ##########
+	#############################
+		# TBD move this info - To run more scripts:
+		# p_load(tidyverse) # to pipe (%>%) and map across each file
+		# List files and source each - TBD y?
+		# list.files("./dl-git-repo/deep-learning-for-term-structure-forecasting/Data Analysis", full.names = TRUE)# %>% map(source)
+
+
+	    
