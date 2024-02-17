@@ -938,4 +938,57 @@
 		# list.files("./dl-git-repo/deep-learning-for-term-structure-forecasting/Data Analysis", full.names = TRUE)# %>% map(source)
 
 
-	    
+	#############################
+	### Data Exploration - WIP ##
+	#############################
+
+		# IES revive tinker
+
+		# For the prices, we explore the following.
+		# Print unique values in our dataset, how many of them and the first few
+
+		# getOption("digits") # global number of rounding digits, default is 7
+		# options("digits" = 16)
+
+		# There is only 118 unique price values in our small_US dataset of a month
+		str(unique(dataFutures_train_orig), digits = 16) # original prices data
+		plot(unique(dataFutures_train_orig))
+		# plot(dataFutures_train_orig) # can be contrasted to the price graph, altho it takes a while to plot
+
+		# There is only 12 unique differenced values in our small_US dataset of a month
+		str(unique(dataFutures_train), digits = 16) # differenced data
+		plot(unique(dataFutures_train))
+
+		summary(dataFutures_train != 0)
+
+		timpy <- dataFutures_train[dataFutures_train != 0]
+		str(timpy)
+		summary(timpy)
+
+		hist(timpy)
+
+		min(timpy)
+		max(timpy)
+		hist(timpy, breaks = 20000, xlim = c(min(timpy), max(timpy))) # !!! a great graph use TBD
+
+		p_load(HistogramTools)
+
+		myhist <- HistogramTools:::.BuildHistogram(timpy) # doesn't work
+		plot(myhist)
+
+		plot(timpy)
+		summary(timpy == 0.03125)
+		summary(timpy == -0.03125)
+		summary(!(timpy == -0.03125 | timpy == 0.03125))
+		timpyy <- timpy[!(timpy == -0.03125 | timpy == 0.03125)]
+		summary(timpyy)
+		str(timpyy)
+		plot(timpyy)
+
+		timpyyy <- timpyy[!(timpyy == -0.0625 | timpyy == 0.0625)]
+		summary(timpyyy)
+		str(timpyyy)
+		plot(timpyyy)
+
+		# For the yields, we explore the following.
+		# TBD
