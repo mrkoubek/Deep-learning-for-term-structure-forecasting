@@ -66,6 +66,9 @@
 ###### Split datasets #######
 #############################
 
+	# We split the dataset into train-validation-test sets, and apply differencing - TBD do we apply differencing to yields to, or that
+	# relevant only to prices?
+
 # TBD edit the code so the variables are named more intuitively (yields/prices etc?)
 # TBD edit the code to be multivariate
 	# Split the dataset into 60% training, 20% validation, 20% testing sets
