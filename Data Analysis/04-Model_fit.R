@@ -103,9 +103,9 @@
 ########## ANNs #############
 #############################
 
-	ls()
-
-	### Prepare parameters ###
+	#############################
+	####### Windowing ###########
+	#############################
 
 	# Windowing the data
 	lstm_num_timesteps <- 2
@@ -156,7 +156,7 @@
 
 
 	#############################
-	####### Training NNs ########
+	####### Parameters ##########
 	#############################
 
 	# TensorBoard initialisation/stopping
@@ -222,6 +222,11 @@
 		save.image(file = paste0("Workspaces/tmp2/Image_", name, "_trained.RData"))
 	}
 
+
+
+	#############################
+	######## Fitting ############
+	#############################
 
 	# model_names <- c()
 	len <- 1
