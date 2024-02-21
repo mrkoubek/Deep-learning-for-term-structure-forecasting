@@ -69,8 +69,8 @@
 	# We split the dataset into train-validation-test sets, and apply differencing - TBD do we apply differencing to yields to, or that
 	# relevant only to prices?
 
-# TBD edit the code so the variables are named more intuitively (yields/prices etc?)
-# TBD edit the code to be multivariate
+	# TBD edit the code so the variables are named more intuitively (yields/prices etc?)
+	# TBD edit the code to be multivariate
 	# Split the dataset into 60% training, 20% validation, 20% testing sets
 	(end <- length(dataFutures_tmp))
 	(split_train <- round(3/5 * end))
@@ -107,12 +107,14 @@
 	####### Windowing ###########
 	#############################
 
-	# Windowing the data
+	# For windowing the data, we need to set how wide the window is.
+	# This is also the number of time steps, that the model (LSTM) sees into the past at each point.
 	lstm_num_timesteps <- 2
 	# lstm_num_timesteps <- 4
 	# lstm_num_timesteps <- 12
 
-	window_data <- function(data) { # window the input data
+	# Window the input data
+	window_data <- function(data) {
 		t(sapply(1:(length(data) - lstm_num_timesteps), function(x) data[x:(x + lstm_num_timesteps - 1)]))
 	}
 
@@ -121,7 +123,8 @@
 	data_test <- window_data(dataFutures_test)
 	data_train[1:5, 1:4]
 
-	window_labels <- function(data) { # window the labels data
+	# Window the labels data
+	window_labels <- function(data) {
 		sapply((lstm_num_timesteps + 1):(length(data)), function(x) data[x])
 	}
 
@@ -131,13 +134,15 @@
 	labels_train[1:5]
 
 
-	# Keras LSTMs expect the input array to be shaped as (no. samples, no. time steps, no. features), yet we have just the two axes, need to add an axis "no.features" at the end that will just say that we have 1 feature (we have just one column/price to feed)
-	dim(data_train) # two dimensions (no. samples, no. time steps)
-	class(data_train) # matrix
+	# Keras LSTMs expect the input array to be shaped as (no. samples, no. time steps, no. features),
+	# yet we have just the two axes, need to add an axis "no.features" at the end
+	# which will just say that we have 1 feature (we have just one column/price to feed).
+	dim(data_train) # two dimensions, (no. samples, no. time steps)
+	class(data_train) # a matrix
 	dim(data_val)
 	dim(data_test)
-	# K <- backend() # don't need this approach anymore, from Keras 2.1.2 can use k_expand_dims and k_eval
-	# data_train <- K$eval(K$expand_dims(data_train, axis = 2L)) # 2L because of this https://github.com/rstudio/tensorflow/issues/190
+
+	# From Keras 2.1.2 we can use k_expand_dims() and k_eval() functions, instead of "subvariables".
 	data_train <- k_eval(k_expand_dims(data_train, axis = -1)) # -1 for the last axis to expand at
 	data_val <- k_eval(k_expand_dims(data_val, axis = -1))
 	data_test <- k_eval(k_expand_dims(data_test, axis = -1))

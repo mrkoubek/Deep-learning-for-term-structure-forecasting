@@ -1065,3 +1065,15 @@
 			#######################################################################################
 			########### Workspaces/Data_04_split-small_US_tick_05-2019.RData ######################
 			#######################################################################################
+
+
+			#############################
+			########## ANNs #############
+			#############################
+
+				#############################
+				####### Windowing ###########
+				#############################
+				
+				# K <- backend() # don't need this approach anymore, from Keras 2.1.2 can use k_expand_dims and k_eval
+				# data_train <- K$eval(K$expand_dims(data_train, axis = 2L)) # 2L because of this https://github.com/rstudio/tensorflow/issues/190
