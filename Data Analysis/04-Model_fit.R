@@ -47,18 +47,23 @@
 	# The output is the DNS parameters, "NS_parameters", which contains the processed datasets for a fixed lambda and a time-varying one.
 
 	ls()
-	str(NS_parameters)
-	head(NS_parameters$lambda_fixed$data_hourly_all)
 
-	# We also have yields available, calculated from the prices in a file 02-Prices_to_yields.R.
+	# We have the yields available, calculated from the prices, in the file 02-Prices_to_yields.R.
 	str(yields)
 	str(yields$data_amonth)
 	head(yields$data_amonth)
 
-	# Pick the future
+	# Then we have the main DNS parameters, calculated from the yields, in the file 03-Model_factor.R
+	str(NS_parameters)
+	head(NS_parameters$lambda_fixed$data_hourly_all)
+
+	# Pick which dataset to analyse
 	dataFutures_tmp <- NS_parameters$lambda_fixed$data_amonth
-	# dataFutures_tmp <- yields$data_amonth$Yield_TU
 	head(dataFutures_tmp)
+
+	# TBD - obsolete old, delete
+	# Pick the future to analyse
+	# dataFutures_tmp <- yields$data_amonth$Yield_TU
 
 
 
