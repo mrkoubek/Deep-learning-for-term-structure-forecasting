@@ -61,29 +61,26 @@
 	dataFutures_tmp <- NS_parameters$lambda_fixed$data_amonth
 	head(dataFutures_tmp)
 
-	# TBD - obsolete old, delete
-	# Pick the future to analyse
-	# dataFutures_tmp <- yields$data_amonth$Yield_TU
-
 
 
 #############################
 ###### Split datasets #######
 #############################
 
-	# We split the dataset into train-validation-test sets, and apply differencing - TBD do we apply differencing to yields too, or that
-	# relevant only for prices?
+	# We split the dataset into train-validation-test sets, and apply possible differencing
 
 	# TBD edit the code so the variables are named more intuitively (yields/prices etc?)
 	# TBD edit the code to be multivariate?
 	# Split the dataset into 60% training, 20% validation, 20% testing sets
-	(end <- length(dataFutures_tmp))
+	# An xts object needs a nrow() instead of length() to get the number of rows (observations)
+	(end <- nrow(dataFutures_tmp))
 	(split_train <- round(3/5 * end))
 	(split_val <- round(4/5 * end))
 
-	dataFutures_train <- dataFutures_tmp[1:split_train]
-	dataFutures_val <- dataFutures_tmp[(split_train + 1):split_val]
-	dataFutures_test <- dataFutures_tmp[(split_val + 1):end]
+	# Edit: the data is multivariate, with 4 columns (plus SSR as 5th which we don't need). So we add a dimension to our data here
+	dataFutures_train <- dataFutures_tmp[1:split_train, ]
+	dataFutures_val <- dataFutures_tmp[(split_train + 1):split_val, ]
+	dataFutures_test <- dataFutures_tmp[(split_val + 1):end, ]
 
 	# backup of original data, for "undifferencing" at the end
 	dataFutures_train_orig <- dataFutures_train
@@ -91,11 +88,16 @@
 	dataFutures_test_orig <- dataFutures_test
 
 	# Difference the data
-	dataFutures_train <- diff(dataFutures_train)
-	dataFutures_val <- diff(dataFutures_val)
-	dataFutures_test <- diff(dataFutures_test)
+	# TBD we don't apply differencing to yields, that just for prices?
+		# 1. Visualise the data
+		# 2. Test for stationarity
+		# 3. Consider the implications
+	# dataFutures_train <- diff(dataFutures_train)
+	# dataFutures_val <- diff(dataFutures_val)
+	# dataFutures_test <- diff(dataFutures_test)
 	summary(dataFutures_train)
 	str(dataFutures_train)
+	head(dataFutures_train)
 
 	
 
