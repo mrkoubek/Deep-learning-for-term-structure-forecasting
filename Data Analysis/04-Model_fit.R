@@ -88,10 +88,10 @@
 	dataFutures_test_orig <- dataFutures_test
 
 	# Difference the data
-	# TBD we don't apply differencing to yields, that just for prices?
+	# TBD we don't apply differencing to yields, that just for prices. We establish this by:
 		# 1. Visualise the data
 		# 2. Test for stationarity
-		# 3. Consider the implications
+		# 3. Consider the implications and decide what is appropriate
 	# dataFutures_train <- diff(dataFutures_train)
 	# dataFutures_val <- diff(dataFutures_val)
 	# dataFutures_test <- diff(dataFutures_test)
