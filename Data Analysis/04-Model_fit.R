@@ -116,8 +116,8 @@
 
 	# For windowing the data, we need to set how wide the window is.
 	# This is also the number of time steps, that the model (LSTM) sees into the past at each point.
-	lstm_num_timesteps <- 2
-	# lstm_num_timesteps <- 4
+	# lstm_num_timesteps <- 2
+	lstm_num_timesteps <- 4
 	# lstm_num_timesteps <- 12
 
 	# Window the input data
