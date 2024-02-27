@@ -64,6 +64,14 @@
 
 
 #############################
+###### Normalisation? #######
+#############################
+
+	# TBD Do we normalise or standardise the data, so the LSTM can work with similarly scaled inputs? Or do we skip this step?
+
+
+
+#############################
 ###### Split datasets #######
 #############################
 
@@ -116,6 +124,7 @@
 
 	# For windowing the data, we need to set how wide the window is.
 	# This is also the number of time steps, that the model (LSTM) sees into the past at each point.
+	# TBD do we loop over this, to automate this as part of the hyperparameter tuning?
 	# lstm_num_timesteps <- 2
 	lstm_num_timesteps <- 4
 	# lstm_num_timesteps <- 12
