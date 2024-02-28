@@ -112,7 +112,6 @@
 # OLD CODE FROM HERE, not refactored
 
 
-# TBC
 
 #############################
 ########## ANNs #############
@@ -134,6 +133,7 @@
 		t(sapply(1:(length(data) - lstm_num_timesteps), function(x) data[x:(x + lstm_num_timesteps - 1)]))
 	}
 
+	# TBC this variable has several dimensions, what do we pass? Explore.
 	data_train <- window_data(dataFutures_train)
 	data_val <- window_data(dataFutures_val)
 	data_test <- window_data(dataFutures_test)
