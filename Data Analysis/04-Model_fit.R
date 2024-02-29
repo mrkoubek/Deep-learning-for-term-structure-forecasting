@@ -107,7 +107,7 @@
 	str(dataFutures_train)
 	head(dataFutures_train)
 
-	
+
 
 # OLD CODE FROM HERE, not refactored
 
@@ -128,26 +128,48 @@
 	lstm_num_timesteps <- 4
 	# lstm_num_timesteps <- 12
 
-	# Window the input data
-	window_data <- function(data) {
-		t(sapply(1:(length(data) - lstm_num_timesteps), function(x) data[x:(x + lstm_num_timesteps - 1)]))
+	# Window the input data for multivariate series
+	window_data_xts <- function(data, lstm_num_timesteps) {
+		# Initialise a list for storing the windows
+		# TBD don't grow a list, predefine its dimensions
+		windows <- list()
+
+		# Number of windows
+		num_windows <- nrow(data) - lstm_num_timesteps + 1
+
+		for (i in 1:num_windows) {
+			# Extract the window
+			window <- data[(i):(i + lstm_num_timesteps - 1), ]
+			windows[[i]] <- window
+		}
+
+		# sapply version?
+		# windows <- t(sapply(1:num_windows, function(i) data[i:(i + lstm_num_timesteps - 1), ]))
+		
+		return(windows)
+		# Old single variable code:
+		# t(sapply(1:(length(data) - lstm_num_timesteps), function(x) data[x:(x + lstm_num_timesteps - 1)]))
 	}
 
 	# TBC this variable has several dimensions, what do we pass? Explore.
-	data_train <- window_data(dataFutures_train)
-	data_val <- window_data(dataFutures_val)
-	data_test <- window_data(dataFutures_test)
-	data_train[1:5, 1:4]
+	data_train_windowed <- window_data_xts(dataFutures_train, lstm_num_timesteps)
+	data_val_windowed <- window_data_xts(dataFutures_val, lstm_num_timesteps)
+	data_test_windowed <- window_data_xts(dataFutures_test, lstm_num_timesteps)
+	str(data_train_windowed[[1]])
+	data_train_windowed[[1]]
+	data_train_windowed[[2]]
+	data_train_windowed[[length(data_train_windowed) - 1]]
+	data_train_windowed[[length(data_train_windowed)]]
 
 	# Window the labels data
-	window_labels <- function(data) {
+	window_labels_xts <- function(data) {
 		sapply((lstm_num_timesteps + 1):(length(data)), function(x) data[x])
 	}
 
-	labels_train <- window_labels(dataFutures_train)
-	labels_val <- window_labels(dataFutures_val)
-	labels_test <- window_labels(dataFutures_test)
-	labels_train[1:5]
+	labels_train_windowed <- window_labels_xts(dataFutures_train, lstm_num_timesteps)
+	labels_val_windowed <- window_labels_xts(dataFutures_val, lstm_num_timesteps)
+	labels_test_windowed <- window_labels_xts(dataFutures_test, lstm_num_timesteps)
+	labels_train_windowed[[1]]
 
 
 	# Keras LSTMs expect the input array to be shaped as (no. samples, no. time steps, no. features),
