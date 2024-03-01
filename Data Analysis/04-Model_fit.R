@@ -36,8 +36,6 @@
 
 
 
-# NEW CODE FROM HERE, cleaned up
-
 #############################
 #### Factor models ##########
 #############################
@@ -100,6 +98,32 @@
 		# 1. Visualise the data
 		# 2. Test for stationarity
 		# 3. Consider the implications and decide what is appropriate
+
+		# 1. Visualise the data
+			# We plot the data.
+			# We need to inspect each of the columns of the dataset (beta_0, beta_1, beta_2, lambda, SSR).
+			str(dataFutures_tmp)
+			head(dataFutures_tmp)
+
+			# Plot each series in the xts object
+			plot(dataFutures_tmp$beta_0, main = "Beta_0 Over Time")
+			plot(dataFutures_tmp$beta_1, main = "Beta_1 Over Time")
+			plot(dataFutures_tmp$beta_2, main = "Beta_2 Over Time")
+			plot(dataFutures_tmp$lambda, main = "Lambda Over Time")
+			plot(dataFutures_tmp$SSR, main = "SSR Over Time")
+
+		# 2. Test for stationarity
+			p_load(tseries)
+
+			# Perform ADF test on each series
+			adf.test(dataFutures_tmp$beta_0, alternative = "stationary")
+			adf.test(dataFutures_tmp$beta_1, alternative = "stationary")
+			adf.test(dataFutures_tmp$beta_2, alternative = "stationary")
+			adf.test(dataFutures_tmp$lambda, alternative = "stationary")
+			adf.test(dataFutures_tmp$SSR, alternative = "stationary")
+
+
+
 	# dataFutures_train <- diff(dataFutures_train)
 	# dataFutures_val <- diff(dataFutures_val)
 	# dataFutures_test <- diff(dataFutures_test)
