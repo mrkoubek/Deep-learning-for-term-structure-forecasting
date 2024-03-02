@@ -57,6 +57,8 @@
 
 	# Pick which dataset to analyse
 	dataFutures_tmp <- NS_parameters$lambda_fixed$data_amonth
+	dataFutures_tmp <- NS_parameters$lambda_fixed$data_daily_all
+	dataFutures_tmp <- NS_parameters$lambda_fixed$data_hourly_all
 	head(dataFutures_tmp)
 
 
@@ -121,6 +123,12 @@
 			adf.test(dataFutures_tmp$beta_2, alternative = "stationary")
 			adf.test(dataFutures_tmp$lambda, alternative = "stationary")
 			adf.test(dataFutures_tmp$SSR, alternative = "stationary")
+
+		# 3. Consider the implications and decide what is appropriate
+			# The NS_parameters series show signs of non-stationarity, the ADF test p-values are too high to reject the null
+			# hypothesis of unit root. The series should be differenced to make them stationary. This is essential for
+			# further time series modelling, some of which assume stationarity.
+
 
 
 
