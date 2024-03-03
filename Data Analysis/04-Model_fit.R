@@ -129,6 +129,21 @@
 			# hypothesis of unit root. The series should be differenced to make them stationary. This is essential for
 			# further time series modelling, some of which assume stationarity.
 
+			# Differencing the series
+			dataFutures_tmp_diff <- dataFutures_tmp
+			dataFutures_tmp_diff$beta_0 <- diff(dataFutures_tmp$beta_0, differences = 1)
+			dataFutures_tmp_diff$beta_1 <- diff(dataFutures_tmp$beta_1, differences = 1)
+			dataFutures_tmp_diff$beta_2 <- diff(dataFutures_tmp$beta_2, differences = 1)
+			dataFutures_tmp_diff$SSR <- diff(dataFutures_tmp$SSR, differences = 1)
+
+			str(dataFutures_tmp_diff)
+			head(dataFutures_tmp_diff)
+
+			# Remove first NA observation after differencing.
+			dataFutures_tmp_diff <- dataFutures_tmp_diff[-1,]
+
+			str(dataFutures_tmp_diff)
+			head(dataFutures_tmp_diff)
 
 
 
