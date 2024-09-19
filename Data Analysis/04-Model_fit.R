@@ -1,5 +1,6 @@
 # Master Thesis
 # Model fitting follows
+# 04-Model_fit.R, David Koubek
 # v1.3 - revive this file, tries with the new yields data instead of just prices
 
 
@@ -11,7 +12,8 @@
     rm(list = ls())
 
 	# Bind R to a Python environment that has TensorFlow with GPU support
-	# Do this first before loading any further packages, otherwise the R session can be binded with a default CPU environment and you will have to restart R to rebind
+	# Do this first before loading any further packages, otherwise the R session can be binded with a default CPU environment
+	# and you will have to restart R to rebind.
 	# reticulate::use_condaenv("r-tensorflow-gpu") # Specify the name of a conda environment.
 	# reticulate::use_condaenv("r-tensorflow-gpu", required = TRUE)
 	# play:
